@@ -1,0 +1,55 @@
+[project]
+name = "rag-eval"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  # --- LangChain stack pinned to the stable 0.3 line ---
+  # WHY PINNED: langchain 1.x + ragas 0.4.x is currently broken. ragas 0.4.3 (latest)
+  # hard-imports langchain_community.chat_models.vertexai, a path the 1.x-era community
+  # package (0.4.x) removed, so `import ragas` fails on any provider. The 0.3 langchain
+  # line + ragas 0.2.x is the mature, mutually-compatible, well-documented combination.
+  # Revisit once ragas ships langchain-1.x support (tracking: ragas issue #2741 / PR #2739).
+  "langchain==0.3.30",
+  "langchain-core==0.3.86",
+  "langchain-community==0.3.31",
+  "langchain-openai==0.3.35",
+  "langchain-anthropic==0.3.22",
+  "langchain-text-splitters==0.3.11",
+  "ragas==0.2.15",
+
+  # --- retrieval core (framework-free) + ingest ---
+  "faiss-cpu==1.14.2",
+  "rank-bm25",
+  "sentence-transformers==5.5.1",
+  "arxiv",
+
+  # --- llm clients, app surfaces, eval utils ---
+  "anthropic==0.109.1",
+  "openai==2.41.1",
+  "fastapi",
+  "uvicorn[standard]",
+  "streamlit",
+  "pydantic",
+  "pyyaml",
+  "typer",
+  "python-dotenv",
+  "numpy",
+  "scikit-learn",
+]
+# NOTE: llama-index intentionally omitted — not used in the MVP. The retrieval scoring core
+# is framework-free (sentence-transformers / faiss / rank_bm25); generation + HyDE use
+# LangChain. Add llama-index later only if a concrete ingest need appears (and pin it then).
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

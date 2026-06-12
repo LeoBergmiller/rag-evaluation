@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+data/raw/
+data/index/
+results/*.json
+!results/baseline.json
+.claude/settings.local.json
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.DS_Store

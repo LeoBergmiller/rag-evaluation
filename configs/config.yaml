@@ -1,0 +1,71 @@
+# configs/config.yaml — aligned to the locked architecture decisions.
+# NOTE: this supersedes the earlier kit defaults (bge-small, 800/120, hybrid-default,
+# flat 2% gate). The agent must treat THIS as ground truth and not reintroduce the old values.
+
+corpus:
+  source: arxiv
+  categories: [cs.CL, cs.LG, cs.AI]
+  max_papers: 300            # fine for MVP; full text matters more than count
+  fulltext: true             # full text, NOT abstracts (the chunking experiment needs real length)
+  strip_references: true     # drop bibliography/references — noise for QA
+  raw_dir: data/raw          # immutable after fetch (CLAUDE.md deny rule)
+  index_dir: data/index      # built FAISS + BM25 indexes (gitignored)
+
+chunking:
+  strategy: recursive        # fixed | recursive | semantic
+  units: tokens              # token-based, not characters
+  chunk_size: 512            # primary (was 800)
+  chunk_overlap: 64          # primary (was 120)
+  store_parent: true         # keep parent-section id in chunk metadata (enables parent-doc later)
+  # secondary experiment (NOT part of the main strategy ablation): 256 / 32
+
+embedding:
+  model: BAAI/bge-base-en-v1.5   # was bge-small; fixed across ALL strategies (controlled variable)
+  device: cpu
+  query_prefix: "Represent this sentence for searching relevant passages: "  # bge: queries only
+  # passages embedded with NO prefix. Unit-test that the prefix is applied to queries only.
+
+retrieval:
+  strategy: dense            # MVP baseline; the benchmark sweeps dense|hybrid|rerank|hyde
+  index_type: flat           # EXACT FAISS IndexFlatIP — no IVF/HNSW (ANN error would contaminate the ablation)
+  top_k: 5
+  candidate_k: 50            # rerank/HyDE fetch-wide before narrowing
+  reranker: BAAI/bge-reranker-base
+  fusion: rrf                # hybrid: reciprocal rank fusion
+
+generation:
+  provider: anthropic        # generator family A
+  model: claude-sonnet-4-6
+  temperature: 0             # determinism; fixed across all strategies
+  max_tokens: 512
+
+evaluation:
+  judge_provider: openai     # judge family B (different from generator — kills self-preference bias)
+  judge_model: gpt-4o
+  judge_temperature: 0
+  ragas_metrics: [faithfulness, answer_relevancy, context_precision, context_recall]
+  retrieval_metrics: [recall_at_k, precision_at_k, mrr, ndcg_at_k]  # always computed; attributes failure
+  abstention: true           # include unanswerable questions; measure refusal
+  bootstrap_resamples: 1000  # 95% CIs on every metric
+  eval_set: data/eval/eval_set.jsonl   # gold (committed); built in build-step 5
+  dev_test_split: [0.4, 0.6] # tune on dev, freeze test for the gate
+
+  # The serialized per-strategy report MUST include these field names so the
+  # rag-eval-report skill can build its table:
+  #   faithfulness, answer_relevancy, context_precision, context_recall,
+  #   recall_at_k, p95_latency_ms, cost_per_query_usd   (+ extras: judge scores, ndcg, mrr, abstention)
+
+  gate:
+    # PROVISIONAL — reset floors + tolerances after measuring baseline run-to-run noise
+    # (build-step 8: run the baseline eval 3-5x, set tolerance ~= 2 * std per metric).
+    floors:
+      faithfulness: 0.85         # provisional; hard floor (hallucination is the cardinal sin)
+      context_recall: 0.80       # provisional
+    tolerance:                   # per-metric no-regression vs committed baseline
+      faithfulness: 0.02
+      answer_relevancy: 0.02
+      context_recall: 0.02
+      ndcg_at_k: 0.02
+    operational_ceilings:        # set after baseline; a strategy that wins quality but blows these should flag
+      p95_latency_ms: null
+      cost_per_query_usd: null
