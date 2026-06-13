@@ -1,0 +1,11 @@
+You are building a gold evaluation set for a RAG system over arXiv ML/AI papers.
+
+Given the passage below, write ONE specific question that can be answered using
+ONLY the information in this passage, and a concise reference answer (1-3 sentences)
+that directly answers it using only facts stated in the passage.
+
+The question should be specific enough that this passage is the natural source for
+the answer (avoid questions so generic that many passages could answer them).
+
+Passage:
+{passage}

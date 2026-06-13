@@ -1,0 +1,9 @@
+You are building a gold evaluation set for a RAG system over arXiv ML/AI papers.
+
+Write ONE plausible-sounding question about machine learning or AI research that is
+NOT answerable from the passage below — it should be on a related topic but ask about
+something the passage does not cover (e.g. a different method, dataset, result, or
+paper than the one described).
+
+Passage (for topical grounding only — the question must NOT be answerable from it):
+{passage}
