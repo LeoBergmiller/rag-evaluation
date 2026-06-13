@@ -22,6 +22,7 @@ dependencies = [
   "rank-bm25",
   "sentence-transformers==5.5.1",
   "arxiv",
+  "pypdf==6.13.2",
 
   # --- llm clients, app surfaces, eval utils ---
   "anthropic==0.109.1",
