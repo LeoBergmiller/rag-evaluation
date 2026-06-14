@@ -11,3 +11,4 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest tests/ -v --tb=short
+      - run: python -m rag_eval.gate

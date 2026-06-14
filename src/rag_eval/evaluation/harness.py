@@ -132,7 +132,10 @@ def evaluate_strategy(
         name: [] for name in cfg.evaluation.ragas_metrics
     }
     for record_index, scores in zip(ragas_record_indices, ragas_results, strict=True):
-        example_records[record_index].ragas_metrics = scores
+        example_records[record_index].ragas_metrics = {
+            name: (value if np.isfinite(value) else None)
+            for name, value in scores.items()
+        }
         for name, value in scores.items():
             ragas_vals[name].append(value)
 

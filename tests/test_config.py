@@ -24,8 +24,8 @@ def test_load_config_fields_and_types() -> None:
     assert cfg.generation.temperature == 0
 
     assert isinstance(cfg.evaluation.gate.floors, dict)
-    assert cfg.evaluation.gate.floors["faithfulness"] == 0.85
-    assert cfg.evaluation.gate.operational_ceilings["p95_latency_ms"] is None
+    assert cfg.evaluation.gate.floors["faithfulness"] == 0.92
+    assert cfg.evaluation.gate.operational_ceilings["p95_latency_ms"] == 185.71
 
 
 def test_fingerprint_stable() -> None:

@@ -13,6 +13,7 @@ from rag_eval.retrieval.registry import (
     RetrieverResources,
     build_retriever,
 )
+from rag_eval.retrieval.rerank import RerankRetriever
 
 FIXTURE_CHUNKS = [
     Chunk(
@@ -139,6 +140,32 @@ def test_bm25_retriever(resources: RetrieverResources) -> None:
 
     assert result.strategy == "bm25"
     assert result.chunks[0].chunk_id == "paper::1"
+
+
+class FakeReranker:
+    """Deterministic reranker: scores passages by ascending input order, so the
+    final order is the reverse of whatever the base retriever returned."""
+
+    def score(self, query: str, passages: list[str]) -> list[float]:
+        return [float(i) for i in range(len(passages))]
+
+
+def test_rerank_retriever(resources: RetrieverResources) -> None:
+    base = DenseRetriever(
+        resources.embedder, resources.dense_index, resources.chunks_by_id
+    )
+    base_order = [c.chunk_id for c in base.retrieve("network", k=4).chunks]
+
+    retriever = RerankRetriever(base, FakeReranker(), candidate_k=4)
+    result = retriever.retrieve("network", k=2)
+
+    assert result.strategy == "rerank"
+    assert len(result.chunks) == 2
+    assert result.diagnostics["base_strategy"] == "dense"
+    assert result.diagnostics["candidate_k"] == 4
+
+    reranked_order = [c.chunk_id for c in result.chunks]
+    assert reranked_order == list(reversed(base_order))[:2]
 
 
 def test_registry_builds_base_strategies(resources: RetrieverResources) -> None:

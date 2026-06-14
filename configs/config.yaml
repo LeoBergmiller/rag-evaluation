@@ -56,16 +56,17 @@ evaluation:
   #   recall_at_k, p95_latency_ms, cost_per_query_usd   (+ extras: judge scores, ndcg, mrr, abstention)
 
   gate:
-    # PROVISIONAL — reset floors + tolerances after measuring baseline run-to-run noise
-    # (build-step 8: run the baseline eval 3-5x, set tolerance ~= 2 * std per metric).
+    # Calibrated from a 5-run dense baseline on 2026-06-13/14 (build-step 8):
+    # tolerance ~= max(2 * std, 0.01); floors = mean - 2 * std; operational
+    # ceilings = 5x p95 latency / 3x cost of the dense baseline.
     floors:
-      faithfulness: 0.85         # provisional; hard floor (hallucination is the cardinal sin)
-      context_recall: 0.80       # provisional
+      faithfulness: 0.92          # hard floor (hallucination is the cardinal sin)
+      context_recall: 0.82
     tolerance:                   # per-metric no-regression vs committed baseline
-      faithfulness: 0.02
-      answer_relevancy: 0.02
-      context_recall: 0.02
-      ndcg_at_k: 0.02
-    operational_ceilings:        # set after baseline; a strategy that wins quality but blows these should flag
-      p95_latency_ms: null
-      cost_per_query_usd: null
+      faithfulness: 0.0178
+      answer_relevancy: 0.01
+      context_recall: 0.0315
+      ndcg_at_k: 0.01
+    operational_ceilings:        # 5x dense p95 latency, 3x dense cost per query
+      p95_latency_ms: 185.71
+      cost_per_query_usd: 0.0352

@@ -1,0 +1,1741 @@
+{
+  "run_id": "26e545d16fe64f73a3b1011d046d140f",
+  "timestamp": "20260613T225758Z",
+  "strategy": "dense",
+  "n_examples": 59,
+  "config_fingerprint": "defa37d5071c7049",
+  "eval_set_hash": "403ff26e0eff39a0",
+  "prompt_template_hash": "de4b5a5833ff80ce",
+  "faithfulness": {
+    "point": 0.9300370789341378,
+    "lo": 0.889451043237808,
+    "hi": 0.9637313034188032
+  },
+  "answer_relevancy": {
+    "point": 0.8430583180337241,
+    "lo": 0.7636262449757892,
+    "hi": 0.9059808352358794
+  },
+  "context_precision": {
+    "point": 0.7112179486824732,
+    "lo": 0.6100240384227067,
+    "hi": 0.798942307650888
+  },
+  "context_recall": {
+    "point": 0.8627450980392157,
+    "lo": 0.7745098039215687,
+    "hi": 0.9411764705882353
+  },
+  "recall_at_k": {
+    "point": 0.75,
+    "lo": 0.6346153846153846,
+    "hi": 0.8653846153846154
+  },
+  "precision_at_k": {
+    "point": 0.15000000000000002,
+    "lo": 0.12692307692307694,
+    "hi": 0.17307692307692304
+  },
+  "mrr": {
+    "point": 0.4724358974358974,
+    "lo": 0.3608413461538462,
+    "hi": 0.5766105769230769
+  },
+  "ndcg_at_k": {
+    "point": 0.5419710915228371,
+    "lo": 0.43176209293446255,
+    "hi": 0.6467862493501124
+  },
+  "p95_latency_ms": 36.978933704085634,
+  "cost_per_query_usd": 0.011796508474576273,
+  "abstention_accuracy": 0.9661016949152542,
+  "abstention_rate": 0.11864406779661017,
+  "examples": [
+    {
+      "id": "answerable::0::2606.13633v1::5",
+      "answerable": true,
+      "question": "Why is gradient truncation applied to the burning-state carry in the optimization procedure, and why is no analogous truncation needed for retardant?",
+      "answer": "## Gradient Truncation in the Optimization Procedure\n\n### Why Truncation is Applied to the Burning-State Carry\n\nThe gradient truncation is applied to the burning-state carry specifically to **suppress gradient explosion** over long optimization horizons. This is implemented as:\n\n$$pB^{\\text{carry}}_{t+1} = \\text{stopgrad}(pB_{t+1})$$\n\nThe truncation cuts one long-range gradient path through the burning-state carry while **preserving the dominant local path** from a water drop to the loss. As the paper explicitly states, this is \"a numerical stabilization device, not part of the physical suppression model\" [2606.13633v1::5].\n\n### Why No Analogous Truncation is Needed for Retardant\n\nNo analogous truncation is required for retardant because **the carried fuel-suppression field evolves multiplicatively through a bounded exponential factor** [2606.13633v1::5]. This bounded multiplicative evolution naturally prevents gradient explosion, making the explicit stopgrad stabilization unnecessary for the retardant pathway.\n\n### Summary of the Distinction\n\n| Aspect | Water (burning-state carry) | Retardant (fuel-suppression carry) |\n|--------|----------------------------|-------------------------------------|\n| Evolution type | Additive/cumulative | Multiplicative via bounded exponential |\n| Gradient explosion risk | Yes — requires truncation | No — naturally bounded |\n| Truncation applied | Yes (`stopgrad`) | No |\n\nThe asymmetry thus arises directly from the different mathematical structures governing how water and retardant effects propagate through the simulation [2606.13633v1::5].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13633v1::5",
+        "2606.13633v1::4",
+        "2606.13633v1::6",
+        "2606.13633v1::3",
+        "2606.13633v1::19"
+      ],
+      "reference_chunk_ids": [
+        "2606.13633v1::5"
+      ],
+      "latency_ms": 32.37954102223739,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9733592627014257,
+        "context_precision": 0.6999999999766667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::2::2606.13643v1::4",
+      "answerable": true,
+      "question": "How does RAH differ from MemGPT in its approach to handling context length limitations?",
+      "answer": "I don't know.\n\nThe provided context discusses RAH (Recursive Agent Harness) and its approach to long-context reasoning through harness recursion and subagent spawning, but it contains no information about MemGPT or any comparison between RAH and MemGPT.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13643v1::11",
+        "2606.13643v1::9",
+        "2606.13681v1::22",
+        "2606.13643v1::7",
+        "2606.13643v1::12"
+      ],
+      "reference_chunk_ids": [
+        "2606.13643v1::4"
+      ],
+      "latency_ms": 27.751000015996397,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "id": "answerable::3::2606.13669v1::34",
+      "answerable": true,
+      "question": "According to the passage, what are the three concrete interfaces through which deterministic graph primitives are exposed to the LLM?",
+      "answer": "I don't know.\n\nThe provided context does not mention \"deterministic graph primitives\" or describe three concrete interfaces through which they are exposed to an LLM. The context discusses SpatialClaw's persistent kernel workspace and HyperTool's executable blocks, but neither source describes deterministic graph primitives or three specific interfaces for exposing them.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::40",
+        "2606.13673v1::51",
+        "2606.13673v1::44",
+        "2606.13663v1::20",
+        "2606.13673v1::9"
+      ],
+      "reference_chunk_ids": [
+        "2606.13669v1::34"
+      ],
+      "latency_ms": 34.05716601992026,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "answerable::6::2606.13663v1::15",
+      "answerable": true,
+      "question": "In the ablation study on execution interface design using the Qwen3-8B backbone, what average accuracy did the HyperTool-only mode achieve compared to the Atomic+HyperTool hybrid setting and the ReAct baseline?",
+      "answer": "Based on the ablation study results presented in Table 2, using the Qwen3-8B backbone:\n\n- **HyperTool-only** mode achieved an average accuracy of **33.33%**\n- **Atomic+HyperTool hybrid** setting achieved **26.85%**\n- **ReAct baseline** (without SFT) achieved **20.92%**\n\nThe HyperTool-only mode significantly outperformed both alternatives, which the authors attribute to the unified action space minimizing cognitive load on smaller models by eliminating the need to dynamically classify and switch between different execution interfaces [2606.13663v1::15].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13663v1::15",
+        "2606.13663v1::19",
+        "2606.13663v1::16",
+        "2606.13663v1::13",
+        "2606.13663v1::3"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::15"
+      ],
+      "latency_ms": 35.11179197812453,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8817633233040021,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::7::2606.13663v1::2",
+      "answerable": true,
+      "question": "What are the two central challenges caused by unfolding tool operations into multiple model-visible transitions in a reasoning trace?",
+      "answer": "Based on the context, the two central challenges caused by unfolding tool operations into multiple model-visible transitions are:\n\n1. **Context inflation**: Long tool observations accumulate in the reasoning trace even when only a few fields are actually needed [2606.13663v1::2].\n\n2. **Reasoning fragmentation**: The model must repeatedly return to the main decision loop for low-level deterministic operations, interleaving high-level task reasoning with procedural state transfer [2606.13663v1::2].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13663v1::2",
+        "2606.13663v1::8",
+        "2606.13663v1::1",
+        "2606.13663v1::6",
+        "2606.13663v1::10"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::2"
+      ],
+      "latency_ms": 31.58216696465388,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.969775697836729,
+        "context_precision": 0.999999999975,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::8::2606.13669v1::26",
+      "answerable": true,
+      "question": "In the described reinforcement learning training procedure, how is the advantage estimate computed for each rollout, and what serves as the baseline instead of a value network?",
+      "answer": "Based on the context, the advantage estimate for each rollout is computed by standardizing rewards within each group. Specifically, for each prompt $q_b$, $G$ independent rollouts are drawn and scored with a rule-based reward $r_{b,g}$. The advantage is then computed as:\n\n$$\\hat{A}_{b,g} = \\frac{r_{b,g} - \\mu_b}{\\sigma_b + \\epsilon}$$\n\nwhere $\\mu_b$ is the group mean reward and $\\sigma_b$ is the group standard deviation [2606.13669v1::26].\n\nInstead of a value network, **the group means serve as the baseline**. As explicitly stated: \"No value network is trained; the group means serve as the baseline.\" [2606.13669v1::26]\n\nThis approach is consistent with the GRPO formulation described in the retrieval-augmented paper, where the normalized advantage is similarly defined as $A_g = (r(\\hat{a}_g, a) - \\bar{r})/\\sigma_r$, using the group mean reward $\\bar{r}$ as the baseline [2606.13680v1::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13669v1::26",
+        "2606.13633v1::21",
+        "2606.13680v1::11",
+        "2606.13680v1::8",
+        "2606.13680v1::9"
+      ],
+      "reference_chunk_ids": [
+        "2606.13669v1::26"
+      ],
+      "latency_ms": 33.19641703274101,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.8857084593070724,
+        "context_precision": 0.6999999999766667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::9::2606.13637v1::3",
+      "answerable": true,
+      "question": "According to the passage, what does the Recovery Subspace Dimensionality (kt) measure, and what specific value of kt was empirically observed?",
+      "answer": "## Recovery Subspace Dimensionality (kt)\n\n**Definition:** kt is defined as \"the minimum rank of the linear probe weight matrix Wt such that the rank-k approximation preserves at least 90% of full probe accuracy\" [2606.13637v1::3]. In other words, it measures the minimum number of dimensions (singular directions) of the probe weight matrix required to retain at least 90% of the recoverability performance for Task 0.\n\n**Empirically Observed Value:** Across all ten tasks (t = 0 through t = 9), kt was observed to remain approximately constant at **8 dimensions**, with a mean of 8.0 and a standard deviation of 0.82 [2606.13637v1::8]. The specific values per task were:\n\n| Task | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n|------|---|---|---|---|---|---|---|---|---|---|\n| kt   | 9 | 8 | 8 | 8 | 7 | 8 | 7 | 7 | 9 | 9 |\n\nThis stability — occupying only approximately 1.56% of total representational dimensionality (8/512) — falsified the original Recoverability Diffusion Hypothesis and instead supported the **Stable Recovery Manifold (SRM) Hypothesis**, which holds that forgotten task information remains recoverable within a compact, stable, low-dimensional manifold regardless of task count [2606.13637v1::4].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13637v1::8",
+        "2606.13637v1::4",
+        "2606.13637v1::3",
+        "2606.13637v1::11",
+        "2606.13637v1::7"
+      ],
+      "reference_chunk_ids": [
+        "2606.13637v1::3"
+      ],
+      "latency_ms": 31.694250006694347,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.940168927609221,
+        "context_precision": 0.99999999998,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::11::2606.13671v1::18",
+      "answerable": true,
+      "question": "What is the time complexity of approximately computing all pairs k-harmonic distances, and what techniques are used to achieve this?",
+      "answer": "Based on the context, the approximate computation of all pairs k-harmonic distances can be achieved in **O(mk poly log n + n² log n)** time, where m is the number of edges in the graph and k is the harmonic parameter [2606.13671v1::18].\n\nFor computing k-harmonic distances restricted to edges only, the complexity is **O(mk poly log n)** [2606.13671v1::18].\n\nThe techniques used to achieve this efficiency are:\n1. **Fast Laplacian solvers** — to avoid exact computation of the pseudoinverse of the Laplacian\n2. **Johnson-Lindenstrauss projections** (Johnson & Lindenstrauss, 1984) — to enable dimensionality reduction while preserving distances approximately [2606.13671v1::18]\n\nThis is contrasted with the naive algorithm, which takes **O(n³)** time. The improved complexity is particularly relevant because a key motivation for using truncated positional encodings is to provide structural information without incurring large computational overhead and training costs [2606.13671v1::18].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13671v1::18",
+        "2606.13671v1::15",
+        "2606.13671v1::16",
+        "2606.13671v1::17",
+        "2606.13671v1::4"
+      ],
+      "reference_chunk_ids": [
+        "2606.13671v1::18"
+      ],
+      "latency_ms": 30.359250027686357,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8888888888888888,
+        "answer_relevancy": 0.9331850030693648,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::15::2606.13673v1::35",
+      "answerable": true,
+      "question": "According to the SpatialClaw paper, what is a key limitation of fine-tuning VLMs with spatial supervision to improve spatial reasoning?",
+      "answer": "According to the SpatialClaw paper, a key limitation of fine-tuning VLMs with spatial supervision is that these approaches \"require retraining whenever perception modules or task distributions change\" [2606.13673v1::35].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::35",
+        "2606.13673v1::1",
+        "2606.13673v1::50",
+        "2606.13673v1::49",
+        "2606.13673v1::0"
+      ],
+      "reference_chunk_ids": [
+        "2606.13673v1::35"
+      ],
+      "latency_ms": 32.14316599769518,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9725926582534624,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::16::2606.13663v1::12",
+      "answerable": true,
+      "question": "Among the baseline methods evaluated with Qwen3-8B, which one achieves the highest overall score, and what is that score?",
+      "answer": "Based on the context provided, I don't have information about baseline methods evaluated specifically with Qwen3-8B in terms of overall scores. The context mentions HyperTool reaching 48.42 average score on 8B [2606.13663v1::14], but this is the HyperTool method itself, not a baseline.\n\nHowever, from the context about HyperTool comparisons [2606.13663v1::14], among the Qwen3-based baselines evaluated, the paper does not provide a clear breakdown of individual baseline scores for Qwen3-8B in the chunks provided.\n\nI don't know.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::15",
+        "2606.13680v1::12",
+        "2606.13669v1::52",
+        "2606.13663v1::14",
+        "2606.13680v1::13"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::12"
+      ],
+      "latency_ms": 33.70591695420444,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "answerable::20::2606.13643v1::2",
+      "answerable": true,
+      "question": "By how much did the Recursive Agent Harness (RAH) improve over the Codex baseline on the Oolong-Synthetic evaluation, and what backbone model was used?",
+      "answer": "RAH improved over the Codex baseline (71.75%) by **+9.61 percentage points** (95% CI [4.2, 14.8]), achieving an Oolong Score of **81.36%** [2606.13643v1::9]. Both RAH and the Codex baseline used **GPT-5 (gpt-5-2025-08-07)** as the backbone model, meaning the performance difference is attributable to the harness architecture rather than model choice [2606.13643v1::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13643v1::7",
+        "2606.13643v1::9",
+        "2606.13643v1::8",
+        "2606.13643v1::3",
+        "2606.13643v1::5"
+      ],
+      "reference_chunk_ids": [
+        "2606.13643v1::2"
+      ],
+      "latency_ms": 34.480709000490606,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8763713374650642,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::21::2606.13680v1::13",
+      "answerable": true,
+      "question": "On the AIME25 benchmark using Qwen3-1.7B, what is the accuracy gap between RA-RFT and GRPO, and how does RA-RFT's step-0 accuracy compare to GRPO's despite ultimately outperforming it?",
+      "answer": "Based on the provided context:\n\n**Accuracy Gap:** On AIME25 with Qwen3-1.7B, RA-RFT achieves **48.7%** while GRPO achieves **41.6%**, resulting in a gap of **+7.1 percentage points** in favor of RA-RFT [2606.13680v1::12] [2606.13680v1::13].\n\n**Step-0 Comparison:** Despite ultimately outperforming GRPO, RA-RFT starts at a *lower* step-0 accuracy than GRPO. Specifically, on AIME25, RA-RFT begins at **33.1%** while GRPO starts at **35.9%** [2606.13680v1::12]. This pattern holds across all benchmarks — as the paper explains, \"the base model is initially distracted by the unfamiliar retrieved context,\" but as reinforcement fine-tuning progresses, \"the model learns to effectively leverage the retrieved reasoning traces, ultimately surpassing GRPO by a substantial margin\" [2606.13680v1::13].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::15",
+        "2606.13680v1::13",
+        "2606.13680v1::12",
+        "2606.13643v1::9",
+        "2606.13657v1::5"
+      ],
+      "reference_chunk_ids": [
+        "2606.13680v1::13"
+      ],
+      "latency_ms": 40.344583976548165,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8888888888888888,
+        "answer_relevancy": 0.9613702942099914,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::23::2606.13637v1::11",
+      "answerable": true,
+      "question": "What is the proposed \"Manifold Anchor Regulariser,\" and how does it balance preventing forgetting with maintaining plasticity for new tasks?",
+      "answer": "## The Manifold Anchor Regulariser\n\n### What It Is\n\nThe Manifold Anchor Regulariser is a targeted regularization intervention designed to preserve the orientation of the 8-dimensional recovery subspace throughout continual learning. After learning task 0, the method extracts **U₀ ∈ ℝ^(d×8)**—the top-8 right singular vectors of the task-0 probe weight matrix W₀. For each subsequent task t, it adds the following anchor loss:\n\n> **L_anchor = λ · ‖U₀ − Uₜ‖²_F**\n\nThis penalizes rotation of the top-8 singular directions away from their original orientation [2606.13637v1::11].\n\n### How It Balances Forgetting Prevention and Plasticity\n\nThe key design principle is **selective constraint**: the regulariser targets *only* the top-8 singular directions, which the paper identifies as the dominant predictor of recoverability (principal-angle drift, Pearson r = −0.862) [2606.13637v1::0]. Critically, it imposes **no constraint on the remaining 504 dimensions**, thereby \"allowing full plasticity for new tasks\" [2606.13637v1::11].\n\nThis balance is justified by the Stable Recovery Manifold finding: since forgotten knowledge is preserved within a compact ~8-dimensional subspace out of 512 total dimensions, and recoverability is governed by the *orientation* of this subspace rather than its information content, preserving only those 8 directions is sufficient to maintain recoverability while leaving the vast majority of the representational space free for learning new tasks [2606.13637v1::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13637v1::11",
+        "2606.13637v1::0",
+        "2606.13637v1::1",
+        "2606.13637v1::12",
+        "2606.13637v1::10"
+      ],
+      "reference_chunk_ids": [
+        "2606.13637v1::11"
+      ],
+      "latency_ms": 32.183917006477714,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8,
+        "answer_relevancy": 0.9691689534119053,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::25::2606.13662v1::4",
+      "answerable": true,
+      "question": "What specific API cost did EUREKAAGENT achieve on the 26-circle packing task when using Claude Code as the CLI agent and GLM-5.1 as the base model?",
+      "answer": "The context does not contain information about the API cost achieved on the 26-circle packing task. It only reports the performance score of **2.635999** for the circle packing task [2606.13662v1::12], but no API cost figures are provided.\n\nI don't know.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13662v1::12",
+        "2606.13662v1::16",
+        "2606.13662v1::10",
+        "2606.13662v1::9",
+        "2606.13662v1::7"
+      ],
+      "reference_chunk_ids": [
+        "2606.13662v1::4"
+      ],
+      "latency_ms": 34.74729199660942,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "answerable::26::2606.13647v1::3",
+      "answerable": true,
+      "question": "According to the passage, by how much can Vocabulary Trimming reduce model size, and what percentage of performance is preserved?",
+      "answer": "Based on the context, Vocabulary Trimming (VT) can reduce model size by:\n\n- **62%** for E5-small (from 118M to 45M parameters) [2606.13647v1::20]\n- **35%** for E5-large (from 560M to 365M parameters) [2606.13647v1::20]\n\nRegarding performance preservation, VT not only preserves performance but actually **slightly improves** it: +0.13 for the small model and +0.31 for the large model [2606.13647v1::20]. Specifically for cross-lingual bitext mining tasks, performance is preserved **within 1 F1 point** on all language pairs, with differences averaging only 0.25 F1 for the small model and 0.04 F1 for the large model [2606.13647v1::21].\n\nMore broadly, the 45M parameter trimmed model achieves **91% of the performance** of the best 560M parameter multilingual model [2606.13647v1::21].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13647v1::20",
+        "2606.13647v1::22",
+        "2606.13647v1::14",
+        "2606.13647v1::18",
+        "2606.13647v1::21"
+      ],
+      "reference_chunk_ids": [
+        "2606.13647v1::3"
+      ],
+      "latency_ms": 32.95087500009686,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9234164106703627,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "answerable::28::2606.13658v1::24",
+      "answerable": true,
+      "question": "According to the passage, what is the key distinction between functional alignment and normative alignment in the context of cognitive colonization (System 0)?",
+      "answer": "## Functional Alignment vs. Normative Alignment in Cognitive Colonization\n\nAccording to the passage, the key distinction is as follows:\n\n**Functional alignment** refers to a cognitive extension that is constitutively integrated into the agent's cognitive system and effectively performs cognitive tasks — it works *with* the agent's cognitive architecture in a seamless, operational sense.\n\n**Normative alignment** refers to whether that integrated component actually serves the agent's *self-governing standpoint* — that is, whether its outputs would be endorsed by the agent upon reflection.\n\nThe critical diagnostic insight of the System 0 framework is that **colonization occurs precisely when these two forms of alignment come apart**: when a component is *functionally aligned* (deeply integrated, seamlessly operating) but *normatively misaligned* (carrying exogenous optimization objectives that the agent never authored and that would fail the agent's reflective endorsement) [2606.13658v1::24].\n\nAs the paper explains, earlier extended mind theorists like Clark & Chalmers implicitly assumed that cognitive extensions serve the agent's cognitive purposes — but this was an architectural and functional claim that \"does not by itself guarantee that all constitutively integrated components will be normatively aligned with the agent's self-governing standpoint\" [2606.13658v1::24].\n\nThis distinction is what makes cognitive colonization distinctively threatening: the foreign objectives \"operate from within the cognitive system, below the threshold of reflective awareness, and are experienced as native\" [2606.13658v1::22] — making the normative misalignment invisible despite full functional integration.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13658v1::24",
+        "2606.13658v1::22",
+        "2606.13658v1::25",
+        "2606.13658v1::20",
+        "2606.13658v1::4"
+      ],
+      "reference_chunk_ids": [
+        "2606.13658v1::24"
+      ],
+      "latency_ms": 34.975457994733006,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.7647058823529411,
+        "answer_relevancy": 0.9534604527200258,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::30::2606.13671v1::21",
+      "answerable": true,
+      "question": "On the ZINC-12k benchmark, which combination of truncated positional encodings achieves the best test MAE performance, and what is that MAE value?",
+      "answer": "Based on the experimental results presented in Table 2, the combination of **Walks + k-harmonics** (with 4 dimensions each) achieves the best test MAE performance on the ZINC-12k benchmark, with a test MAE of **0.064 ± 0.002** [2606.13671v1::21][2606.13671v1::22].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13671v1::22",
+        "2606.13671v1::4",
+        "2606.13671v1::21",
+        "2606.13668v1::5",
+        "2606.13671v1::0"
+      ],
+      "reference_chunk_ids": [
+        "2606.13671v1::21"
+      ],
+      "latency_ms": 32.52916701603681,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9258651506243126,
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::33::2606.13680v1::2",
+      "answerable": true,
+      "question": "By how many points does RA-RFT improve AIME 2025 average@32 accuracy over GRPO for the Qwen3-1.7B and Qwen3-4B models respectively?",
+      "answer": "Based on the context provided:\n\n- **Qwen3-1.7B**: RA-RFT achieves 48.7% vs GRPO's 41.6% on AIME 2025, an improvement of **+7.1 points** [2606.13680v1::12].\n\n- **Qwen3-4B**: RA-RFT improves over GRPO by **+2.8 points** on AIME 2025 [2606.13680v1::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::15",
+        "2606.13680v1::13",
+        "2606.13680v1::12",
+        "2606.13657v1::5",
+        "2606.13669v1::52"
+      ],
+      "reference_chunk_ids": [
+        "2606.13680v1::2"
+      ],
+      "latency_ms": 36.18058399297297,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9511837141961946,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::34::2606.13649v1::19",
+      "answerable": true,
+      "question": "In the selective prediction analysis at the equal-cost (3-call) budget, what was the range of ΔAUROC improvement when combining OC+SC (K=3) over SC (K=3) alone across the four datasets?",
+      "answer": "Based on the selective prediction analysis for the five thinking models at the equal-cost (3-call) budget, the range of ΔAUROC improvement when combining OC+SC(K=3) over SC(K=3) alone was from **+0.050 on StrategyQA to +0.134 on GSM8K** [2606.13649v1::19].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13649v1::18",
+        "2606.13649v1::20",
+        "2606.13649v1::14",
+        "2606.13649v1::19",
+        "2606.13649v1::13"
+      ],
+      "reference_chunk_ids": [
+        "2606.13649v1::19"
+      ],
+      "latency_ms": 32.50962501624599,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.25,
+        "ndcg_at_k": 0.43067655807339306
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.6666666666666666,
+        "answer_relevancy": 0.9724961877050426,
+        "context_precision": 0.6999999999766667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::35::2606.13670v1::10",
+      "answerable": true,
+      "question": "According to the passage, what percentage of LLM reanalysis results were confirmed by human reanalysis (n=69)?",
+      "answer": "Based on the context, when comparing the LLM reanalysis to the human reanalysis effect size, **29% of studies** fell within the strict tolerance band of ±0.05 [2606.13670v1::4].\n\nIt should be noted that while this represents the effect-size agreement with human reanalysis, the majority vote LLM conclusion matched the original claim in 95.7%, compared to 81.2% for human reanalysis [2606.13670v1::4].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13670v1::12",
+        "2606.13670v1::4",
+        "2606.13670v1::3",
+        "2606.13670v1::18",
+        "2606.13670v1::2"
+      ],
+      "reference_chunk_ids": [
+        "2606.13670v1::10"
+      ],
+      "latency_ms": 33.48924999590963,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8850096974306706,
+        "context_precision": 0.49999999995,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "id": "answerable::37::2606.13658v1::1",
+      "answerable": true,
+      "question": "According to the passage, what specific threat does AI as System 0 pose beyond threatening access to knowledge and the ability to supervise tasks?",
+      "answer": "According to the passage, beyond threatening access to knowledge and the ability to supervise tasks, AI systems constituting System 0 are increasingly becoming **\"cognitive colonizers\"**, as they bring externally designed optimization objectives into the architecture of the self [2606.13658v1::1].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13658v1::4",
+        "2606.13658v1::1",
+        "2606.13658v1::2",
+        "2606.13658v1::5",
+        "2606.13658v1::10"
+      ],
+      "reference_chunk_ids": [
+        "2606.13658v1::1"
+      ],
+      "latency_ms": 32.65050001209602,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9027646766113623,
+        "context_precision": 0.94999999997625,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::38::2606.13680v1::16",
+      "answerable": true,
+      "question": "What is the average accuracy improvement observed when fine-tuning Reason-ModernColBERT compared to Qwen3-Embedding-4B on the Qwen3-1.7B benchmark, and what does this suggest about retrieval architecture for reasoning-intensive tasks?",
+      "answer": "## Accuracy Improvement Analysis\n\n### Raw Numbers from Table 3\n\n| Retriever | Avg. Accuracy |\n|-----------|--------------|\n| Qwen3-Embedding-4B (off-the-shelf) | 38.5% |\n| Qwen3-Embedding-4B (fine-tuned) | 40.5% |\n| Reason-ModernColBERT (off-the-shelf) | 40.7% |\n| Reason-ModernColBERT (fine-tuned) | **47.4%** |\n\n### Key Comparisons\n\nAfter fine-tuning with reasoning supervision, **Reason-ModernColBERT achieves 47.4% vs. Qwen3-Embedding-4B's 40.5%**, a gap of **6.9 percentage points** in average accuracy [2606.13680v1::15]. Additionally, even without fine-tuning, Reason-ModernColBERT already matches or exceeds the fine-tuned Qwen3-Embedding-4B (40.7 vs. 38.5) [2606.13680v1::16].\n\nThe recall@1 improvement is also dramatic: Reason-ModernColBERT fine-tuned achieves **43.5% R@1** versus only **14.7%** for fine-tuned Qwen3-Embedding-4B [2606.13680v1::15].\n\n### What This Suggests\n\nThis strongly suggests that **multi-vector late-interaction retrieval is better suited for reasoning-intensive retrieval** than single-vector dense retrieval [2606.13680v1::16]. The authors explicitly conclude that Reason-ModernColBERT's architecture is more capable of capturing the structural and reasoning-level similarities needed to surface analogous problem-solving patterns, and that this architectural advantage compounds further when combined with gold-relevance supervision aligned to reasoning utility [2606.13680v1::16].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::16",
+        "2606.13680v1::15",
+        "2606.13680v1::14",
+        "2606.13680v1::0",
+        "2606.13669v1::52"
+      ],
+      "reference_chunk_ids": [
+        "2606.13680v1::16"
+      ],
+      "latency_ms": 40.03700002795085,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9436564712304653,
+        "context_precision": 0.999999999975,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::40::2606.13669v1::41",
+      "answerable": true,
+      "question": "According to the evaluation framework, what policy does Module B adopt for assessing textually mentioned entities, and how does it handle synonym recognition?",
+      "answer": "Based on the context, Module B adopts a **\"Lenient on Format, Strict on Facts\"** policy for assessing textually mentioned entities such as Tasks, Methods, and Datasets [2606.13669v1::41].\n\nRegarding synonym recognition, the framework deems linguistic variations and abbreviations as correct matches. For example, extracting \"ConvNet\" when the source text says \"Convolutional Neural Network\" is considered a valid match [2606.13669v1::41].\n\nAdditionally, Module B's evaluation penalizes the omission of **primary methods or main datasets** (Core-Focus Recall), but missing trivial details — such as auxiliary hyperparameters like learning rates or generic terms like \"computer\" — does not negatively impact the Recall score [2606.13669v1::41].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13669v1::41",
+        "2606.13669v1::42",
+        "2606.13669v1::12",
+        "2606.13669v1::40",
+        "2606.13647v1::24"
+      ],
+      "reference_chunk_ids": [
+        "2606.13669v1::41"
+      ],
+      "latency_ms": 32.58212498622015,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9483582992123818,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::42::2606.13657v1::0",
+      "answerable": true,
+      "question": "According to the paper's findings on the geometry of on-policy distillation updates, where do the parameter updates tend to fall relative to the source weights?",
+      "answer": "Based on the paper's findings, the parameter updates in on-policy distillation (OPD) are **strongly biased away from the principal singular subspaces of the source weights** and instead fall **disproportionately on coordinates where the source weights are close to zero** (i.e., low-magnitude source coordinates) [2606.13657v1::0] [2606.13657v1::2] [2606.13657v1::18].\n\nMore specifically, the updates are described as moving toward **low-curvature, spectrum-preserving regions** and away from the dominant singular directions of the source weights [2606.13657v1::4]. While the updates are numerically full-rank, they are **spectrally concentrated** — meaning their singular-value energy is concentrated rather than uniformly distributed [2606.13657v1::2] [2606.13657v1::18].\n\nThis off-principal geometry suggests that dense teacher supervision does not turn OPD into ordinary dense parameter rewriting; rather, OPD retains important geometric signatures similar to on-policy post-training methods like RLVR [2606.13657v1::0].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13657v1::4",
+        "2606.13657v1::0",
+        "2606.13657v1::2",
+        "2606.13657v1::18",
+        "2606.13657v1::3"
+      ],
+      "reference_chunk_ids": [
+        "2606.13657v1::0"
+      ],
+      "latency_ms": 34.213416976854205,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.7,
+        "answer_relevancy": 0.9053693423489763,
+        "context_precision": 0.99999999998,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::43::2606.13657v1::15",
+      "answerable": true,
+      "question": "What is the median top-16 singular-value energy ratio for DS-Qwen OPD, and what does this coexist with in terms of the numerical rank of OPD updates?",
+      "answer": "Based on the context, the median top-16 SVD energy for DS-Qwen OPD is **26.92%** [2606.13657v1::8].\n\nThis spectrally concentrated energy profile coexists with OPD updates being **numerically full-rank** matrices. As the paper explains, OPD delta matrices are full-rank when assessed by numerical rank, yet their energy spectrum is highly concentrated — meaning a large fraction of the total update energy is captured by just the top 16 singular values [2606.13657v1::16]. The accurate characterization is therefore that \"OPD deltas are full-rank matrices with a spectrally concentrated energy profile\" [2606.13657v1::16], which means reporting only numerical rank (suggesting incompatibility with low-rank methods) or only top-k energy (suggesting low dimensionality) would each give a misleading picture on its own.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13657v1::16",
+        "2606.13657v1::10",
+        "2606.13657v1::8",
+        "2606.13657v1::7",
+        "2606.13657v1::6"
+      ],
+      "reference_chunk_ids": [
+        "2606.13657v1::15"
+      ],
+      "latency_ms": 34.952334011904895,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.931067993762796,
+        "context_precision": 0.4777777777618519,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "id": "answerable::44::2606.13673v1::28",
+      "answerable": true,
+      "question": "In which specific meta-categories does SpatialClaw achieve the largest performance lifts (+6–9 percentage points) over the Structured tool-call and Single-pass Code baselines?",
+      "answer": "Based on the context, SpatialClaw achieves the largest performance lifts of +6–9 percentage points in **Camera motion**, **Multi-view/viewpoint reasoning**, and **Relative direction** meta-categories [2606.13673v1::28]. These are precisely the categories that require chained geometric computation across frames and viewpoints, where the persistent kernel's ability to enable cross-step composition and revision provides the greatest leverage [2606.13673v1::28].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::26",
+        "2606.13673v1::40",
+        "2606.13673v1::28",
+        "2606.13673v1::1",
+        "2606.13673v1::49"
+      ],
+      "reference_chunk_ids": [
+        "2606.13673v1::28"
+      ],
+      "latency_ms": 35.24495899910107,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9515514293741288,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::45::2606.13662v1::14",
+      "answerable": true,
+      "question": "By what percentage does the best EUREKAGENT kernel improve over TTT-Discover on the TriMul kernel engineering task?",
+      "answer": "Based on the context, the best EUREKAGENT kernel improves over TTT-Discover by about **10.8%** [2606.13662v1::14].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13662v1::1",
+        "2606.13662v1::14",
+        "2606.13662v1::13",
+        "2606.13662v1::12",
+        "2606.13662v1::15"
+      ],
+      "reference_chunk_ids": [
+        "2606.13662v1::14"
+      ],
+      "latency_ms": 31.54833399457857,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9319635837608585,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::46::2606.13633v1::12",
+      "answerable": true,
+      "question": "How does the proposed framework distinguish between the effects of water and retardant in its intervention model?",
+      "answer": "## Distinction Between Water and Retardant Effects\n\nThe proposed framework treats water and retardant as physically distinct suppression materials with different mechanisms of action:\n\n### Water: Immediate Effect on Active Burning\nWater acts **directly on the current burning probability** at the time of application. Specifically, it reduces the burning probability through a suppression factor:\n\n$$s^{\\text{water}}_t(i,j) = \\exp\\left(-\\min\\left(E^{\\text{water}}_t(i,j), 50\\right)\\right)$$\n\nThis immediately modifies the burning state:\n- $\\tilde{p}^B_t(i,j) = p^B_t(i,j) \\cdot s^{\\text{water}}_t(i,j)$ (burning probability reduced)\n- $\\tilde{p}^U_t(i,j)$ is updated to conserve probability mass\n\nThus, water has a **transient, immediate** effect on cells currently on fire [2606.13633v1::18].\n\n### Retardant: Persistent Fuel Suppression\nRetardant acts through a **persistent fuel-suppression field** $r_t(i,j) \\in [0,1]$, initialized at 1, which decays multiplicatively upon retardant application:\n\n$$r_{t+1}(i,j) = r_t(i,j) \\cdot \\exp\\left(-\\min\\left(E^{\\text{ret}}_t(i,j), 50\\right)\\right)$$\n\nThis modifies the **effective fuel term** used in future spread calculations:\n$$f^{\\text{eff}}_t(i,j) = f_t(i,j) \\cdot r_{t+1}(i,j)$$\n\nThus, retardant has a **lasting effect on future fire spread** by reducing fuel availability over subsequent time steps [2606.13633v1::18].\n\n### Summary\nAs explicitly noted in the paper, \"water acts immediately on active burning\" while \"retardant persistently reduces future spread through the effective fuel term\" [2606.13633v1::12], reflecting their distinct physical roles in aerial wildfire suppression.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13633v1::18",
+        "2606.13633v1::2",
+        "2606.13633v1::12",
+        "2606.13633v1::15",
+        "2606.13633v1::21"
+      ],
+      "reference_chunk_ids": [
+        "2606.13633v1::12"
+      ],
+      "latency_ms": 25.235457986127585,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9208739874602889,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::48::2606.13663v1::20",
+      "answerable": true,
+      "question": "According to the analysis of HyperTool blocks, what percentage of blocks expand beyond a single Atomic call, and which functional type leads this expansion?",
+      "answer": "Based on the analysis, over half — specifically **55.7%** — of HyperTool blocks expand beyond a single Atomic call, and this expansion is led by **tool Chaining**, which accounts for **35.4%** of blocks [2606.13663v1::20].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13663v1::19",
+        "2606.13663v1::20",
+        "2606.13663v1::15",
+        "2606.13663v1::7",
+        "2606.13663v1::16"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::20"
+      ],
+      "latency_ms": 32.67854201840237,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9622162478471378,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::49::2606.13673v1::57",
+      "answerable": true,
+      "question": "What does the `fit_ground_plane_ransac` function output when fitting fails, and what is left unspecified about its normal vector output?",
+      "answer": "Based on the context, when fitting fails, `fit_ground_plane_ransac` outputs `(None, None)` [2606.13673v1::57].\n\nWhen fitting succeeds, the sign of `plane_normal` is unspecified and must be disambiguated by the caller [2606.13673v1::57].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::57",
+        "2606.13633v1::19",
+        "2606.13673v1::47",
+        "2606.13673v1::46",
+        "2606.13673v1::59"
+      ],
+      "reference_chunk_ids": [
+        "2606.13673v1::57"
+      ],
+      "latency_ms": 30.1422500051558,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.3333333333333333,
+        "answer_relevancy": 0.9277062555839368,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::50::2606.13681v1::31",
+      "answerable": true,
+      "question": "According to the preference evidence capture results on PERSONAMEM-EVO, which question type shows the largest improvement in row-level capture when using EvoMem compared to the base system?",
+      "answer": "Based on Table 8 in the context, the **Temporal Trajectory** question type shows the largest improvement in row-level capture when using EvoMem compared to the base system, with a gain of **+4.4%** (from 92.2% to 96.6%) [2606.13681v1::33].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13681v1::18",
+        "2606.13681v1::31",
+        "2606.13681v1::32",
+        "2606.13681v1::33",
+        "2606.13681v1::28"
+      ],
+      "reference_chunk_ids": [
+        "2606.13681v1::31"
+      ],
+      "latency_ms": 35.419083025772125,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9595142871962462,
+        "context_precision": 0.6388888888675925,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::51::2606.13662v1::12",
+      "answerable": true,
+      "question": "In the circle packing task evaluated in EUREKAGENT's mathematics experiments, what score did EUREKAGENT achieve compared to the previous best AI result, and which LLMs were used for each?",
+      "answer": "Based on the context, in the circle packing task:\n\n- **EUREKAGENT** achieved a score of **2.635999**, using **GLM-5.1** as its LLM [2606.13662v1::12].\n- The **previous best AI** result was **2.635986**, achieved using **R1-Distill-Qwen3-8B** [2606.13662v1::12].\n\nEUREKAGENT thus surpassed the previous best AI result by approximately 0.000013, while also outperforming the previous best human result of ~2.634 [2606.13662v1::1].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13662v1::12",
+        "2606.13662v1::1",
+        "2606.13662v1::15",
+        "2606.13662v1::13",
+        "2606.13662v1::14"
+      ],
+      "reference_chunk_ids": [
+        "2606.13662v1::12"
+      ],
+      "latency_ms": 31.942417030222714,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9471557411924221,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::53::2606.13680v1::12",
+      "answerable": true,
+      "question": "On the Qwen3-1.7B model, by how much does RA-RFT improve over standard GRPO on the AIME25 benchmark?",
+      "answer": "Based on the context, RA-RFT improves over standard GRPO by **+7.1** on AIME25 for the Qwen3-1.7B model (48.7% vs 41.6%) [2606.13680v1::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::15",
+        "2606.13680v1::13",
+        "2606.13680v1::12",
+        "2606.13657v1::5",
+        "2606.13643v1::9"
+      ],
+      "reference_chunk_ids": [
+        "2606.13680v1::12"
+      ],
+      "latency_ms": 34.50795798562467,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9765504434514675,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "id": "answerable::54::2606.13647v1::10",
+      "answerable": true,
+      "question": "What distinguishes the multilingual-e5-large-instruct model from the other models in the Multilingual E5 family?",
+      "answer": "Based on the context, **multilingual-e5-large-instruct** achieves the **highest overall score (77.49)** on SkMTEB among all evaluated models, making it the top performer overall [2606.13647v1::18].\n\nWhat distinguishes it from other models in the Multilingual E5 family is that it is **instruction-tuned**, which particularly benefits performance on **classification and clustering tasks**, where it outperforms smaller alternatives by significant margins [2606.13647v1::18]. The context notes that \"instruction-tuned and large-scale models excel particularly in classification and clustering tasks\" [2606.13647v1::18].\n\nIn contrast, the other members of the Multilingual E5 family (such as multilingual-e5-small at 118M parameters and multilingual-e5-base at 278M parameters) are not instruction-tuned and are considerably smaller in scale, though they still demonstrate \"strong performance across model sizes\" [2606.13647v1::18].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13647v1::13",
+        "2606.13647v1::18",
+        "2606.13647v1::23",
+        "2606.13647v1::21",
+        "2606.13647v1::11"
+      ],
+      "reference_chunk_ids": [
+        "2606.13647v1::10"
+      ],
+      "latency_ms": 29.82304198667407,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.7777777777777778,
+        "answer_relevancy": 0.9926682733530187,
+        "context_precision": 0.0,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "id": "answerable::57::2606.13649v1::11",
+      "answerable": true,
+      "question": "What correlation coefficient does operadic consistency achieve with accuracy on the MuSiQue dataset, and is it statistically significant?",
+      "answer": "Based on the context, operadic consistency achieves a Pearson correlation coefficient between **0.86 and 0.94** uniformly across all four datasets, with p ≤ 0.0004 on all four [2606.13649v1::10]. Since MuSiQue is one of the four datasets evaluated, OC achieves r in this range on MuSiQue as well, and the result is statistically significant (p ≤ 0.0004) [2606.13649v1::0][2606.13649v1::10].\n\nThis contrasts sharply with CoT-SC, which collapses to r = +0.43 on MuSiQue (not statistically significant), and semantic entropy, which drops to r = +0.44 on MuSiQue [2606.13649v1::10].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13649v1::9",
+        "2606.13649v1::0",
+        "2606.13649v1::10",
+        "2606.13649v1::8",
+        "2606.13634v1::15"
+      ],
+      "reference_chunk_ids": [
+        "2606.13649v1::11"
+      ],
+      "latency_ms": 31.295457971282303,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.875,
+        "answer_relevancy": 0.9475325462730094,
+        "context_precision": 0.6388888888675925,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::59::2606.13681v1::0",
+      "answerable": true,
+      "question": "What average accuracy do current LLM agents achieve on EvoArena across evolving terminal, software, and social-preference domains, and by how much does EvoMem improve performance on standard benchmarks like GAIA and LoCoMo?",
+      "answer": "Based on the provided context, current LLM agents achieve an **average accuracy of 39.6%** across evolving terminal, software, and social-preference domains on EvoArena [2606.13681v1::0].\n\nRegarding standard benchmarks, EvoMem improves performance by:\n- **6.1% on GAIA**\n- **4.8% on LoCoMo**\n\n[2606.13681v1::0] [2606.13681v1::27]",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13681v1::28",
+        "2606.13681v1::27",
+        "2606.13681v1::0",
+        "2606.13681v1::34",
+        "2606.13681v1::26"
+      ],
+      "reference_chunk_ids": [
+        "2606.13681v1::0"
+      ],
+      "latency_ms": 36.71641700202599,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9394277351562099,
+        "context_precision": 0.5833333333041666,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::60::2606.13657v1::1",
+      "answerable": true,
+      "question": "According to the passage, how does On-Policy Distillation (OPD) combine the advantages of conventional supervised fine-tuning and RLVR?",
+      "answer": "According to the passage, OPD combines the attractive parts of both conventional supervised fine-tuning and RLVR by addressing each method's key limitation:\n\n- **Conventional supervised fine-tuning (SFT) and offline distillation** provide dense token-level supervision but train on fixed demonstrations that may differ from what the model generates at test time, causing distribution shift and compounding errors [2606.13657v1::1].\n\n- **RLVR** trains on the current policy's own samples (on-policy), but learns from sparse environment- or verifier-derived outcome rewards, facing a credit-assignment problem [2606.13657v1::1].\n\n**OPD resolves both issues** by keeping the data **on-policy** from the student model (like RLVR) while replacing sparse environmental reward feedback with **dense teacher supervision** (like SFT/offline distillation) [2606.13657v1::1]. In other words, OPD generates training data from the student's own rollouts to avoid distribution shift, but uses a teacher model to provide rich, token-level feedback on those rollouts rather than relying on sparse rewards.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13657v1::2",
+        "2606.13657v1::17",
+        "2606.13657v1::0",
+        "2606.13657v1::15",
+        "2606.13657v1::1"
+      ],
+      "reference_chunk_ids": [
+        "2606.13657v1::1"
+      ],
+      "latency_ms": 31.111375021282583,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.2,
+        "ndcg_at_k": 0.38685280723454163
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9324900216795088,
+        "context_precision": 0.99999999998,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::61::2606.13663v1::6",
+      "answerable": true,
+      "question": "In the HyperTool framework, how does it handle a workflow with multiple dependent tool calls compared to the standard MCP-style atomic tool-call interface?",
+      "answer": "## HyperTool vs. Standard MCP-Style Atomic Tool Calls\n\n### Standard MCP-Style Interface\n\nUnder the standard MCP-style interface, each action is an atomic tool call:\n\n> `at = Call(τt, xt), τt ∈ T`\n\nThis means a workflow with **k dependent tool operations must be expressed as k model-visible transitions**, exposing every intermediate observation, value transfer, and procedural step to the main reasoning trace [2606.13663v1::6].\n\n### HyperTool's Approach\n\nHyperTool changes the model-visible unit of tool execution by exposing a **unified executable interface**:\n\n> `at = Block(St)`\n\nwhere `St` is a **bounded executable program** written over the primitive tools. The HyperTool runtime executes `St` and returns a **single block-level observation** `ot` to the outer trace [2606.13663v1::6].\n\nInside a HyperTool block, the model can:\n- Call existing tools through their original schemas\n- Store returned values as local variables\n- Parse and filter observations\n- Perform lightweight computation\n- Define temporary helper functions\n- Pass intermediate values directly across calls [2606.13663v1::6]\n\n### Key Distinction\n\nIf `St` contains **multiple dependent calls**, HyperTool expresses them as **one executable subroutine** rather than multiple model-visible transitions, keeping intermediate observations and deterministic state transfers out of the main trace [2606.13663v1::7]. This effectively mitigates context inflation — for example, in Financial Analysis, HyperTool nearly doubled accuracy while using over **78% fewer tokens** compared to the atomic ReAct baseline [2606.13663v1::19].\n\nNotably, HyperTool **subsumes** the standard interface: if `St` contains only one primitive call, it reduces to the standard atomic tool-call interface [2606.13663v1::6].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13663v1::7",
+        "2606.13663v1::6",
+        "2606.13663v1::19",
+        "2606.13663v1::3",
+        "2606.13663v1::20"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::6"
+      ],
+      "latency_ms": 36.497415974736214,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9117565850201884,
+        "context_precision": 0.99999999998,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::63::2606.13673v1::48",
+      "answerable": true,
+      "question": "What are the two fallback strategies attempted by the termination node in SpatialClaw when an agent's budget is exceeded, and in what order are they tried?",
+      "answer": "When an agent's budget is exceeded, the termination node attempts two fallback strategies in the following order:\n\n1. **(i) Chain-of-thought fallback**: The VLM backbone is prompted to answer directly from the key frames using the same boxed-answer protocol as the no-tool baseline [2606.13673v1::48].\n\n2. **(ii) Regex-based extraction**: If the chain-of-thought fallback does not yield a parseable answer, a regex-based extraction is performed over the agent's recent messages and variables [2606.13673v1::48].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::48",
+        "2606.13673v1::49",
+        "2606.13673v1::11",
+        "2606.13673v1::46",
+        "2606.13673v1::17"
+      ],
+      "reference_chunk_ids": [
+        "2606.13673v1::48"
+      ],
+      "latency_ms": 32.727833022363484,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8350593071681307,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::64::2606.13634v1::8",
+      "answerable": true,
+      "question": "In the algebra LG defined over the operad DG of derivation trees for a context-free grammar G, what does LG(A) represent for a nonterminal A ∈ V?",
+      "answer": "In the algebra $L_G$ defined over the operad $D_G$, for a nonterminal $A \\in V$, $L_G(A)$ represents **the language generated by $A$**, i.e., the language of the subgrammar with $A$ as the start symbol [2606.13634v1::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13634v1::9",
+        "2606.13634v1::5",
+        "2606.13634v1::8",
+        "2606.13634v1::10",
+        "2606.13634v1::4"
+      ],
+      "reference_chunk_ids": [
+        "2606.13634v1::8"
+      ],
+      "latency_ms": 31.69741597957909,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9391597548021607,
+        "context_precision": 0.4166666666458333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::66::2606.13647v1::2",
+      "answerable": true,
+      "question": "How many datasets and task types does SkMTEB include, and how many embedding models were evaluated using it?",
+      "answer": "Based on the context, SkMTEB includes **31 datasets** across **7 task types**. A total of **31 embedding models** (spanning open-weight and proprietary systems of compact, mid-sized, and large multilingual varieties) were evaluated using it [2606.13647v1::0] [2606.13647v1::2].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13647v1::5",
+        "2606.13647v1::0",
+        "2606.13647v1::2",
+        "2606.13647v1::4",
+        "2606.13647v1::24"
+      ],
+      "reference_chunk_ids": [
+        "2606.13647v1::2"
+      ],
+      "latency_ms": 31.129167007748038,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9469202514440719,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::67::2606.13681v1::32",
+      "answerable": true,
+      "question": "By how much does EvoMem improve row-level capture and clause-level capture compared to the baseline, and what do these metrics measure?",
+      "answer": "Based on the context, EvoMem improves these capture metrics as follows:\n\n- **Clause-level capture**: improves from 89.4% to 90.3%, a gain of **+0.9 percentage points**\n- **Row-level capture**: improves from 72.5% to 74.9%, a gain of **+2.4 percentage points**\n\n**What these metrics measure:**\n\n- **Clause-level capture** checks whether each atomic preference clause appears in at least one memory unit — i.e., whether individual pieces of preference evidence are preserved somewhere in the memory store.\n- **Row-level capture** requires that *all* clauses needed for a given example are preserved together — i.e., whether the complete evidence set for each example is retained.\n\nThe larger gain at the row level indicates that EvoMem is particularly effective at preserving **complete preference states** needed for downstream reasoning, rather than just individual fragments [2606.13681v1::32]. Category-level results show the largest row-level gains on *temporal trajectory* (+4.4%) and *multi-pattern synthesis* (+3.5%), which also correspond to the strongest accuracy improvements [2606.13681v1::33].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13681v1::28",
+        "2606.13681v1::29",
+        "2606.13681v1::31",
+        "2606.13681v1::33",
+        "2606.13681v1::32"
+      ],
+      "reference_chunk_ids": [
+        "2606.13681v1::32"
+      ],
+      "latency_ms": 33.911542035639286,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.2,
+        "ndcg_at_k": 0.38685280723454163
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9288201619151163,
+        "context_precision": 0.36666666664833336,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::72::2606.13677v1::20",
+      "answerable": true,
+      "question": "What success rates does the proposed system achieve for grasping and in-hand manipulation across all object categories, and how does this compare to the teleoperation baseline on tongs?",
+      "answer": "## System Performance vs. Teleoperation Baseline\n\n### Proposed System Success Rates\n\nThe proposed system achieves approximately **70% success rates for both grasping and in-hand manipulation** across all four object categories (tongs, pliers, clothespins, and syringes) [2606.13677v1::20].\n\nLooking at the specific numbers from Table 1, the system (\"Ours\") achieves success rates generally in the **0.6–0.8 range** across grasping, opening, and closing phases for all object categories [2606.13677v1::21].\n\n### Comparison to Teleoperation Baseline on Tongs\n\nThe teleoperation baseline (GeoRT) performs significantly worse:\n\n- **Teleoperation** can only achieve around **30% success on tongs**, with values of approximately 0.3 for grasp and 0.1–0.3 for open/close operations [2606.13677v1::20] [2606.13677v1::21].\n- The limited teleoperation performance is attributed to **\"the difficulty of precisely controlling the force when manipulating thin articulated objects\"**, as well as **\"frequent tool slippage and bouncing caused by imbalanced contact forces\"** [2606.13677v1::21] [2606.13677v1::22].\n\nIn summary, the proposed system achieves roughly **2× or more improvement** over the teleoperation baseline on tongs, and the teleoperation baseline struggles across all categories, with the position-based retargeting method even failing to generate sufficient contact force for clothespins [2606.13677v1::22].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13677v1::21",
+        "2606.13677v1::23",
+        "2606.13677v1::20",
+        "2606.13677v1::22",
+        "2606.13677v1::10"
+      ],
+      "reference_chunk_ids": [
+        "2606.13677v1::20"
+      ],
+      "latency_ms": 33.44295802526176,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.9166666666666666,
+        "answer_relevancy": 0.9542079855188961,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::74::2606.13669v1::48",
+      "answerable": true,
+      "question": "What two evaluation metrics are used to assess performance on the open-source multi-hop reasoning benchmarks, and how is each defined?",
+      "answer": "Based on the context provided, I can identify the evaluation metrics mentioned for the benchmarks, but the question specifically asks about \"open-source multi-hop reasoning benchmarks\" with their definitions.\n\nFrom the context, the metrics defined are:\n\n1. **Acc (Accuracy)** – per-sample 1/0 categorical scoring, applied to categorical questions including multiple-choice and binary questions [2606.13673v1::38].\n\n2. **MRA (Mean Relative Accuracy)** – mean relative accuracy on numerical questions [2606.13673v1::38].\n\nThere is also **VCI** (the SPAR-Bench metric for view change inference, defined as MRA averaged across five movement axes) [2606.13673v1::38], but this is specific to one benchmark rather than a general metric.\n\nHowever, regarding the specific framing of \"open-source multi-hop reasoning benchmarks\" as referenced in paper 2606.13669, the context mentions that performance is evaluated in terms of **rationale accuracy** and **answer accuracy** [2606.13669v1::46], but their precise definitions are not provided in the given context.\n\nI don't know the full definitions of rationale accuracy and answer accuracy as used in the open-source multi-hop reasoning benchmark evaluation, as the context does not provide sufficient detail on those specific metric formulations.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::37",
+        "2606.13669v1::2",
+        "2606.13673v1::38",
+        "2606.13649v1::21",
+        "2606.13669v1::46"
+      ],
+      "reference_chunk_ids": [
+        "2606.13669v1::48"
+      ],
+      "latency_ms": 32.84645895473659,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.9166666666666666,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": null
+      }
+    },
+    {
+      "id": "answerable::75::2606.13680v1::11",
+      "answerable": true,
+      "question": "What evaluation metric and sampling configuration are used to report results across all experiments on the four competition-level mathematical reasoning benchmarks?",
+      "answer": "Based on the context, results across all experiments on the four competition-level mathematical reasoning benchmarks (AIME 2024, AIME 2025, HMMT February 2025, and BrUMO 2025) are reported using **average@32 accuracy** with **temperature 1.0** and a **maximum generation length of 32,768 tokens** [2606.13680v1::11].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13673v1::38",
+        "2606.13673v1::37",
+        "2606.13680v1::12",
+        "2606.13680v1::11",
+        "2606.13649v1::21"
+      ],
+      "reference_chunk_ids": [
+        "2606.13680v1::11"
+      ],
+      "latency_ms": 30.220000015106052,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.25,
+        "ndcg_at_k": 0.43067655807339306
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9511144995518985,
+        "context_precision": 0.249999999975,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::77::2606.13670v1::3",
+      "answerable": true,
+      "question": "What two tolerance thresholds are used for effect-size recovery in the reproducibility evaluation, and what metric is used to measure effect size?",
+      "answer": "Based on the context, the two tolerance thresholds used for effect-size recovery are **±0.05** (referred to as the \"strict\" tolerance) and **±0.20**, both measured in **Cohen's *d*** [2606.13670v1::3].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13670v1::3",
+        "2606.13670v1::4",
+        "2606.13670v1::12",
+        "2606.13670v1::11",
+        "2606.13670v1::0"
+      ],
+      "reference_chunk_ids": [
+        "2606.13670v1::3"
+      ],
+      "latency_ms": 33.645500021521,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.947538836244178,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::79::2606.13663v1::4",
+      "answerable": true,
+      "question": "What improvement in average accuracy did HyperTool achieve on MCP-Universe when applied to Qwen3-8B?",
+      "answer": "Based on the context, HyperTool improved average accuracy on MCP-Universe for Qwen3-8B from **9.93% to 33.33%** [2606.13663v1::0], representing a substantial improvement in multi-step tool use performance [2606.13663v1::3].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13663v1::16",
+        "2606.13663v1::19",
+        "2606.13663v1::0",
+        "2606.13663v1::3",
+        "2606.13663v1::11"
+      ],
+      "reference_chunk_ids": [
+        "2606.13663v1::4"
+      ],
+      "latency_ms": 30.349708977155387,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9638899423794091,
+        "context_precision": 0.8055555555287036,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::83::2606.13671v1::12",
+      "answerable": true,
+      "question": "According to Theorem 4.2, what is the relationship in expressive power between Ω(n)-Walk-WL and 1-EP-WL for graphs with n ≥ 6 even vertices?",
+      "answer": "According to Theorem 4.2, for graphs with n ≥ 6 even vertices, there exist pairs of graphs that are **indistinguishable by Ω(n)-Walk-WL but are distinguishable by 1-EP-WL** [2606.13671v1::12]. This means that 1-EP-WL (using just a single eigenspace projection encoding) is strictly more expressive than Ω(n)-Walk-WL (using a linear number of powers of the adjacency matrix) on such graphs, demonstrating that even a constant-sized spectral encoding can distinguish graphs that a linear-sized walk encoding cannot.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13671v1::13",
+        "2606.13671v1::14",
+        "2606.13671v1::12",
+        "2606.13671v1::8",
+        "2606.13671v1::3"
+      ],
+      "reference_chunk_ids": [
+        "2606.13671v1::12"
+      ],
+      "latency_ms": 34.38500000629574,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8333333333333334,
+        "answer_relevancy": 0.9667803274361259,
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::84::2606.13634v1::14",
+      "answerable": true,
+      "question": "In the example of operadic inconsistency using LLAMA3 8B INSTRUCT, what results were produced when the model was executed on the four partial collapses of the Tree of Questions (ToQ), and why does this demonstrate operadic inconsistency?",
+      "answer": "## Operadic Inconsistency in LLAMA3 8B INSTRUCT\n\nWhen LLAMA3 8B INSTRUCT was executed on the four partial collapses of the Tree of Questions (ToQ) for the question \"Who was First Lady when World War 2 ended?\", the results were:\n\n- **Three partial collapses** yielded the answer **\"Bess Truman\"**\n- **One partial collapse** (the total collapse — i.e., the single-pass direct question) yielded **\"Eleanor Roosevelt\"** [2606.13634v1::14]\n\n## Why This Demonstrates Operadic Inconsistency\n\nAccording to Definition 2.12, a model **m** is operadically consistent on a ToQ **T** if, for **any** partial collapses T′₁ and T′₂ of T, the final answers produced by m agree [2606.13634v1::14].\n\nIn this example, the answers across the four partial collapses do **not** all agree — \"Bess Truman\" and \"Eleanor Roosevelt\" are contradictory answers to the same root question. Specifically, the total collapse (direct single-pass answer) disagrees with the answers produced by the decomposed partial collapses. This disagreement across partial collapses directly **witnesses operadic inconsistency**, as the condition that all partial collapses yield the same final answer is violated [2606.13634v1::14].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13634v1::14",
+        "2606.13634v1::15",
+        "2606.13634v1::12",
+        "2606.13649v1::3",
+        "2606.13649v1::24"
+      ],
+      "reference_chunk_ids": [
+        "2606.13634v1::14"
+      ],
+      "latency_ms": 39.341584022622555,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7485998725367345,
+        "context_precision": 0.8055555555287036,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::85::2606.13677v1::11",
+      "answerable": true,
+      "question": "What are the inputs and outputs of the Mana data generation system?",
+      "answer": "Based on the context provided:\n\n**Inputs:**\nThe input to Mana is a tool mesh with an articulated joint model and a small amount of human-provided functional affordance annotation. Specifically, the user marks the canonical tool pose and the functional regions of the mesh in a 3D interface (e.g., handles of pliers, arms of tongs, plunger and barrel of a syringe). This labeling process takes less than 1 minute per tool instance [2606.13677v1::11].\n\n**Outputs:**\nThe output is a dataset of successful simulated manipulation trajectories, each containing:\n- Wrist motion\n- Hand joint commands\n- Object state\n- Semantic phase labels (such as grasping, opening, and closing)\n\nThese trajectories are subsequently used to train the visuomotor policy [2606.13677v1::11].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13677v1::1",
+        "2606.13677v1::0",
+        "2606.13677v1::11",
+        "2606.13663v1::9",
+        "2606.13677v1::8"
+      ],
+      "reference_chunk_ids": [
+        "2606.13677v1::11"
+      ],
+      "latency_ms": 28.305582993198186,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8986652331670375,
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::86::2606.13637v1::2",
+      "answerable": true,
+      "question": "What did Davari et al. find when applying linear probing to continual learning settings?",
+      "answer": "Based on the context, Davari et al. [2] applied linear probing to assess representational quality independently of classifiers in continual learning settings and found that **probing accuracy exceeds task accuracy in forgetting settings** [2606.13637v1::2].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13637v1::1",
+        "2606.13637v1::2",
+        "2606.13637v1::3",
+        "2606.13637v1::0",
+        "2606.13637v1::12"
+      ],
+      "reference_chunk_ids": [
+        "2606.13637v1::2"
+      ],
+      "latency_ms": 27.611542027443647,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.964549421503464,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "answerable::87::2606.13643v1::5",
+      "answerable": true,
+      "question": "How does RAH's code-execution path differ from the baseline JSON tool-calling path in terms of parallel subagent scaling?",
+      "answer": "Based on the context, the two paths differ in the following key ways regarding parallel subagent scaling:\n\n**JSON Tool-Calling (Baseline Path):**\n- The parent emits a structured function call and the harness runs the subagent directly [2606.13643v1::5]\n- It is **capped by the API's per-turn parallel tool-call budget/limit**, meaning the number of subagents that can be spawned in a single turn is bounded by the provider's protocol [2606.13643v1::5] [2606.13643v1::6]\n- Used for smaller subtasks of **one to five entries** [2606.13643v1::6]\n\n**Code-Execution Path (RAH's Contribution):**\n- The parent writes an **executable script** that instantiates subagents as `Task()` objects and runs them in parallel via `asyncio.gather` [2606.13643v1::5] [2606.13643v1::6]\n- It **bypasses the per-turn cap** entirely, since a script executed in a subprocess carries no such restriction [2606.13643v1::6]\n- Scaling is **controlled by the workload rather than the provider's protocol** — the number of subagents is simply a parameter in the generated code, allowing it to scale to **thousands of subagent harnesses in parallel** [2606.13643v1::5] [2606.13643v1::6]\n- Used when the parallelism benefit justifies the script-generation overhead (i.e., for larger, fine-grained workloads) [2606.13643v1::6]\n\nIn summary, the code-execution path removes the hard ceiling imposed by the API's tool-call limit and makes spawning scale a function of workload size rather than protocol constraints.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "2606.13643v1::5",
+        "2606.13643v1::6",
+        "2606.13643v1::3",
+        "2606.13643v1::9",
+        "2606.13643v1::11"
+      ],
+      "reference_chunk_ids": [
+        "2606.13643v1::5"
+      ],
+      "latency_ms": 31.415791949257255,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8862074930571812,
+        "context_precision": 0.94999999997625,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "id": "unanswerable::1::2606.13658v1::24",
+      "answerable": false,
+      "question": "What empirical benchmarks or datasets have been used to evaluate the degree to which large language model outputs align with users' reflectively endorsed preferences, and which models performed best on these evaluations?",
+      "answer": "I don't know.\n\nThe provided context does not contain information about benchmarks or datasets evaluating the alignment of large language model outputs with users' reflectively endorsed preferences, nor any related model performance comparisons on such evaluations. The context covers SkMTEB (a Slovak text embedding benchmark) and an LLM-based reproducibility assessment study, neither of which addresses preference alignment evaluation.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13647v1::23",
+        "2606.13647v1::4",
+        "2606.13670v1::0",
+        "2606.13647v1::24",
+        "2606.13647v1::1"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 35.81858397228643,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::2::2606.13662v1::12",
+      "answerable": false,
+      "question": "What benchmark results did OpenEvolve achieve on the bin packing problem using GPT-4o as its base language model?",
+      "answer": "I don't know.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13662v1::1",
+        "2606.13681v1::26",
+        "2606.13662v1::5",
+        "2606.13681v1::27",
+        "2606.13662v1::12"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 32.50541602028534,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::3::2606.13658v1::16",
+      "answerable": false,
+      "question": "What empirical benchmarks or datasets have been used to evaluate the degree to which large language models exhibit genuine collective intelligence versus algorithmic convergence in multi-agent collaborative reasoning tasks?",
+      "answer": "I don't know.\n\nThe provided context does not contain information about empirical benchmarks or datasets specifically designed to evaluate genuine collective intelligence versus algorithmic convergence in multi-agent collaborative reasoning tasks. While the context touches on related topics such as confidence and uncertainty in LLM reasoning [2606.13649v1::21], compositional reasoning benchmarks, and various embedding benchmarks [2606.13647v1::4], none of these directly address the specific question of collective intelligence versus algorithmic convergence in multi-agent settings.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13649v1::21",
+        "2606.13670v1::0",
+        "2606.13669v1::13",
+        "2606.13680v1::11",
+        "2606.13647v1::4"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 35.95229098573327,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::5::2606.13669v1::46",
+      "answerable": false,
+      "question": "What retrieval strategy does REALM (Retrieval-Augmented Language Model Pre-Training) use to integrate external knowledge during pre-training, and how does its performance compare to RAG-based approaches on open-domain QA benchmarks like Natural Questions?",
+      "answer": "I don't know.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13669v1::6",
+        "2606.13680v1::0",
+        "2606.13680v1::3",
+        "2606.13680v1::16",
+        "2606.13680v1::1"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 35.53900000406429,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::6::2606.13680v1::11",
+      "answerable": false,
+      "question": "What accuracy does the QuestA method achieve on the MATH-500 benchmark when using the Qwen2.5-Math-7B base model?",
+      "answer": "I don't know.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13680v1::12",
+        "2606.13680v1::11",
+        "2606.13680v1::15",
+        "2606.13680v1::10",
+        "2606.13673v1::14"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 34.26304197637364,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::7::2606.13658v1::21",
+      "answerable": false,
+      "question": "What benchmark datasets were used to evaluate the degree of value misalignment in large language models across different cultural contexts in the study by Anwar et al. (2024)?",
+      "answer": "I don't know.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13647v1::23",
+        "2606.13647v1::24",
+        "2606.13647v1::4",
+        "2606.13647v1::5",
+        "2606.13670v1::18"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 34.972499997820705,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    },
+    {
+      "id": "unanswerable::8::2606.13637v1::10",
+      "answerable": false,
+      "question": "How does Gradient Episodic Memory (GEM) compare to Experience Replay (ER) in terms of backward transfer on the Split-CIFAR-10 benchmark for continual learning?",
+      "answer": "I don't know.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "2606.13637v1::10",
+        "2606.13637v1::2",
+        "2606.13637v1::5",
+        "2606.13637v1::3",
+        "2606.13680v1::12"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 34.697750001214445,
+      "retrieval_metrics": {},
+      "ragas_metrics": {}
+    }
+  ]
+}

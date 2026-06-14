@@ -18,6 +18,7 @@ from rag_eval.ingest.pipeline import load_chunks
 from rag_eval.retrieval.base import Retriever
 from rag_eval.retrieval.bm25 import BM25Retriever
 from rag_eval.retrieval.dense import DenseRetriever
+from rag_eval.retrieval.rerank import CrossEncoderReranker, RerankRetriever
 
 
 @dataclass
@@ -80,3 +81,10 @@ def _build_dense(cfg: Config, resources: RetrieverResources) -> Retriever:
 @register("bm25")
 def _build_bm25(cfg: Config, resources: RetrieverResources) -> Retriever:
     return BM25Retriever(resources.bm25_index, resources.chunks_by_id)
+
+
+@register("rerank")
+def _build_rerank(cfg: Config, resources: RetrieverResources) -> Retriever:
+    base = _build_dense(cfg, resources)
+    reranker = CrossEncoderReranker(cfg.retrieval.reranker)
+    return RerankRetriever(base, reranker, cfg.retrieval.candidate_k)

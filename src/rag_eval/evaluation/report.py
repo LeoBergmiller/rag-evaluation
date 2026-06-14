@@ -25,7 +25,7 @@ class ExampleRecord(BaseModel):
     reference_chunk_ids: list[str] | None
     latency_ms: float
     retrieval_metrics: dict[str, float]
-    ragas_metrics: dict[str, float]
+    ragas_metrics: dict[str, float | None]
 
 
 class StrategyReport(BaseModel):
