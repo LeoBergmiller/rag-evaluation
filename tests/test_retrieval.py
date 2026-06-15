@@ -9,6 +9,8 @@ from rag_eval.ingest.index import BM25Index, DenseIndex
 from rag_eval.retrieval.base import RetrievalResult, Retriever, ScoredChunk
 from rag_eval.retrieval.bm25 import BM25Retriever
 from rag_eval.retrieval.dense import DenseRetriever
+from rag_eval.retrieval.hybrid import HybridRetriever
+from rag_eval.retrieval.hyde import HydeRetriever
 from rag_eval.retrieval.registry import (
     RetrieverResources,
     build_retriever,
@@ -168,10 +170,58 @@ def test_rerank_retriever(resources: RetrieverResources) -> None:
     assert reranked_order == list(reversed(base_order))[:2]
 
 
+def test_hybrid_retriever(resources: RetrieverResources) -> None:
+    dense = DenseRetriever(
+        resources.embedder, resources.dense_index, resources.chunks_by_id
+    )
+    bm25 = BM25Retriever(resources.bm25_index, resources.chunks_by_id)
+
+    retriever = HybridRetriever(dense, bm25, candidate_k=4, rrf_k=60)
+    result = retriever.retrieve("network", k=2)
+
+    assert result.strategy == "hybrid"
+    assert len(result.chunks) == 2
+    assert result.diagnostics["fusion"] == "rrf"
+    assert result.diagnostics["candidate_k"] == 4
+    assert result.diagnostics["rrf_k"] == 60
+    assert result.diagnostics["components"] == ["dense", "bm25"]
+
+    dense_top = {c.chunk_id for c in dense.retrieve("network", k=4).chunks}
+    bm25_top = {c.chunk_id for c in bm25.retrieve("network", k=4).chunks}
+    assert result.chunks[0].chunk_id in dense_top | bm25_top
+
+
+class FakeExpander:
+    """Deterministic expander: always returns the same hypothetical document."""
+
+    def __init__(self, document: str) -> None:
+        self._document = document
+
+    def expand(self, query: str) -> str:
+        return self._document
+
+
+def test_hyde_retriever(resources: RetrieverResources) -> None:
+    dense = DenseRetriever(
+        resources.embedder, resources.dense_index, resources.chunks_by_id
+    )
+    hypothetical_document = "reinforcement learning policy gradient reward"
+
+    retriever = HydeRetriever(dense, FakeExpander(hypothetical_document))
+    result = retriever.retrieve("totally unrelated query text", k=2)
+
+    expected = dense.retrieve(hypothetical_document, k=2)
+
+    assert result.strategy == "hyde"
+    assert [c.chunk_id for c in result.chunks] == [c.chunk_id for c in expected.chunks]
+    assert result.diagnostics["base_strategy"] == "dense"
+    assert result.diagnostics["hypothetical_document"] == hypothetical_document
+
+
 def test_registry_builds_base_strategies(resources: RetrieverResources) -> None:
     cfg = load_config()
 
-    for strategy in ("dense", "bm25"):
+    for strategy in ("dense", "bm25", "hybrid"):
         retriever = build_retriever(strategy, cfg, resources)
         assert isinstance(retriever, Retriever)
         assert retriever.name == strategy

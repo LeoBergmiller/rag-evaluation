@@ -19,6 +19,7 @@ def test_load_config_fields_and_types() -> None:
     assert cfg.retrieval.index_type == "flat"
     assert cfg.retrieval.top_k == 5
     assert cfg.retrieval.candidate_k == 50
+    assert cfg.retrieval.rrf_k == 60
 
     assert cfg.generation.provider == "anthropic"
     assert cfg.generation.temperature == 0

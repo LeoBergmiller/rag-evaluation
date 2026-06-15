@@ -59,6 +59,7 @@ class RetrievalConfig:
     candidate_k: int
     reranker: str
     fusion: str
+    rrf_k: int
 
 
 @dataclass(frozen=True)
@@ -164,6 +165,7 @@ def load_config(path: Path | None = None) -> Config:
         candidate_k=retrieval_raw["candidate_k"],
         reranker=retrieval_raw["reranker"],
         fusion=retrieval_raw["fusion"],
+        rrf_k=retrieval_raw["rrf_k"],
     )
 
     generation_raw = raw["generation"]

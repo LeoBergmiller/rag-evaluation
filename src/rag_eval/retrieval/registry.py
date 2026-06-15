@@ -18,6 +18,8 @@ from rag_eval.ingest.pipeline import load_chunks
 from rag_eval.retrieval.base import Retriever
 from rag_eval.retrieval.bm25 import BM25Retriever
 from rag_eval.retrieval.dense import DenseRetriever
+from rag_eval.retrieval.hybrid import HybridRetriever
+from rag_eval.retrieval.hyde import HydeRetriever, LLMQueryExpander
 from rag_eval.retrieval.rerank import CrossEncoderReranker, RerankRetriever
 
 
@@ -42,6 +44,10 @@ def register(name: str) -> Callable[[RetrieverBuilder], RetrieverBuilder]:
         return builder
 
     return decorator
+
+
+def registered_strategies() -> list[str]:
+    return sorted(_REGISTRY)
 
 
 def build_retriever(
@@ -88,3 +94,17 @@ def _build_rerank(cfg: Config, resources: RetrieverResources) -> Retriever:
     base = _build_dense(cfg, resources)
     reranker = CrossEncoderReranker(cfg.retrieval.reranker)
     return RerankRetriever(base, reranker, cfg.retrieval.candidate_k)
+
+
+@register("hybrid")
+def _build_hybrid(cfg: Config, resources: RetrieverResources) -> Retriever:
+    dense = _build_dense(cfg, resources)
+    bm25 = _build_bm25(cfg, resources)
+    return HybridRetriever(dense, bm25, cfg.retrieval.candidate_k, cfg.retrieval.rrf_k)
+
+
+@register("hyde")
+def _build_hyde(cfg: Config, resources: RetrieverResources) -> Retriever:
+    base = _build_dense(cfg, resources)
+    expander = LLMQueryExpander(cfg)
+    return HydeRetriever(base, expander)

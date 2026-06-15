@@ -1,0 +1,5 @@
+Write a short passage from a machine learning paper that would plausibly answer the following question. Do not mention that this is hypothetical; write it as if it were an excerpt from the paper itself.
+
+Question: {question}
+
+Passage:

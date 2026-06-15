@@ -32,6 +32,7 @@ retrieval:
   candidate_k: 50            # rerank/HyDE fetch-wide before narrowing
   reranker: BAAI/bge-reranker-base
   fusion: rrf                # hybrid: reciprocal rank fusion
+  rrf_k: 60                   # standard Cormack RRF constant
 
 generation:
   provider: anthropic        # generator family A
