@@ -5,11 +5,13 @@ from __future__ import annotations
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from rag_eval.config import load_config
+from rag_eval.evaluation.ablation import AblationReport
 from rag_eval.generation.generator import Generator
 from rag_eval.retrieval.registry import (
     build_retriever,
@@ -40,6 +42,11 @@ class QueryResponse(BaseModel):
     strategy: str
     latency_ms: float
     chunks: list[ChunkOut]
+
+
+def _latest_ablation_path(results_dir: Path = Path("results")) -> Path | None:
+    candidates = sorted(results_dir.glob("*_ablation_*.json"))
+    return candidates[-1] if candidates else None
 
 
 @asynccontextmanager
@@ -96,6 +103,16 @@ def create_app() -> FastAPI:
                 for chunk in result.chunks
             ],
         )
+
+    @app.get("/ablation")
+    def ablation() -> AblationReport:
+        path = _latest_ablation_path()
+        if path is None:
+            raise HTTPException(
+                status_code=404,
+                detail="No ablation report found; run scripts/run_benchmark.py first.",
+            )
+        return AblationReport.model_validate_json(path.read_text())
 
     return app
 
