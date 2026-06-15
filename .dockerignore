@@ -1,0 +1,20 @@
+.venv/
+venv/
+.git/
+.github/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.claude/
+
+# Data, prebuilt index, and eval outputs are mounted as volumes, not baked into the image.
+data/
+results/
+
+# Secrets -- never copy into an image layer.
+.env
+.env.*
+!.env.example
+
+.DS_Store

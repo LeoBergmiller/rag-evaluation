@@ -20,6 +20,14 @@ pytest tests/ -v --tb=short
 ruff check . && ruff format .
 ```
 
+### Docker
+Requires `data/index/` to already exist (run `cli ingest` on the host first -- the
+index is gitignored and not baked into the image) and a `.env` with
+`ANTHROPIC_API_KEY` / `OPENAI_API_KEY` (see `.env.example`).
+```bash
+docker compose up --build   # api on :8000, ui (Streamlit) on :8501
+```
+
 ## Architecture rules
 - Every retrieval strategy implements the same `Retriever` interface in
   src/rag_eval/retrieval/base.py. Strategies are selected by config, never hardcoded.
