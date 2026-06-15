@@ -48,6 +48,13 @@ dev = ["pytest", "ruff", "mypy"]
 line-length = 88
 target-version = "py311"
 
+[tool.mypy]
+python_version = "3.11"
+packages = ["rag_eval"]
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

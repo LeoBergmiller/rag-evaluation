@@ -104,8 +104,9 @@ class Config:
         """Hash of the controlled variables held fixed across strategies.
 
         Excludes judge settings (not a controlled variable of the strategy
-        comparison) and the eval set (tracked separately via eval_set_hash).
-        TODO: fold prompt-template content in once generation/prompts/ exists (step 4).
+        comparison), the eval set, and the prompt template -- those are
+        tracked separately as eval_set_hash and prompt_template_hash on
+        StrategyReport and checked independently by the regression gate.
         """
         canon: dict[str, Any] = {
             "embedding_model": self.embedding.model,

@@ -72,9 +72,11 @@ class DenseIndex:
 
     @classmethod
     def load(cls, directory: Path) -> "DenseIndex":
+        # faiss.read_index returns the base Index type; we know it's an
+        # IndexFlatIP because that's the only index_type this project writes.
         index = faiss.read_index(str(directory / _DENSE_INDEX_FILE))
         chunk_ids = json.loads((directory / _DENSE_IDS_FILE).read_text())
-        return cls(index=index, chunk_ids=chunk_ids)
+        return cls(index=index, chunk_ids=chunk_ids)  # type: ignore[arg-type]
 
 
 class BM25Index:

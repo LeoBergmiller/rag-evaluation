@@ -58,7 +58,9 @@ def bootstrap_ci(
 
     rng = np.random.default_rng(seed)
     resampled = rng.choice(data, size=(n_resamples, len(data)), replace=True)
-    boot_stats = statistic(resampled, axis=1)
+    # numpy reductions (e.g. np.mean) accept `axis`, but the narrower
+    # Callable[[ndarray], float] type above doesn't model that.
+    boot_stats = statistic(resampled, axis=1)  # type: ignore[call-arg]
 
     alpha = (1.0 - ci) / 2.0
     lo = float(np.quantile(boot_stats, alpha))

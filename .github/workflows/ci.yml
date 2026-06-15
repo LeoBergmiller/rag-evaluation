@@ -10,6 +10,7 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: ruff format --check .
+      - run: mypy src/rag_eval
       - run: pytest tests/ -v --tb=short
       - run: python -m rag_eval.gate
 

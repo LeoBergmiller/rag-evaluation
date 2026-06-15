@@ -121,11 +121,14 @@ if __name__ == "__main__":
         cfg.evaluation.eval_set,
     )
 
-    print("\nSample examples:")
+    logger.info("Sample examples:")
     for example in dataset.examples[:5]:
-        print(
-            f"\n[{example.id}] (split={example.split}, answerable={example.answerable})"
+        logger.info(
+            "[%s] (split=%s, answerable=%s)\n  Q: %s\n  A: %s\n  refs: %s",
+            example.id,
+            example.split,
+            example.answerable,
+            example.question,
+            example.reference_answer,
+            example.reference_chunk_ids,
         )
-        print(f"  Q: {example.question}")
-        print(f"  A: {example.reference_answer}")
-        print(f"  refs: {example.reference_chunk_ids}")

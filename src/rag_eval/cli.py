@@ -41,14 +41,17 @@ def ingest(config: Path | None = None) -> None:
 @app.command()
 def query(
     question: str,
-    strategy: str = typer.Option(None, "--strategy", "-s"),
-    k: int = typer.Option(None, "--k"),
+    strategy: str | None = typer.Option(None, "--strategy", "-s"),
+    k: int | None = typer.Option(None, "--k"),
     config: Path | None = None,
 ) -> None:
     """Run a single query against a retrieval strategy and generate an answer."""
+    if k is not None and k <= 0:
+        raise typer.BadParameter("k must be > 0")
+
     cfg = load_config(config)
     strategy = strategy or cfg.retrieval.strategy
-    k = k or cfg.retrieval.top_k
+    k = k if k is not None else cfg.retrieval.top_k
 
     resources = load_resources(cfg)
     retriever = build_retriever(strategy, cfg, resources)
@@ -68,7 +71,7 @@ def query(
 
 @app.command()
 def evaluate(
-    strategy: list[str] = typer.Option(None, "--strategy", "-s"),
+    strategy: list[str] | None = typer.Option(None, "--strategy", "-s"),
     gate: bool = typer.Option(True, "--gate/--no-gate"),
     config: Path | None = None,
 ) -> None:

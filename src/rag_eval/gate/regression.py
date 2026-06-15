@@ -120,6 +120,12 @@ def check_regression(
 
 
 def load_baseline(path: Path = Path("results/baseline.json")) -> StrategyReport:
+    if not path.exists():
+        raise FileNotFoundError(
+            f"No baseline report at {path}. Run `python -m rag_eval.cli evaluate "
+            f"--strategy dense --no-gate` and copy the resulting results/*_dense_*.json "
+            f"to {path}, or pass --no-gate to skip the regression gate."
+        )
     return StrategyReport.model_validate_json(path.read_text())
 
 
