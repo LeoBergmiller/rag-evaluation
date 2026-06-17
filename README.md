@@ -1,5 +1,8 @@
 # rag-evaluation
 
+[![CI](https://github.com/LeoBergmiller/rag-evaluation/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoBergmiller/rag-evaluation/actions/workflows/ci.yml)
+[![Docker Hub](https://img.shields.io/docker/v/leobergmiller/rag-evaluation?label=Docker%20Hub)](https://hub.docker.com/r/leobergmiller/rag-evaluation)
+
 A production-style RAG system over an arXiv ML/AI paper corpus that implements and
 **benchmarks five retrieval strategies** behind one swappable interface, evaluated with
 [RAGAS](https://github.com/explodinggradients/ragas) + a custom retrieval-metrics harness,
@@ -101,8 +104,17 @@ streamlit run app.py                # http://localhost:8501 — Ask / Benchmark 
 
 ### Docker
 
+A pre-built image is available on Docker Hub — no local build required:
+
 ```bash
-docker compose up --build   # api on :8000, Streamlit ui on :8501
+docker pull leobergmiller/rag-evaluation:latest
+docker compose up          # api on :8000, Streamlit ui on :8501
+```
+
+Or build from source:
+
+```bash
+docker compose up --build
 ```
 
 Requires `data/index/` to already exist (run `cli ingest` on the host first — the index is
@@ -118,7 +130,8 @@ python -m rag_eval.gate   # self-check: candidate == committed baseline
 ```
 
 CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)) runs lint, type checks, the full
-test suite, the gate self-check, and a build-only Docker image build on every push.
+test suite, the gate self-check, builds the Docker image on every push, and publishes it to
+Docker Hub on every push to `main`.
 
 ## Project layout
 
