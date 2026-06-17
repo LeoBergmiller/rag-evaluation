@@ -130,8 +130,7 @@ python -m rag_eval.gate   # self-check: candidate == committed baseline
 ```
 
 CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)) runs lint, type checks, the full
-test suite, the gate self-check, builds the Docker image on every push, and publishes it to
-Docker Hub on every push to `main`.
+test suite, the gate self-check, and builds the Docker image on every push.
 
 ## Project layout
 
