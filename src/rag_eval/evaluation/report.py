@@ -26,6 +26,9 @@ class ExampleRecord(BaseModel):
     latency_ms: float
     retrieval_metrics: dict[str, float]
     ragas_metrics: dict[str, float | None]
+    correctness: int | None = None
+    completeness: int | None = None
+    citation_valid: bool | None = None
 
 
 class StrategyReport(BaseModel):
@@ -51,6 +54,10 @@ class StrategyReport(BaseModel):
     cost_per_query_usd: float
     abstention_accuracy: float
     abstention_rate: float
+
+    correctness: MetricCI | None = None
+    completeness: MetricCI | None = None
+    citation_valid_rate: MetricCI | None = None
 
     examples: list[ExampleRecord]
 

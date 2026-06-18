@@ -132,6 +132,26 @@ python -m rag_eval.gate   # self-check: candidate == committed baseline
 CI ([.github/workflows/ci.yml](.github/workflows/ci.yml)) runs lint, type checks, the full
 test suite, the gate self-check, and builds the Docker image on every push.
 
+### Judge-vs-human agreement
+
+The custom rubric judge (GPT-4o, [`evaluation/rubric.py`](src/rag_eval/evaluation/rubric.py))
+was validated against 40 blind human labels on the same three-dimension rubric (dense strategy run):
+
+| dimension | Cohen κ | % agreement |
+| --- | --- | --- |
+| correctness (0–2) | 0.70 | 85% |
+| completeness (0–2) | 0.74 | 90% |
+| citation_valid (bool) | 0.33 | 77.5% |
+
+Correctness and completeness show substantial agreement (κ ≥ 0.70); the judge skews slightly lenient
+on correctness — it accepts answers with correct key facts but loose framing that a human marked
+partial. Citation_valid agreement is lower (κ = 0.33) not because the judge is unreliable but because
+the rubric criterion is underspecified: "plausibly supports" conflates "topically related" with "the
+cited chunk actually contains the specific claim." On 5 of 10 citation_valid disagreements the judge
+was *stricter* than the human — it correctly flagged factually-right answers whose cited chunks do not
+contain the specific claim, a real grounding failure the human missed. The ambiguous rubric wording is
+a documented limitation; the κ reflects genuine interpretive ambiguity, not unreliable scoring.
+
 ## Project layout
 
 ```

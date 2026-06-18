@@ -26,6 +26,7 @@ from rag_eval.evaluation.metrics import (
     reciprocal_rank,
 )
 from rag_eval.evaluation.report import ExampleRecord, MetricCI, StrategyReport
+from rag_eval.evaluation.rubric import RubricScore, score_example
 from rag_eval.generation.generator import Generator
 from rag_eval.generation.prompts import prompt_template_hash
 from rag_eval.retrieval.registry import RetrieverResources, build_retriever
@@ -33,6 +34,7 @@ from rag_eval.retrieval.registry import RetrieverResources, build_retriever
 logger = logging.getLogger(__name__)
 
 JudgeFn = Callable[[list[SingleTurnSample], Config], list[dict[str, float]]]
+RubricFn = Callable[..., RubricScore | None]
 
 
 def default_eval_examples(cfg: Config) -> list[EvalExample]:
@@ -48,6 +50,7 @@ def evaluate_strategy(
     *,
     generator: Generator | None = None,
     judge_fn: JudgeFn = run_ragas,
+    rubric_fn: RubricFn = score_example,
 ) -> StrategyReport:
     retriever = build_retriever(strategy, cfg, resources)
     generator = generator or Generator(cfg.generation)
@@ -63,6 +66,9 @@ def evaluate_strategy(
     abstention_correct: list[bool] = []
     costs: list[float] = []
     latencies: list[float] = []
+    correctness_vals: list[float] = []
+    completeness_vals: list[float] = []
+    citation_valid_vals: list[float] = []
 
     for example in examples:
         result = retriever.retrieve(example.question, cfg.retrieval.top_k)
@@ -102,6 +108,20 @@ def evaluate_strategy(
                 )
             )
 
+        chunks_by_id_text = {chunk.chunk_id: chunk.text for chunk in result.chunks}
+        rubric = rubric_fn(
+            question=example.question,
+            reference_answer=example.reference_answer,
+            model_answer=gen_result.answer,
+            cited_chunk_ids=gen_result.cited_chunk_ids,
+            chunks_by_id=chunks_by_id_text,
+            cfg=cfg,
+        )
+        if rubric is not None:
+            correctness_vals.append(float(rubric.correctness))
+            completeness_vals.append(float(rubric.completeness))
+            citation_valid_vals.append(1.0 if rubric.citation_valid else 0.0)
+
         record = ExampleRecord(
             id=example.id,
             answerable=example.answerable,
@@ -113,6 +133,9 @@ def evaluate_strategy(
             latency_ms=latency_ms,
             retrieval_metrics=retrieval_metrics,
             ragas_metrics={},
+            correctness=rubric.correctness if rubric is not None else None,
+            completeness=rubric.completeness if rubric is not None else None,
+            citation_valid=rubric.citation_valid if rubric is not None else None,
         )
         example_records.append(record)
 
@@ -191,5 +214,8 @@ def evaluate_strategy(
         cost_per_query_usd=cost_per_query_usd,
         abstention_accuracy=abstention_accuracy,
         abstention_rate=abstention_rate,
+        correctness=ci(correctness_vals, seed=9) if correctness_vals else None,
+        completeness=ci(completeness_vals, seed=10) if completeness_vals else None,
+        citation_valid_rate=ci(citation_valid_vals, seed=11) if citation_valid_vals else None,
         examples=example_records,
     )

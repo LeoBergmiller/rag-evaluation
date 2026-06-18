@@ -8,6 +8,7 @@ from rag_eval.config import Config, load_config
 from rag_eval.evaluation.dataset import EvalExample
 from rag_eval.evaluation.harness import evaluate_strategy
 from rag_eval.evaluation.report import StrategyReport, save
+from rag_eval.evaluation.rubric import RubricScore
 from rag_eval.generation.generator import Generator
 from tests.test_retrieval import FIXTURE_CHUNKS, FakeEmbedder
 
@@ -46,6 +47,12 @@ def _stub_judge(samples: list[SingleTurnSample], cfg: Config) -> list[dict[str, 
     return [{name: 0.8 for name in cfg.evaluation.ragas_metrics} for _ in samples]
 
 
+def _stub_rubric(**kwargs: object) -> RubricScore | None:
+    if kwargs.get("reference_answer") is None:
+        return None
+    return RubricScore(correctness=2, completeness=2, citation_valid=True, rationale="stub")
+
+
 @pytest.fixture
 def resources() -> RetrieverResources:
     embedder = FakeEmbedder()
@@ -82,6 +89,7 @@ def test_evaluate_strategy_report_shape(resources: RetrieverResources) -> None:
         EXAMPLES,
         generator=generator,
         judge_fn=_stub_judge,
+        rubric_fn=_stub_rubric,
     )
 
     assert isinstance(report, StrategyReport)
@@ -107,6 +115,12 @@ def test_evaluate_strategy_report_shape(resources: RetrieverResources) -> None:
     assert report.abstention_accuracy == 1.0
     assert report.abstention_rate == pytest.approx(1 / 3)
 
+    assert report.correctness is not None
+    assert report.completeness is not None
+    assert report.citation_valid_rate is not None
+    for rubric_ci in (report.correctness, report.completeness, report.citation_valid_rate):
+        assert rubric_ci.lo <= rubric_ci.point <= rubric_ci.hi
+
 
 def test_evaluate_strategy_report_roundtrip(
     resources: RetrieverResources, tmp_path: Path
@@ -128,6 +142,7 @@ def test_evaluate_strategy_report_roundtrip(
         EXAMPLES,
         generator=generator,
         judge_fn=_stub_judge,
+        rubric_fn=_stub_rubric,
     )
 
     path = save(report, tmp_path)

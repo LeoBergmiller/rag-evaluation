@@ -1,0 +1,10 @@
+Question: {question}
+
+Reference answer:
+{reference_answer}
+
+Model answer:
+{answer}
+
+Text of cited chunks:
+{cited_chunk_texts}

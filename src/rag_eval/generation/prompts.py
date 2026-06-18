@@ -12,6 +12,8 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 _SYSTEM_PROMPT_FILE = "system.txt"
 _USER_PROMPT_FILE = "user.txt"
 _HYDE_PROMPT_FILE = "hyde.txt"
+_RUBRIC_SYSTEM_FILE = "rubric_system.txt"
+_RUBRIC_USER_FILE = "rubric_user.txt"
 
 
 def load_prompt(name: str) -> str:
@@ -28,6 +30,15 @@ def build_answer_prompt() -> ChatPromptTemplate:
 
 def build_hyde_prompt() -> ChatPromptTemplate:
     return ChatPromptTemplate.from_messages([("human", load_prompt(_HYDE_PROMPT_FILE))])
+
+
+def build_rubric_prompt() -> ChatPromptTemplate:
+    return ChatPromptTemplate.from_messages(
+        [
+            ("system", load_prompt(_RUBRIC_SYSTEM_FILE)),
+            ("human", load_prompt(_RUBRIC_USER_FILE)),
+        ]
+    )
 
 
 def prompt_template_hash() -> str:
