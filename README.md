@@ -66,7 +66,9 @@ intervals, and fail CI if a change regresses quality below a calibrated toleranc
 
 ## Latest benchmark results
 
-59-example gold eval set, `dense` as baseline (see
+59-example gold eval set of single-document-grounded questions (plus unanswerable abstention
+probes; multi-hop / multi-document QA is out of scope by design — see decision D10), `dense` as
+baseline (see
 [results/20260615T005622Z_ablation_48a41165.md](results/20260615T005622Z_ablation_48a41165.md)
 for the full report):
 
@@ -80,6 +82,17 @@ for the full report):
 
 `hyde` and `rerank` fail the gate on latency/operational ceilings (not quality) — both add a
 second LLM/model pass per query, which the gate is specifically designed to surface.
+
+**Finding — the fancier strategies don't earn their cost on this workload.** `rerank` does post
+the single best quality (faithfulness +0.0154, nDCG@k +0.2835 vs the dense baseline), but at
+~28× the latency (1105 ms vs 40 ms) — and plain `bm25` captures nearly all of that retrieval
+gain (nDCG@k 0.8129 vs rerank's 0.8254) while being the *cheapest* strategy in the table
+(~5 ms p95) and passing the gate. `hyde`'s extra LLM pass buys no quality at all here (faithfulness
+−0.0052) for ~310× the latency. On this corpus — specific, single-document-grounded QA over ML
+papers — a cross-encoder and a hypothetical-document step are complexity the results don't
+justify: the cheap lexical/hybrid retrievers are on the Pareto front, and the expensive layers
+sit behind it. The value of building all five is being *able to show that*, rather than assuming
+the sophisticated strategy is better.
 
 ## Quickstart
 
@@ -152,6 +165,18 @@ was *stricter* than the human — it correctly flagged factually-right answers w
 contain the specific claim, a real grounding failure the human missed. The ambiguous rubric wording is
 a documented limitation; the κ reflects genuine interpretive ambiguity, not unreliable scoring.
 
+**Update — criterion sharpened.** The low κ has two compounding causes. (1) The rubric prompt scored a
+citation valid if the chunk *"plausibly supports"* the claim, which conflates *topically related* with
+*actually contains the specific claim*. The [rubric prompt](src/rag_eval/generation/prompts/rubric_system.txt)
+has since been sharpened to require the cited chunk to **state or directly entail** the specific claim,
+with worked valid/invalid examples. (2) With only 8 negative labels in 40, Cohen κ is highly
+base-rate-sensitive, so κ = 0.33 overstates unreliability relative to the 77.5% raw agreement. The figures
+in the table were measured under the *old* wording. Because the sharpened criterion **moves the bar** (it
+would reclassify the ~5 lenient human "valid" labels on genuine grounding failures), those 40 labels
+cannot honestly re-validate the new wording — a faithful re-measurement requires re-labeling the citation
+judgments under the sharpened definition. No new κ is claimed until that re-label is done; the committed
+figures stand as the pre-sharpening measurement.
+
 ## Project layout
 
 ```
@@ -171,6 +196,13 @@ configs/config.yaml    single source of truth for all tunable parameters
 data/eval/eval_set.jsonl  committed gold eval set (59 examples, dev/test split)
 results/baseline.json     committed dense-strategy baseline for the regression gate
 ```
+
+## Security
+
+[docs/security.md](docs/security.md) maps the OWASP LLM Top 10 (2025) to this project — which
+risks bind on the design (LLM01 indirect prompt injection, LLM05 output handling), which are the
+core of what the eval harness measures (LLM09 misinformation), and which are N/A or low by scope
+(static trusted arXiv corpus, text-only output, no agency).
 
 ## License
 

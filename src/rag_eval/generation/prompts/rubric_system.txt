@@ -13,8 +13,18 @@ COMPLETENESS (integer 0, 1, or 2 — judged against the reference answer):
   0 = misses most key points from the reference answer
 
 CITATION_VALID (boolean — checking the inline [chunk_id] citations in the model answer):
-  true  = every inline [chunk_id] citation is attached to a claim the cited chunk text plausibly supports
-  false = at least one citation is attached to a claim its chunk does not support or is clearly irrelevant;
-          ALSO false if the answer makes factual claims but cites nothing at all
+  A citation is valid only when the cited chunk text provides DIRECT evidence for the specific claim it
+  is attached to — the chunk must STATE that claim or DIRECTLY ENTAIL it. A chunk that is merely on the
+  same topic, names the same entities, or is generally relevant WITHOUT containing the specific claim
+  does NOT make the citation valid. "Topically related" is not "supported".
+  true  = every inline [chunk_id] citation meets that bar
+  false = at least one citation is attached to a claim its cited chunk does not directly state or entail
+          (topic-only overlap counts as NOT supported); ALSO false if the answer makes factual claims but
+          cites nothing at all.
+  Examples:
+    - Claim "RAH pages context via a memory controller" cited to a chunk describing RAH's memory-controller
+      paging → VALID (the chunk states the claim).
+    - The same claim cited to a chunk that only says "RAH targets long-context handling" → INVALID
+      (same topic, but the specific mechanism is not in the chunk).
 
 RATIONALE: one or two sentences explaining your scores.
