@@ -39,7 +39,9 @@ class RubricScore(BaseModel):
         return v
 
 
-def _format_cited_chunks(cited_chunk_ids: list[str], chunks_by_id: dict[str, str]) -> str:
+def _format_cited_chunks(
+    cited_chunk_ids: list[str], chunks_by_id: dict[str, str]
+) -> str:
     if not cited_chunk_ids:
         return "(none cited)"
     return "\n\n".join(
@@ -49,7 +51,9 @@ def _format_cited_chunks(cited_chunk_ids: list[str], chunks_by_id: dict[str, str
 
 
 def _build_rubric_chain(cfg: Config) -> Any:
-    model = build_chat_model("openai", cfg.evaluation.judge_model, 0, _RUBRIC_MAX_TOKENS)
+    model = build_chat_model(
+        "openai", cfg.evaluation.judge_model, 0, _RUBRIC_MAX_TOKENS
+    )
     return build_rubric_prompt() | model.with_structured_output(RubricScore)
 
 
@@ -85,5 +89,7 @@ def score_example(
             if attempt == 0:
                 logger.warning("Rubric judge failed (attempt 1): %s — retrying", exc)
             else:
-                logger.warning("Rubric judge failed twice; recording None scores: %s", exc)
+                logger.warning(
+                    "Rubric judge failed twice; recording None scores: %s", exc
+                )
     return None

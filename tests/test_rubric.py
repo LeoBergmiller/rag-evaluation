@@ -14,7 +14,9 @@ def _cfg() -> MagicMock:
 
 
 def _good_score() -> RubricScore:
-    return RubricScore(correctness=2, completeness=1, citation_valid=True, rationale="looks good")
+    return RubricScore(
+        correctness=2, completeness=1, citation_valid=True, rationale="looks good"
+    )
 
 
 # --- RubricScore model ---
@@ -78,7 +80,9 @@ def test_score_example_returns_valid_rubric() -> None:
     chain.invoke.assert_called_once()
 
 
-def test_score_example_retries_on_first_failure(caplog: pytest.LogCaptureFixture) -> None:
+def test_score_example_retries_on_first_failure(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
     chain = MagicMock()
     chain.invoke.side_effect = [Exception("parse error"), _good_score()]
 
@@ -99,7 +103,9 @@ def test_score_example_retries_on_first_failure(caplog: pytest.LogCaptureFixture
     assert "retrying" in caplog.text
 
 
-def test_score_example_returns_none_on_double_failure(caplog: pytest.LogCaptureFixture) -> None:
+def test_score_example_returns_none_on_double_failure(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
     chain = MagicMock()
     chain.invoke.side_effect = [Exception("fail 1"), Exception("fail 2")]
 

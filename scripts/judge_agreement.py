@@ -84,7 +84,9 @@ def main(
             cfg=cfg,
         )
         if score is None:
-            logger.warning("Judge returned None for example %s — skipping", row["example_id"])
+            logger.warning(
+                "Judge returned None for example %s — skipping", row["example_id"]
+            )
             skipped += 1
             continue
 
@@ -100,20 +102,32 @@ def main(
 
     n = len(human_correctness)
     if n < 2:
-        typer.echo(f"Too few comparable examples ({n}) — cannot compute kappa.", err=True)
+        typer.echo(
+            f"Too few comparable examples ({n}) — cannot compute kappa.", err=True
+        )
         raise typer.Exit(1)
 
-    kappa_correctness = cohen_kappa_score(human_correctness, judge_correctness, weights="linear")
-    kappa_completeness = cohen_kappa_score(human_completeness, judge_completeness, weights="linear")
+    kappa_correctness = cohen_kappa_score(
+        human_correctness, judge_correctness, weights="linear"
+    )
+    kappa_completeness = cohen_kappa_score(
+        human_completeness, judge_completeness, weights="linear"
+    )
     kappa_citation = cohen_kappa_score(human_citation, judge_citation)
     pct_citation = sum(h == j for h, j in zip(human_citation, judge_citation)) / n * 100
 
     typer.echo(f"\n=== Judge-vs-Human Agreement (n={n}, skipped={skipped}) ===\n")
     typer.echo(f"{'metric':<28}  {'Cohen κ':>9}  {'% agree':>9}")
     typer.echo("-" * 52)
-    typer.echo(f"{'correctness (0-2, linear κ)':<28}  {kappa_correctness:>9.3f}  {'—':>9}")
-    typer.echo(f"{'completeness (0-2, linear κ)':<28}  {kappa_completeness:>9.3f}  {'—':>9}")
-    typer.echo(f"{'citation_valid (bool)':<28}  {kappa_citation:>9.3f}  {pct_citation:>8.1f}%")
+    typer.echo(
+        f"{'correctness (0-2, linear κ)':<28}  {kappa_correctness:>9.3f}  {'—':>9}"
+    )
+    typer.echo(
+        f"{'completeness (0-2, linear κ)':<28}  {kappa_completeness:>9.3f}  {'—':>9}"
+    )
+    typer.echo(
+        f"{'citation_valid (bool)':<28}  {kappa_citation:>9.3f}  {pct_citation:>8.1f}%"
+    )
 
 
 if __name__ == "__main__":

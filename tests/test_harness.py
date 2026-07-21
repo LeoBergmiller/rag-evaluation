@@ -50,7 +50,9 @@ def _stub_judge(samples: list[SingleTurnSample], cfg: Config) -> list[dict[str, 
 def _stub_rubric(**kwargs: object) -> RubricScore | None:
     if kwargs.get("reference_answer") is None:
         return None
-    return RubricScore(correctness=2, completeness=2, citation_valid=True, rationale="stub")
+    return RubricScore(
+        correctness=2, completeness=2, citation_valid=True, rationale="stub"
+    )
 
 
 @pytest.fixture
@@ -118,7 +120,11 @@ def test_evaluate_strategy_report_shape(resources: RetrieverResources) -> None:
     assert report.correctness is not None
     assert report.completeness is not None
     assert report.citation_valid_rate is not None
-    for rubric_ci in (report.correctness, report.completeness, report.citation_valid_rate):
+    for rubric_ci in (
+        report.correctness,
+        report.completeness,
+        report.citation_valid_rate,
+    ):
         assert rubric_ci.lo <= rubric_ci.point <= rubric_ci.hi
 
 

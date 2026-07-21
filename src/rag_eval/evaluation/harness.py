@@ -216,6 +216,8 @@ def evaluate_strategy(
         abstention_rate=abstention_rate,
         correctness=ci(correctness_vals, seed=9) if correctness_vals else None,
         completeness=ci(completeness_vals, seed=10) if completeness_vals else None,
-        citation_valid_rate=ci(citation_valid_vals, seed=11) if citation_valid_vals else None,
+        citation_valid_rate=ci(citation_valid_vals, seed=11)
+        if citation_valid_vals
+        else None,
         examples=example_records,
     )

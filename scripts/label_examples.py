@@ -27,7 +27,9 @@ def _hr(char: str = "─") -> None:
 
 def _wrap(text: str, indent: int = 2) -> str:
     prefix = " " * indent
-    return textwrap.fill(text, width=_WIDTH - indent, initial_indent=prefix, subsequent_indent=prefix)
+    return textwrap.fill(
+        text, width=_WIDTH - indent, initial_indent=prefix, subsequent_indent=prefix
+    )
 
 
 def _prompt_int(prompt: str, choices: tuple[int, ...]) -> int:
@@ -75,9 +77,13 @@ def main() -> None:
     total = len(worksheet)
     done = len(existing)
 
-    print(f"\nLabeling worksheet: {total} examples total, {done} already labeled, {len(todo)} remaining.")
+    print(
+        f"\nLabeling worksheet: {total} examples total, {done} already labeled, {len(todo)} remaining."
+    )
     if not todo:
-        print("All examples labeled. Run scripts/judge_agreement.py to compute agreement.")
+        print(
+            "All examples labeled. Run scripts/judge_agreement.py to compute agreement."
+        )
         return
     print("Press Ctrl-C at any time to stop — progress is saved after each example.\n")
 
@@ -120,7 +126,9 @@ def main() -> None:
             completeness = _prompt_int("completeness", (0, 1, 2))
 
             print("  CITATION VALID — do [chunk_id] citations support the claims?")
-            print("    y = every citation supports its claim  |  n = at least one doesn't (or none cited)")
+            print(
+                "    y = every citation supports its claim  |  n = at least one doesn't (or none cited)"
+            )
             citation_valid = _prompt_bool("citation_valid")
 
             rationale = input("  rationale (optional, press Enter to skip): ").strip()
