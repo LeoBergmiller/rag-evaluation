@@ -10,15 +10,24 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import pickle
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-import faiss
-import numpy as np
-from pydantic import BaseModel
-from rank_bm25 import BM25Okapi
+# faiss and torch (via sentence-transformers) each link their own OpenMP runtime; on
+# macOS the duplicate load aborts/segfaults (OMP Error #15). Tolerate the duplicate and
+# pin faiss to a single thread BEFORE importing faiss. IndexFlatIP is exact, so retrieval
+# results are unchanged; only faiss's internal parallelism is disabled.
+os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+
+import faiss  # noqa: E402
+import numpy as np  # noqa: E402
+from pydantic import BaseModel  # noqa: E402
+from rank_bm25 import BM25Okapi  # noqa: E402
+
+faiss.omp_set_num_threads(1)
 
 logger = logging.getLogger(__name__)
 

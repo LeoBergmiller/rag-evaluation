@@ -6,9 +6,12 @@ venv/
 .env.*
 !.env.example
 data/raw/
+data/raw_med/
 data/index/
+data/index_med/
 results/*.json
 !results/baseline.json
+!results/baseline_med.json
 .claude/settings.local.json
 .pytest_cache/
 .ruff_cache/

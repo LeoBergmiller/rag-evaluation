@@ -1,0 +1,80 @@
+# configs/config_med.yaml — SECOND corpus (open-access PubMed Central medical literature).
+#
+# This is the cross-domain generalization config. The embedding / chunking / retrieval /
+# generation blocks are BYTE-IDENTICAL to configs/config.yaml on purpose: holding every
+# controlled variable fixed is what makes "the same harness, unchanged, benchmarks a second
+# domain" a real claim. As a result this corpus shares the arXiv config_fingerprint; the two
+# corpora are separated instead by eval_set_hash + baseline_path + index_dir.
+#
+# Select this config on any entry point via: RAG_CONFIG=configs/config_med.yaml
+
+corpus:
+  source: pmc                # PMC JATS full text via NCBI E-utilities (NOT arXiv)
+  categories: []             # unused for pmc (arXiv-only field)
+  max_papers: 500            # ~500 open-access articles for the ICI slice
+  fulltext: true
+  strip_references: true     # drop JATS <back>/<ref-list> — noise for QA
+  raw_dir: data/raw_med      # immutable after fetch (separate from arXiv data/raw)
+  index_dir: data/index_med  # built FAISS + BM25 indexes (gitignored)
+  # Narrow, coherent slice: immune checkpoint inhibitors in cancer (not all oncology).
+  query: '"immune checkpoint inhibitor"[Title/Abstract] AND (cancer[Title/Abstract] OR tumor[Title/Abstract])'
+
+chunking:
+  strategy: recursive
+  units: tokens
+  chunk_size: 512
+  chunk_overlap: 64
+  store_parent: true
+
+embedding:
+  model: BAAI/bge-base-en-v1.5
+  device: cpu
+  query_prefix: "Represent this sentence for searching relevant passages: "
+
+retrieval:
+  strategy: dense
+  index_type: flat
+  top_k: 5
+  candidate_k: 50
+  reranker: BAAI/bge-reranker-base
+  fusion: rrf
+  rrf_k: 60
+
+generation:
+  provider: anthropic
+  model: claude-sonnet-4-6
+  temperature: 0
+  max_tokens: 512
+
+evaluation:
+  judge_provider: openai
+  judge_model: gpt-4o
+  judge_temperature: 0
+  # Budget-fit (Option A): judged on the two RAGAS metrics used in the cross-domain
+  # comparison + gate. arXiv retains all four; the harness/prompts are otherwise identical.
+  ragas_metrics: [faithfulness, context_recall]
+  retrieval_metrics: [recall_at_k, precision_at_k, mrr, ndcg_at_k]
+  abstention: true
+  bootstrap_resamples: 1000
+  eval_set: data/eval/eval_set_med.jsonl   # gold (committed); medical corpus
+  baseline_path: results/baseline_med.json # separate committed baseline for this corpus
+  dev_test_split: [0.4, 0.6]
+
+  # PROVISIONAL gate values — placeholders copied from the arXiv baseline so the config
+  # loads. RECALIBRATE from `RAG_CONFIG=configs/config_med.yaml python scripts/measure_baseline.py`
+  # on the medical corpus (build item 3) before committing baseline_med.json / trusting the gate.
+  gate:
+    # Floors set from the medical dense baseline with margin (Option A: single-run
+    # calibration). Faithfulness keeps a coarse absolute FLOOR but is dropped from the
+    # fine no-regression TOLERANCE: judge timeouts on the batch-1 run cut its sample
+    # coverage (45-52 of 52 answerable), so a 0.018 tolerance would key on noise. It is
+    # still reported in every report/table -- just not gated at tolerance resolution.
+    floors:
+      faithfulness: 0.90
+      context_recall: 0.75
+    tolerance:                   # reused from the arXiv baseline (judge noise is a
+      context_recall: 0.0315     # harness property, identical across corpora)
+      ndcg_at_k: 0.01
+    operational_ceilings:
+      p95_latency_ms: 185.71
+      cost_per_query_usd: 0.0352

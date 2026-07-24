@@ -13,11 +13,42 @@ from rag_eval.ingest.chunk import Chunk, chunk_text
 from rag_eval.ingest.download import download_papers
 from rag_eval.ingest.embed import BGEEmbedder, Embedder
 from rag_eval.ingest.index import BM25Index, DenseIndex, IngestManifest
+from rag_eval.ingest.jats_parse import extract_jats_text
 from rag_eval.ingest.parse import extract_text
+from rag_eval.ingest.pmc_download import download_pmc_articles
 
 logger = logging.getLogger(__name__)
 
 _CHUNKS_FILE = "chunks.jsonl"
+
+
+def _load_source_documents(cfg: Config) -> list[tuple[str, str]]:
+    """(doc_id, cleaned_text) per source document, dispatched on the corpus source.
+
+    Both sources feed the SAME downstream chunk -> embed -> index pipeline; only the
+    fetch + parse differ. arXiv yields PDF text keyed by arXiv id; PMC yields JATS
+    full-text keyed by PMCID.
+    """
+    if cfg.corpus.source == "pmc":
+        articles = download_pmc_articles(cfg.corpus)
+        return [
+            (
+                article.pmcid,
+                extract_jats_text(
+                    article.xml_path, strip_references=cfg.corpus.strip_references
+                ),
+            )
+            for article in articles
+        ]
+
+    papers = download_papers(cfg.corpus)
+    return [
+        (
+            paper.arxiv_id,
+            extract_text(paper.pdf_path, strip_references=cfg.corpus.strip_references),
+        )
+        for paper in papers
+    ]
 
 
 def run_ingest(cfg: Config, *, embedder: Embedder | None = None) -> IngestManifest:
@@ -25,7 +56,7 @@ def run_ingest(cfg: Config, *, embedder: Embedder | None = None) -> IngestManife
 
     `embedder` can be injected (e.g. in tests) to avoid loading the real bge model.
     """
-    papers = download_papers(cfg.corpus)
+    documents = _load_source_documents(cfg)
 
     tokenizer = AutoTokenizer.from_pretrained(cfg.embedding.model)
 
@@ -33,14 +64,11 @@ def run_ingest(cfg: Config, *, embedder: Embedder | None = None) -> IngestManife
         return len(tokenizer.encode(text, add_special_tokens=False))
 
     chunks: list[Chunk] = []
-    for paper in papers:
-        text = extract_text(
-            paper.pdf_path, strip_references=cfg.corpus.strip_references
-        )
+    for doc_id, text in documents:
         chunks.extend(
             chunk_text(
                 text,
-                paper.arxiv_id,
+                doc_id,
                 length_function=length_function,
                 chunk_size=cfg.chunking.chunk_size,
                 chunk_overlap=cfg.chunking.chunk_overlap,
@@ -66,15 +94,15 @@ def run_ingest(cfg: Config, *, embedder: Embedder | None = None) -> IngestManife
         config_fingerprint=cfg.fingerprint(),
         embedding_model=cfg.embedding.model,
         embedding_dimension=embedder.dimension,
-        n_papers=len(papers),
+        n_papers=len(documents),
         n_chunks=len(chunks),
         index_type=cfg.retrieval.index_type,
     )
     manifest.save(index_dir)
 
     logger.info(
-        "Ingest complete: %d papers, %d chunks -> %s",
-        len(papers),
+        "Ingest complete: %d documents, %d chunks -> %s",
+        len(documents),
         len(chunks),
         index_dir,
     )

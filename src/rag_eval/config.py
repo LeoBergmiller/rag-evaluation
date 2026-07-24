@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -33,6 +34,8 @@ class CorpusConfig:
     strip_references: bool
     raw_dir: Path
     index_dir: Path
+    # PMC (source="pmc") search term; unused by the arXiv source (which uses `categories`).
+    query: str | None = None
 
 
 @dataclass(frozen=True)
@@ -89,6 +92,8 @@ class EvaluationConfig:
     eval_set: Path
     dev_test_split: tuple[float, ...]
     gate: GateConfig
+    # Committed baseline the regression gate compares against for this corpus.
+    baseline_path: str = "results/baseline.json"
 
 
 @dataclass(frozen=True)
@@ -126,8 +131,17 @@ class Config:
 
 
 def load_config(path: Path | None = None) -> Config:
-    """Load and validate configuration from a YAML file."""
-    config_path = path or _DEFAULT_CONFIG_PATH
+    """Load and validate configuration from a YAML file.
+
+    When no explicit path is given, the RAG_CONFIG environment variable selects the
+    config file (used to point any entry point at a second corpus, e.g.
+    RAG_CONFIG=configs/config_med.yaml); if unset, the arXiv default is used.
+    """
+    if path is not None:
+        config_path = path
+    else:
+        env_path = os.environ.get("RAG_CONFIG")
+        config_path = Path(env_path) if env_path else _DEFAULT_CONFIG_PATH
     with config_path.open("r") as f:
         raw = yaml.safe_load(f)
 
@@ -140,6 +154,7 @@ def load_config(path: Path | None = None) -> Config:
         strip_references=corpus_raw["strip_references"],
         raw_dir=Path(corpus_raw["raw_dir"]),
         index_dir=Path(corpus_raw["index_dir"]),
+        query=corpus_raw.get("query"),
     )
 
     chunking_raw = raw["chunking"]
@@ -195,6 +210,7 @@ def load_config(path: Path | None = None) -> Config:
         eval_set=Path(evaluation_raw["eval_set"]),
         dev_test_split=tuple(evaluation_raw["dev_test_split"]),
         gate=gate,
+        baseline_path=evaluation_raw.get("baseline_path", "results/baseline.json"),
     )
 
     config = Config(

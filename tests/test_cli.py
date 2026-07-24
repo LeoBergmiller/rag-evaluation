@@ -145,7 +145,7 @@ def test_evaluate_command_gate_pass(monkeypatch) -> None:
         cli, "evaluate_strategy", lambda strategy, cfg, resources, examples: report
     )
     monkeypatch.setattr(cli, "save", lambda r, d: Path("results/fake.json"))
-    monkeypatch.setattr(cli, "load_baseline", lambda: report)
+    monkeypatch.setattr(cli, "load_baseline", lambda path=None: report)
     monkeypatch.setattr(cli, "check_regression", lambda *a, **k: gate_result)
 
     result = runner.invoke(cli.app, ["evaluate", "--strategy", "dense"])
@@ -178,7 +178,7 @@ def test_evaluate_command_gate_fail(monkeypatch) -> None:
         cli, "evaluate_strategy", lambda strategy, cfg, resources, examples: report
     )
     monkeypatch.setattr(cli, "save", lambda r, d: Path("results/fake.json"))
-    monkeypatch.setattr(cli, "load_baseline", lambda: report)
+    monkeypatch.setattr(cli, "load_baseline", lambda path=None: report)
     monkeypatch.setattr(cli, "check_regression", lambda *a, **k: gate_result)
 
     result = runner.invoke(cli.app, ["evaluate", "--strategy", "dense"])

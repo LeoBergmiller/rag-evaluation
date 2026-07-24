@@ -10,6 +10,7 @@ corpus:
   strip_references: true     # drop bibliography/references — noise for QA
   raw_dir: data/raw          # immutable after fetch (CLAUDE.md deny rule)
   index_dir: data/index      # built FAISS + BM25 indexes (gitignored)
+  query: null                # unused by the arXiv source (uses `categories`); set for source=pmc
 
 chunking:
   strategy: recursive        # fixed | recursive | semantic
@@ -49,6 +50,7 @@ evaluation:
   abstention: true           # include unanswerable questions; measure refusal
   bootstrap_resamples: 1000  # 95% CIs on every metric
   eval_set: data/eval/eval_set.jsonl   # gold (committed); built in build-step 5
+  baseline_path: results/baseline.json # committed baseline the gate compares against
   dev_test_split: [0.4, 0.6] # tune on dev, freeze test for the gate
 
   # The serialized per-strategy report MUST include these field names so the

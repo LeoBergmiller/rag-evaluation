@@ -27,6 +27,7 @@ def main() -> None:
         description="Run the full strategy benchmark sweep."
     )
     parser.add_argument("--strategies", type=str, default=None)
+    parser.add_argument("--config", type=str, default=None)
     parser.add_argument("--gate", dest="gate", action="store_true", default=True)
     parser.add_argument("--no-gate", dest="gate", action="store_false")
     args = parser.parse_args()
@@ -35,11 +36,11 @@ def main() -> None:
         args.strategies.split(",") if args.strategies else registered_strategies()
     )
 
-    cfg = load_config()
+    cfg = load_config(Path(args.config) if args.config else None)
     resources = load_resources(cfg)
     examples = default_eval_examples(cfg)
 
-    baseline = load_baseline() if args.gate else None
+    baseline = load_baseline(Path(cfg.evaluation.baseline_path)) if args.gate else None
 
     reports: list[StrategyReport] = []
     gate_results: dict[str, bool] = {}

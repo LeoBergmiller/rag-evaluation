@@ -82,7 +82,7 @@ def evaluate(
     resources = load_resources(cfg)
     examples = default_eval_examples(cfg)
 
-    baseline = load_baseline() if gate else None
+    baseline = load_baseline(Path(cfg.evaluation.baseline_path)) if gate else None
     any_failed = False
 
     for strategy_name in strategies:
