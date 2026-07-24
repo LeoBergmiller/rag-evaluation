@@ -3,14 +3,21 @@
 [![CI](https://github.com/LeoBergmiller/rag-evaluation/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoBergmiller/rag-evaluation/actions/workflows/ci.yml)
 [![Docker Hub](https://img.shields.io/docker/v/leobergmiller/rag-evaluation?label=Docker%20Hub)](https://hub.docker.com/r/leobergmiller/rag-evaluation)
 
-A production-style RAG system over an arXiv ML/AI paper corpus that implements and
-**benchmarks five retrieval strategies** behind one swappable interface, evaluated with
+A production-style RAG evaluation harness that implements and **benchmarks five retrieval
+strategies** behind one swappable interface, evaluated with
 [RAGAS](https://github.com/explodinggradients/ragas) + a custom retrieval-metrics harness,
-gated by an automated regression check, and served via a FastAPI + Streamlit demo.
+gated by an automated regression check, and served via a FastAPI + Streamlit demo. It runs
+over **two independent corpora** — an arXiv ML/AI paper corpus and an open-access
+[PubMed Central](https://www.ncbi.nlm.nih.gov/pmc/) medical-literature corpus — to show the
+*same harness, unchanged, benchmarks a second domain and the strategy ranking reproduces*.
 
 The goal isn't "a RAG demo" — it's the harness around it: a controlled experiment that lets
 you swap retrieval strategies via config, measure quality/latency/cost with confidence
-intervals, and fail CI if a change regresses quality below a calibrated tolerance.
+intervals, fail CI if a change regresses quality below a calibrated tolerance, and drop in a
+whole new domain by adding a config + an ingest adapter — with **zero changes** to retrieval,
+generation, evaluation, or the gate. (The medical corpus is a retrieval-**evaluation** testbed
+over published *literature* — not a clinical tool; abstention on unanswerable questions is
+measured as a first-class safety property.)
 
 ## Architecture
 
@@ -94,20 +101,64 @@ justify: the cheap lexical/hybrid retrievers are on the Pareto front, and the ex
 sit behind it. The value of building all five is being *able to show that*, rather than assuming
 the sophisticated strategy is better.
 
+## Cross-domain generalization (arXiv → medical)
+
+The headline claim — *the harness, not the demo* — is made concrete by running the **identical,
+unchanged** pipeline over a second, unrelated domain: ~500 open-access PubMed Central full-text
+articles on immune-checkpoint inhibitors in cancer (JATS XML, not PDF), with its own 100-example
+gold set. Both corpora share the **same `config_fingerprint` (`defa37d5071c7049`)** — the
+controlled variables (embedding, chunking, generation) are byte-identical; only the corpus and
+eval set differ. See [results/cross_domain.md](results/cross_domain.md).
+
+| corpus | strategy | context_recall | recall@k | nDCG@k | p95 (ms) | gate |
+| --- | --- | --- | --- | --- | --- | --- |
+| medical | dense (baseline) | 0.803 | 0.692 | 0.584 | 42 | ✓ |
+| medical | bm25 | 0.885 | 0.885 | 0.821 | 108 | ✓ |
+| medical | hybrid | 0.910 | 0.865 | 0.734 | 101 | ✓ |
+| medical | rerank | 0.962 | 0.962 | 0.907 | 1316 | ✗ |
+| medical | hyde | 0.644 | 0.481 | 0.374 | 12301 | ✗ |
+
+**What reproduces:**
+- **The leading 3 by nDCG@k are identical across domains** (`rerank > bm25 > hybrid`) — and cheap
+  `bm25` holds a top spot in both, so the "cheap retrieval stays competitive" finding generalizes.
+- **`rerank` and `hyde` fail the gate on the latency ceiling in *both* domains** — the
+  earn-the-complexity result holds: the fancier strategies don't justify their cost on either corpus.
+
+**What diverges (the interesting part):** **HyDE** collapses on medical — nDCG@k 0.62 (arXiv) →
+0.37 (medical), the worst strategy on the corpus. Query transformation that helps modestly on one
+domain can actively hurt on another; generalization is not free, and the harness is what lets you
+*catch* that rather than assume it.
+
+> Scope notes (documented in [decision D12](docs/architecture-decisions.md)): to fit an API budget,
+> the medical run judges `faithfulness` + `context_recall` (the RAGAS metrics in this comparison),
+> and its gate tolerances are reused from the arXiv calibration (judge noise is a harness property,
+> identical across corpora). Batch-1 judge timeouts reduced faithfulness sample coverage on two
+> strategies, so faithfulness is reported but excluded from the medical gate's fine tolerance.
+
 ## Quickstart
 
 ```bash
 git clone https://github.com/LeoBergmiller/rag-evaluation.git
 cd rag-evaluation
 pip install -e ".[dev]"
-cp .env.example .env   # fill in ANTHROPIC_API_KEY and OPENAI_API_KEY
+cp .env.example .env   # ANTHROPIC_API_KEY, OPENAI_API_KEY (+ NCBI_API_KEY for the medical corpus)
 ```
 
+**arXiv corpus (default):**
 ```bash
 python -m rag_eval.cli ingest                 # download → chunk → embed → build FAISS + BM25 index
 python -m rag_eval.cli query "What is attention?" --strategy hybrid
 python -m rag_eval.cli evaluate --strategy dense --no-gate   # writes results/*_dense_*.json
 python scripts/run_benchmark.py               # full 5-strategy sweep + ablation report
+```
+
+**Medical corpus (PubMed Central):** every entry point selects a corpus via the `RAG_CONFIG`
+env var (default = arXiv). The medical config uses a separate index, eval set, and baseline:
+```bash
+RAG_CONFIG=configs/config_med.yaml python -m rag_eval.cli ingest        # fetch PMC + build index
+RAG_CONFIG=configs/config_med.yaml python -m rag_eval.cli query "How do PD-1 inhibitors work?" -s hybrid
+python scripts/run_benchmark.py --config configs/config_med.yaml        # medical 5-strategy sweep
+python scripts/cross_domain_report.py --out results/cross_domain.md     # arXiv vs medical table
 ```
 
 ```bash

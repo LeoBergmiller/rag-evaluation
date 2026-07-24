@@ -28,7 +28,7 @@ ask_tab, benchmark_tab = st.tabs(["Ask", "Benchmark"])
 with ask_tab:
     st.header("Ask a question")
     question = st.text_area(
-        "Question", placeholder="What is attention in transformers?"
+        "Question", placeholder="Ask a question answerable from the indexed corpus…"
     )
     strategy = st.selectbox("Strategy", options=strategies) if strategies else None
     k = st.slider("k (chunks retrieved)", min_value=1, max_value=20, value=5)

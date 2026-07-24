@@ -7,9 +7,13 @@ system whose scope does not need them.
 
 ## System context (what determines the risk surface)
 
-- **The corpus is trusted and static.** Content is arXiv ML/AI papers (`cs.CL`, `cs.LG`,
-  `cs.AI`), fetched once into `data/raw/`, which is immutable by project rule. There is
-  no user-supplied or web-crawled content in the index.
+- **Both corpora are trusted, public, and static.** The default corpus is arXiv ML/AI
+  papers (`cs.CL`, `cs.LG`, `cs.AI`); the second is open-access PubMed Central full-text
+  articles (immune-checkpoint inhibitors in cancer). Each is fetched once into an immutable
+  raw dir (`data/raw/`, `data/raw_med/`); there is no user-supplied or web-crawled content
+  in either index. The medical corpus is published **literature** — peer-reviewed journal
+  articles under open-access licenses — **not** patient records or PHI, so it carries the
+  same trusted-public-source posture as arXiv (see LLM02).
 - **Output is text, and it stops at text.** The generated answer is returned as JSON by
   the FastAPI `/query` endpoint ([`api.py`](../src/rag_eval/api.py)) and rendered in the
   Streamlit UI via `st.markdown(...)` (answer) and `st.write(...)` (chunk text)
@@ -32,7 +36,7 @@ answer *only* from context and to reply exactly `I don't know` when context is
 insufficient, and retrieved passages are rendered as `[chunk_id] text` data lines
 ([`generator.py` `format_context`](../src/rag_eval/generation/generator.py)) so context
 is presented as data, not as instructions.
-- **Why low here:** the corpus is trusted arXiv papers, so an adversarial "ignore your
+- **Why low here:** both corpora are trusted published sources, so an adversarial "ignore your
   instructions" payload sitting inside a chunk is not part of the threat model — no
   attacker controls the indexed content.
 - **What would change it:** if the corpus became untrusted (user uploads, web crawl,
@@ -42,14 +46,17 @@ is presented as data, not as instructions.
   separation. That is deliberately **not** built now; see the DO-NOT-ADD scope decisions
   in the project audit.
 
-### LLM02 — Sensitive Information Disclosure · *Low / N/A for this corpus*
-The index contains only already-public, published arXiv papers. There is no PII, no
-secrets, and no private user data in retrievable content, so there is nothing sensitive
-for retrieval or generation to leak. Author names in papers are public bibliographic
-data, not PII in the disclosure sense.
-- **What would change it:** an enterprise/internal corpus (support tickets, HR docs,
-  customer data) would make PII redaction and access control on retrieval a real
-  requirement. N/A here by virtue of the corpus, not by mitigation.
+### LLM02 — Sensitive Information Disclosure · *Low / N/A for both corpora*
+Each index contains only already-public, published content — arXiv papers or open-access
+PubMed Central journal articles. There is no PII, no secrets, and no private user data in
+retrievable content, so there is nothing sensitive for retrieval or generation to leak.
+Author names are public bibliographic data, not PII in the disclosure sense. The medical
+corpus warrants an explicit note: it is **published literature, not clinical data** — no
+patient records, no PHI — so HIPAA-style disclosure risk does not attach.
+- **What would change it:** an enterprise/internal corpus (support tickets, HR docs) or,
+  for the medical side, actual patient records / EHR data would make PII/PHI redaction and
+  access control on retrieval a real requirement. N/A here by virtue of the corpus, not by
+  mitigation.
 
 ### LLM03 — Supply Chain · *Partially addressed*
 The LLM/eval stack is pinned to exact versions (LangChain 0.3.x, `ragas==0.2.15`,
@@ -61,7 +68,7 @@ artifacts — acceptable for a portfolio benchmark, would be tightened (lockfile
 hashes, vendored/attested models) for a regulated production deployment.
 
 ### LLM04 — Data & Model Poisoning · *Low / N/A*
-The corpus is fetched once from arXiv and then immutable; there is no continuous
+Each corpus is fetched once (arXiv or PMC) and then immutable; there is no continuous
 ingestion, user-contributed data, or fine-tuning loop that an attacker could poison. The
 embedding and reranker models are stock published checkpoints used as-is. No training or
 model updates occur in this system.
@@ -116,7 +123,7 @@ exposure. Called out honestly as a demo-scope gap, not a design claim.
 | Risk | Relevance here | Basis |
 | --- | --- | --- |
 | LLM01 Prompt Injection | Relevant (indirect), low residual | Trusted static corpus; prompt-level defense + `[id]` data-line separation |
-| LLM02 Sensitive Info | N/A | Public arXiv content only; no PII/secrets indexed |
+| LLM02 Sensitive Info | N/A | Public arXiv + PMC OA literature only; no PII/PHI/secrets indexed |
 | LLM03 Supply Chain | Partially addressed | Exact-pinned deps (D8); no artifact hash-pinning |
 | LLM04 Data/Model Poisoning | N/A | Immutable one-shot corpus; stock model checkpoints |
 | LLM05 Improper Output Handling | Relevant, low residual | Text-only sink; Markdown w/ HTML off; no SQL/code/tool boundary |
