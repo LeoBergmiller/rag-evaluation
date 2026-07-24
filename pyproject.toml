@@ -42,7 +42,10 @@ dependencies = [
 # LangChain. Add llama-index later only if a concrete ingest need appears (and pin it then).
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff", "mypy"]
+# Pinned for reproducible CI (same rationale as the runtime pins, D8): unpinned linters
+# drift ahead of what's verified locally -- ruff 0.16 added import-sort rules that fail
+# checks passing under 0.15. Bump deliberately, re-running `ruff check/format` + mypy.
+dev = ["pytest==9.0.3", "ruff==0.15.17", "mypy==2.1.0"]
 
 [tool.ruff]
 line-length = 88
