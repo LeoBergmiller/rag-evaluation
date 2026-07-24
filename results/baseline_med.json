@@ -1,0 +1,1850 @@
+{
+  "run_id": "8c441dd9ae9d49ee88899ca4a822257d",
+  "timestamp": "20260724T004935Z",
+  "strategy": "dense",
+  "n_examples": 60,
+  "config_fingerprint": "defa37d5071c7049",
+  "eval_set_hash": "988a0ec1f7c79ee8",
+  "prompt_template_hash": "de4b5a5833ff80ce",
+  "faithfulness": {
+    "point": 0.9633980712600623,
+    "lo": 0.9356953422394597,
+    "hi": 0.9833943833943835
+  },
+  "answer_relevancy": {
+    "point": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+  },
+  "context_precision": {
+    "point": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+  },
+  "context_recall": {
+    "point": 0.8028846153846154,
+    "lo": 0.6826923076923077,
+    "hi": 0.8990384615384616
+  },
+  "recall_at_k": {
+    "point": 0.6923076923076923,
+    "lo": 0.5576923076923077,
+    "hi": 0.8076923076923077
+  },
+  "precision_at_k": {
+    "point": 0.13846153846153847,
+    "lo": 0.11153846153846156,
+    "hi": 0.16153846153846152
+  },
+  "mrr": {
+    "point": 0.5477564102564103,
+    "lo": 0.4285176282051282,
+    "hi": 0.6685897435897435
+  },
+  "ndcg_at_k": {
+    "point": 0.5838275180846109,
+    "lo": 0.453502726327767,
+    "hi": 0.702999681422694
+  },
+  "p95_latency_ms": 42.11161221755901,
+  "cost_per_query_usd": 0.0102584,
+  "abstention_accuracy": 0.85,
+  "abstention_rate": 0.13333333333333333,
+  "correctness": {
+    "point": 1.7083333333333333,
+    "lo": 1.5208333333333333,
+    "hi": 1.875
+  },
+  "completeness": {
+    "point": 1.7083333333333333,
+    "lo": 1.5208333333333333,
+    "hi": 1.875
+  },
+  "citation_valid_rate": {
+    "point": 0.8541666666666666,
+    "lo": 0.75,
+    "hi": 0.9583333333333334
+  },
+  "examples": [
+    {
+      "id": "answerable::0::PMC13098181::19",
+      "answerable": true,
+      "question": "According to the study, what AKI prevalence rates were observed when secondary outcome measures requiring corticosteroid/immunosuppressive prescriptions or nephrology referral were applied, and why are these considered more accurate?",
+      "answer": "## Secondary AKI Prevalence Rates and Their Accuracy\n\nWhen secondary outcome measures were applied, the following AKI prevalence rates were observed:\n\n- **14%** among patients who received an outpatient prescription for **corticosteroids and/or immunosuppressive medications** (within 60 days of AKI event) [PMC13098181::19]\n- **7%** among patients who had a **nephrology consultation** [PMC13098181::19]\n\nThese figures contrast with the primary AKI outcome of **29%**, which captured AKI events from any cause, including hypovolemia, infection, obstruction, and other cancer-related factors not specific to immune-related adverse events [PMC13098181::16].\n\n## Why These Are Considered More Accurate\n\nThese secondary measures are considered to provide a more accurate reflection of AKI **potentially resulting from ICI therapy specifically** because they require additional clinical actions — corticosteroid/immunosuppressive treatment or nephrology referral — that are typically triggered when clinicians suspect an **immune-mediated mechanism** rather than other causes [PMC13098181::19].\n\nThe primary 29% figure is acknowledged as an overestimate of ICI-related nephrotoxicity because the study was unable to classify AKI etiology as directly related to ICI toxicity versus other causes, and the primary definition included less serious or pseudo-AKI events (grade 1) from non-immune causes [PMC13098181::19] [PMC13098181::16].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13098181::19",
+        "PMC12971670::23",
+        "PMC13098181::12",
+        "PMC13098181::16",
+        "PMC13098181::18"
+      ],
+      "reference_chunk_ids": [
+        "PMC13098181::19"
+      ],
+      "latency_ms": 917.7847499959171,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::1::PMC13070734::10",
+      "answerable": true,
+      "question": "In the KEYNOTE-189 study, what were the median PFS outcomes for patients with high PD-L1 expression (≥50%) who received ICI added to platinum therapy versus those who did not?",
+      "answer": "Based on the context provided, the KEYNOTE-189 study reported that in patients with higher PD-L1 expression, the addition of ICI to platinum therapy resulted in a median PFS of **11.1 months** versus **4.8 months** without ICI (HR 0.35) [PMC13070734::10].\n\nNote that while the context references \"higher PD-L1 expression\" in association with these figures, it does not explicitly specify that this subgroup was defined as PD-L1 ≥ 50% — only that higher PD-L1 expression was associated with greater efficacy of ICI addition on PFS [PMC13070734::10].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13070734::10",
+        "PMC13070734::12",
+        "PMC13070734::11",
+        "PMC13070734::3",
+        "PMC13070734::0"
+      ],
+      "reference_chunk_ids": [
+        "PMC13070734::10"
+      ],
+      "latency_ms": 34.12087500328198,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::2::PMC13349752::19",
+      "answerable": true,
+      "question": "What was the overall pooled hazard ratio and 95% confidence interval for the association between troponin elevation and mortality in immune checkpoint inhibitor–treated patients, as determined by the random-effects model?",
+      "answer": "Based on the meta-analysis of eight studies comprising 1,317 participants, the overall pooled hazard ratio for the association between troponin elevation and mortality in immune checkpoint inhibitor–treated patients was **HR 1.95 (95% CI: 1.36–2.81)**, as determined by the random-effects model. This association was statistically significant (z = 3.59, p = 0.0003), though substantial heterogeneity was observed across studies (I² = 80.9%, p < 0.0001) [PMC13349752::18][PMC13349752::19].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13349752::19",
+        "PMC13349752::1",
+        "PMC13349752::0",
+        "PMC13349752::18",
+        "PMC13349752::17"
+      ],
+      "reference_chunk_ids": [
+        "PMC13349752::19"
+      ],
+      "latency_ms": 39.73333298927173,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::3::PMC13194638::10",
+      "answerable": true,
+      "question": "What were the area under the curve (AUC) values for predicting ICI response using PD-L1 expression alone versus the blood DNA methylation profile, and what happened to the AUC when the two were combined?",
+      "answer": "I don't know.\n\nThe provided context does not contain AUC values comparing PD-L1 expression alone versus blood DNA methylation profile alone, nor does it report a combined AUC for these two biomarkers together. While [PMC12999820::12] mentions a validation AUC of 0.80 for multimodal AI systems integrating pathological and CT-derived features in NSCLC, this is not a direct comparison of PD-L1 versus blood DNA methylation profiles or their combination.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13194638::9",
+        "PMC13194638::2",
+        "PMC13194638::15",
+        "PMC13194638::14",
+        "PMC12999820::12"
+      ],
+      "reference_chunk_ids": [
+        "PMC13194638::10"
+      ],
+      "latency_ms": 40.0353750155773,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "answerable::4::PMC13001626::1",
+      "answerable": true,
+      "question": "According to the passage, what molecular mechanism does L1CAM-AS1 use to stabilize RAN protein and activate NF-κB signaling in hepatocellular carcinoma cells?",
+      "answer": "## Molecular Mechanism of L1CAM-AS1 in Stabilizing RAN and Activating NF-κB Signaling\n\nBased on the provided context, L1CAM-AS1 employs the following sequential molecular mechanism:\n\n### 1. RAN Protein Stabilization via Blocking Ubiquitination\n\nL1CAM-AS1 stabilizes RAN protein by **preventing its proteasomal degradation**. Specifically:\n\n- L1CAM-AS1 overexpression elevates RAN protein levels, while knockdown decreases them, without affecting RAN mRNA levels — indicating post-translational regulation [PMC13001626::16]\n- Treatment with MG132 (a 26S proteasome inhibitor) eliminated L1CAM-AS1-induced RAN upregulation, confirming proteasome-dependent control [PMC13001626::16]\n- L1CAM-AS1 **blocks RAN ubiquitination at key sites Lys152 (K152) and Lys167 (K167)** by **disrupting the interaction between RAN and its E3 ubiquitin ligase OSTM1** [PMC13001626::17]\n- CHX chase experiments confirmed that L1CAM-AS1 overexpression extends RAN protein half-life [PMC13001626::16]\n\n### 2. NF-κB Pathway Activation\n\nBy stabilizing RAN — a GTP-binding protein involved in nuclear transport — L1CAM-AS1 **promotes RAN-mediated nuclear import of the transcription factor RELA (p65)**, thereby activating NF-κB signaling and upregulating **CCL2 expression** in HCC cells [PMC13001626::28].\n\nThis ultimately leads to M2 macrophage polarization and immunosuppression in the tumor microenvironment [PMC13001626::28].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13001626::14",
+        "PMC13001626::15",
+        "PMC13001626::17",
+        "PMC13001626::28",
+        "PMC13001626::16"
+      ],
+      "reference_chunk_ids": [
+        "PMC13001626::1"
+      ],
+      "latency_ms": 39.70087500056252,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::5::PMC13022356::32",
+      "answerable": true,
+      "question": "What institutional approval was obtained for the human studies described in this research, and what is the approval number?",
+      "answer": "Based on the context provided, multiple studies are described, each with different institutional approvals:\n\n1. **PMC13004668**: The study protocol was approved by multiple IRBs and ethics committees across participating sites in the USA and Republic of Korea, including WCG IRB, MD Anderson Cancer Center, Dana Farber Cancer Institute, and others. No single approval number is mentioned [PMC13004668::30].\n\n2. **PMC13225849**: The study protocol was approved by the **Institutional Ethics Committee of the NHO Takasaki General Medical Center**, with **IRB No. TGMC2024-03** [PMC13225849::23].\n\n3. **PMC13248814**: The study was approved by the **ethical committee of Guangyuan Central Hospital**, with **approval number: GYZXLLH2025010** [PMC13248814::21].\n\n4. **PMC12874490**: Ethics approval was obtained from the **institutional review board of the National Cancer Center Hospital**, but no approval number is provided [PMC12874490::8].\n\nIn summary, the specific approval numbers mentioned are **TGMC2024-03** (NHO Takasaki General Medical Center) and **GYZXLLH2025010** (Guangyuan Central Hospital).",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13004668::30",
+        "PMC13225849::23",
+        "PMC13248814::21",
+        "PMC13225849::7",
+        "PMC12874490::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC13022356::32"
+      ],
+      "latency_ms": 28.162374976091087,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.5833333333333334,
+        "context_recall": 0.5
+      },
+      "correctness": 0,
+      "completeness": 0,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::6::PMC13081749::10",
+      "answerable": true,
+      "question": "According to the passage, how does Clostridium butyricum contribute to alleviating local immunosuppression in tumors?",
+      "answer": "Based on the context, *Clostridium butyricum* contributes to alleviating local immunosuppression in tumors through two key mechanisms:\n\n1. **Inhibiting M2-type tumor-associated macrophage (M2 TAM) polarization** – by preventing the polarization of these immunosuppressive macrophages, it reduces their contribution to the immunosuppressive tumor microenvironment.\n\n2. **Decreasing regulatory T cell (Treg) accumulation** – by reducing the accumulation of Tregs, it weakens their suppression of effector T cells.\n\nTogether, these actions collectively alleviate local immunosuppression in tumors [PMC13081749::10].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13079699::33",
+        "PMC12911357::0",
+        "PMC13167794::7",
+        "PMC13079699::0",
+        "PMC13081749::10"
+      ],
+      "reference_chunk_ids": [
+        "PMC13081749::10"
+      ],
+      "latency_ms": 36.59075000905432,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.2,
+        "ndcg_at_k": 0.38685280723454163
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.7142857142857143,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::11::PMC13218753::4",
+      "answerable": true,
+      "question": "According to the passage, what specific diagnostic steps are suggested before initiating ICI therapy or when new gastrointestinal symptoms arise, such as diarrhea?",
+      "answer": "Based on the context, the following specific diagnostic steps are suggested before initiating ICI therapy or when new gastrointestinal symptoms like diarrhea arise:\n\n1. **Check celiac serologies and fecal calprotectin** [PMC13218753::4]\n\n2. **Review long-term medications and exposures** [PMC13218753::4]\n\n3. **Consider further serologic and genetic testing**, including **human leukocyte antigen (HLA) phenotyping**, especially when autoimmune enteropathies are suspected, since most affected individuals have relevant HLA-DQ2 or HLA-DQ8 variants [PMC13218753::4]\n\n4. **Endoscopic evaluation** should be considered if additional doubt exists, with careful attention to **upper endoscopy or enteroscopy**, as this is often overlooked in the evaluation of diarrhea [PMC13218753::4]\n\n5. If the workup remains inconclusive, **modified treatment approaches** may be considered in a multidisciplinary setting, including **single-agent ICI exposure**, among other strategies [PMC13218753::4]\n\nThe rationale for these steps is to identify patients with indolent immune-mediated gastrointestinal conditions or pre-autoimmunity that could be exacerbated by ICI exposure, noting that formal guidelines for pretreatment testing in this context are currently lacking [PMC13218753::4].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12996924::8",
+        "PMC13218753::4",
+        "PMC13004809::11",
+        "PMC13004809::3",
+        "PMC13004809::1"
+      ],
+      "reference_chunk_ids": [
+        "PMC13218753::4"
+      ],
+      "latency_ms": 32.84479200374335,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::12::PMC13004668::14",
+      "answerable": true,
+      "question": "According to the IMDC prognostic scoring, what percentage of patients in the ccRCC cohort had an intermediate prognostic score, and how many had a favorable score?",
+      "answer": "Based on the context provided, there are multiple ccRCC cohorts described, but the most directly relevant answer comes from two sources:\n\n1. In the ccRCC cohort described in [PMC13004668::14], **66.7% had an intermediate prognostic score**, and only **one patient (3.3%) had a favorable score**.\n\n2. In the separate cohort of 309 metastatic ccRCC patients described in [PMC12958928::11], **61.8% had intermediate-risk disease**, and **30 patients (9.7%) had a favorable score**.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13004668::14",
+        "PMC12958928::11",
+        "PMC13257015::5",
+        "PMC13004668::25",
+        "PMC12949065::12"
+      ],
+      "reference_chunk_ids": [
+        "PMC13004668::14"
+      ],
+      "latency_ms": 35.57208299753256,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8333333333333334,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::13::PMC13272025::1",
+      "answerable": true,
+      "question": "According to the 2020 GLOBOCAN report, what were the approximate annual numbers of new gastric cancer cases and deaths worldwide, and what is the 5-year survival rate for patients with advanced or metastatic gastric cancer?",
+      "answer": "Based on the provided context:\n\n**New Cases:** According to GLOBOCAN 2020 data, approximately **1.1 million new gastric carcinoma cases** were diagnosed globally in 2020 [PMC12883131::2].\n\n**Deaths:** The context states that gastric carcinoma mortality ranks **fourth worldwide** [PMC12883131::2], but does not provide a specific number of annual deaths from the GLOBOCAN 2020 report.\n\n**5-year Survival Rates for Advanced/Metastatic Gastric Cancer:**\n- For advanced gastric carcinoma in India: **20%** [PMC12883131::2]\n- For advanced and metastatic gastric cancer generally: **less than 6.8%** [PMC13238030::3]\n- For patients with GC in Europe and the United States: **19% to 31%**, and in China approximately **28%** [PMC13066996::3] (though these figures refer to GC broadly, not exclusively metastatic cases)\n\nThe context does not provide a single precise global figure for annual gastric cancer deaths from GLOBOCAN 2020, so a complete answer to that specific part of the question cannot be given from the available information.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13238030::3",
+        "PMC12883131::2",
+        "PMC13238030::24",
+        "PMC13238030::0",
+        "PMC13066996::3"
+      ],
+      "reference_chunk_ids": [
+        "PMC13272025::1"
+      ],
+      "latency_ms": 35.46999997342937,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": 1,
+      "completeness": 1,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::14::PMC13182965::29",
+      "answerable": true,
+      "question": "What specific driver mutations do the tumor intestinal organoids in the AKPS murine CRC model harbor, and why are these mutations significant?",
+      "answer": "## Driver Mutations in AKPS Organoids\n\nThe AKPS intestinal organoids harbor four specific driver mutations:\n\n1. **Loss-of-function mutation in *Apc*** (Apc⁻/⁻)\n2. **Oncogenic *Kras* mutation** (KrasG12D/+)\n3. **Loss-of-function mutation in *Trp53*** (Trp53R172H/⁻)\n4. **Loss-of-function mutation in *Smad4*** (Smad4⁻/⁻)\n\n[PMC13182965::0][PMC13182965::8]\n\n## Significance of These Mutations\n\nThese mutations are significant for several reasons:\n\n- They represent **the most common driver mutations found in sporadic human CRC**, thereby enhancing the translational relevance of the model [PMC13182965::29].\n\n- By recapitulating the genetic landscape of human CRC, the organoids **more faithfully reproduce the biological and molecular features of sporadic human CRC** compared to conventional tumor cell lines (such as MC38 or CT26), which lack this genetic heterogeneity [PMC13182965::2][PMC13182965::29].\n\n- The combination of these mutations bridges a critical gap in preclinical modeling, as existing models (e.g., AOM/DSS, Apc^min/+, CT26) are largely resistant to immune checkpoint inhibitors and do not adequately recapitulate the human CRC immune landscape [PMC13182965::2].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13182965::8",
+        "PMC13182965::9",
+        "PMC13182965::29",
+        "PMC13182965::2",
+        "PMC13182965::0"
+      ],
+      "reference_chunk_ids": [
+        "PMC13182965::29"
+      ],
+      "latency_ms": 35.49212499638088,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::15::PMC13272025::9",
+      "answerable": true,
+      "question": "Among patients who received first-line ICI therapy, what was the most commonly used agent and what percentage of the total cohort received it?",
+      "answer": "Based on the available context, I cannot answer this question precisely as stated. The context does not provide information about the most commonly used ICI agent specifically among **first-line** ICI therapy patients along with its percentage of the total cohort.\n\nWhat the context does provide is:\n- In [PMC13126388::10], nivolumab was the most commonly used ICI agent overall (50.7% of the total cohort of 150 patients), but this is not broken down by line of therapy.\n- In [PMC13062620::8], first-line treatment patterns are described in terms of regimen combinations (e.g., ICI combined with CT alone at 31.6%), but not by specific ICI agent.\n\nI don't know the answer to the specific question as asked.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13223633::31",
+        "PMC12972483::3",
+        "PMC13223633::23",
+        "PMC13126388::10",
+        "PMC13062620::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC13272025::9"
+      ],
+      "latency_ms": 37.01129197725095,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": 0,
+      "completeness": 0,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::16::PMC13311620::8",
+      "answerable": true,
+      "question": "What type of prospective study design does the passage suggest would more definitively inform the optimal sequencing of ICI therapy and adoptive cell therapy in anti-PD-1 refractory melanoma?",
+      "answer": "Based on the context, the passage suggests a **randomized, prospective evaluation with crossover at the time of progression** — specifically one comparing sequential combination ICI therapy and adoptive cell therapy, with a design akin to the **DREAMSeq trial** — would more definitively inform the optimal sequencing of these therapeutic modalities in anti-PD-1 refractory melanoma [PMC13311620::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13311620::8",
+        "PMC13311620::1",
+        "PMC13311620::7",
+        "PMC13059913::15",
+        "PMC13311620::2"
+      ],
+      "reference_chunk_ids": [
+        "PMC13311620::8"
+      ],
+      "latency_ms": 38.10441700625233,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::18::PMC13198839::3",
+      "answerable": true,
+      "question": "What clinical event prompted the discontinuation of enoxaparin, and what anticoagulant was initiated as a replacement?",
+      "answer": "Based on the clinical case described, vaginal bleeding was the clinical event that prompted the discontinuation (conversion away from) enoxaparin. Warfarin was initiated as the replacement anticoagulant, with close international normalized ratio (INR) monitoring [PMC13189673::5].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13189673::9",
+        "PMC13189673::5",
+        "PMC12878502::18",
+        "PMC12878502::0",
+        "PMC12878502::20"
+      ],
+      "reference_chunk_ids": [
+        "PMC13198839::3"
+      ],
+      "latency_ms": 36.83316599926911,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": 0,
+      "completeness": 0,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::19::PMC12994185::31",
+      "answerable": true,
+      "question": "What method was used to identify MARCHF8-interacting proteins, and how were the findings subsequently validated?",
+      "answer": "## Identification and Validation of MARCHF8-Interacting Proteins\n\n### Method: TurboID-Based Proximity Labeling\n\nMARCHF8-interacting proteins were identified using **TurboID-based proximity labeling** combined with mass spectrometry. Stable cell lines expressing either a TurboID-MARCHF8 fusion protein or TurboID alone were established in two cell types: normal immortalized keratinocytes (N/Tert-1 E6E7) and HPV+ HNC cells (SCC152). The TurboID enzyme biotinylated proteins within close proximity, which were then pulled down using streptavidin-coated beads and analyzed by mass spectrometry in triplicate [PMC12994185::3].\n\nMARCHF8 interacting proteins were defined as those enriched **>twofold with P < 0.05** in TurboID-MARCHF8 pulldowns compared to TurboID alone, in both cell lines — yielding a total of **1,037 proteins** [PMC12994185::5].\n\n### Validation\n\nThe findings were validated through multiple approaches:\n\n1. **Known substrates**: The screen identified previously known MARCHF8 targets (CDH1, CD44, TRAIL-R1), supporting the validity of the approach [PMC12994185::3].\n2. **Co-immunoprecipitation**: MARCHF8 was pulled down from SCC152 cell lysates (treated with proteasome inhibitor MG132) using an anti-MARCHF8 antibody, and HLA-A/B/C was detected by western blot in the complex [PMC12994185::3].\n3. **Reciprocal co-IP**: HLA-A/B/C proteins were pulled down using an anti-HLA-A/B/C antibody, which in turn pulled down MARCHF8 [PMC12994185::3].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12994185::3",
+        "PMC12994185::20",
+        "PMC12994185::5",
+        "PMC12994185::15",
+        "PMC12994185::10"
+      ],
+      "reference_chunk_ids": [
+        "PMC12994185::31"
+      ],
+      "latency_ms": 30.787625000812113,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.9230769230769231,
+        "context_recall": 0.5
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::22::PMC13266228::1",
+      "answerable": true,
+      "question": "What primary outcomes were measured in the systematic review on gonadal toxicity and fertility in patients with gastrointestinal, sarcoma, lung, and melanoma cancers?",
+      "answer": "## Primary Outcomes Measured\n\nThe systematic review measured the following primary outcomes:\n\n### For Females:\n- **Persistent amenorrhea or ovarian failure** following treatment\n- **Return or maintenance of menses** [PMC13266228::8]\n\n### For Males:\n- **Treatment-related azoospermia**\n- **Recovery of spermatogenesis** at follow-up [PMC13266228::8]\n\n### Secondary Outcomes:\nIn addition to the primary outcomes, secondary outcomes included **hormonal changes** and reported **fertility outcomes such as pregnancy or live birth** [PMC13266228::8], which was further confirmed in the methods summary [PMC13266228::1].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13266228::8",
+        "PMC13266228::3",
+        "PMC13266228::1",
+        "PMC13266228::2",
+        "PMC13266228::30"
+      ],
+      "reference_chunk_ids": [
+        "PMC13266228::1"
+      ],
+      "latency_ms": 36.882624990539625,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8571428571428571,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::24::PMC13303765::12",
+      "answerable": true,
+      "question": "In the C4CMMRD scoring system, how many points are assigned to a patient who has multiple developmental venous anomalies (DVAs) in separate regions of the brain?",
+      "answer": "Based on the C4CMMRD scoring system described in the context, **2 points** are assigned to a patient who has multiple developmental venous anomalies (DVAs, also known as cerebral venous angiomas) in separate regions of the brain [PMC13303765::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13303765::12",
+        "PMC13324675::19",
+        "PMC13324675::20",
+        "PMC13189673::5",
+        "PMC13326604::11"
+      ],
+      "reference_chunk_ids": [
+        "PMC13303765::12"
+      ],
+      "latency_ms": 37.37579198786989,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::26::PMC12895580::13",
+      "answerable": true,
+      "question": "What were the median overall survival (OS) outcomes for patients stratified by salivary Actinomyces abundance using the ROC-derived 11% threshold?",
+      "answer": "Based on the Kaplan-Meier analysis, patients stratified by the ROC-derived 11% Actinomyces abundance threshold showed the following median OS outcomes:\n\n- **Low abundance group (≤11%, n = 46):** Median OS of **9 months** (95% CI: 6–18 months)\n- **High abundance group (>11%, n = 24):** Median OS of **5 months** (95% CI: 4–10 months)\n\nThe difference between groups was statistically significant (log-rank p = 0.009) [PMC12895580::13]. On univariate analysis, high Actinomyces abundance (>11%) was associated with a hazard ratio for OS of 2.05 (95% CI: 1.19–3.53, p = 0.009) [PMC12895580::14], and after multivariable adjustment, the HR was 2.61 (95% CI: 1.48–4.61, p < 0.001) [PMC12895580::2].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12895580::13",
+        "PMC12895580::14",
+        "PMC12895580::2",
+        "PMC12895580::7",
+        "PMC12895580::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC12895580::13"
+      ],
+      "latency_ms": 30.88637499604374,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::27::PMC13139166::5",
+      "answerable": true,
+      "question": "For steroid-refractory immune-related colitis/enterocolitis, why is vedolizumab preferred over infliximab in patients who also have hepatitis?",
+      "answer": "Based on the provided context, I cannot fully answer this question. The context discusses vedolizumab and infliximab as treatment options for steroid-refractory immune-mediated colitis, but does **not** specifically explain why vedolizumab would be preferred over infliximab in patients who also have concurrent hepatitis.\n\nThe context does note that infliximab and vedolizumab differ in \"time to clinical response, hospitalization burden, and recurrence patterns\" [PMC13223026::40], and that vedolizumab \"can be associated with a slower clinical response\" [PMC13319570::7], but no rationale related to concurrent hepatitis is provided in the available context.\n\nI don't know.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13223026::40",
+        "PMC13319570::0",
+        "PMC13319570::7",
+        "PMC12970099::4",
+        "PMC13139166::18"
+      ],
+      "reference_chunk_ids": [
+        "PMC13139166::5"
+      ],
+      "latency_ms": 61.25800000154413,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": 0,
+      "completeness": 0,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::29::PMC12967885::15",
+      "answerable": true,
+      "question": "According to a real-world cohort study over 10 years involving 432 patients with malignant melanoma or renal cancer, what method was used to identify IMH cases, and what did multivariate logistic regression analysis reveal about female sex?",
+      "answer": "Based on the context, the real-world cohort study over 10 years involving 432 patients with malignant melanoma or renal cancer identified IMH cases **using the definitions, grading, and causality assessment methods validated for drug-induced liver injury (DILI)** [PMC12967885::15].\n\nThe multivariate logistic regression analysis revealed that **female sex was an independent risk factor for IMH occurrence**, which may be attributed to women being more sensitive to the toxicity of anti-tumor drugs [PMC12967885::15].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12967885::15",
+        "PMC13362896::13",
+        "PMC12967885::49",
+        "PMC13185749::6",
+        "PMC13263832::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC12967885::15"
+      ],
+      "latency_ms": 38.213291991269216,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::30::PMC13294274::20",
+      "answerable": true,
+      "question": "Why is the abatacept–ruxolitinib combination considered particularly instructive as a toxicity-directed strategy for ICI-associated cardiotoxicity?",
+      "answer": "The abatacept–ruxolitinib combination is considered particularly instructive because it targets **specific mechanistic pathways** rather than imposing broad immunosuppression. Specifically, abatacept blocks T-cell co-stimulation driving the fulminant inflammatory response, while ruxolitinib (a selective JAK inhibitor) interrupts JAK-STAT signaling pathways that are upregulated in ICI-associated myocarditis [PMC13096996::11]. This targeted approach aims to selectively interrupt tissue-destructive circuits in the heart while preserving enough systemic immune activity to maintain antitumor benefit [PMC13294274::20].\n\nThe clinical evidence supporting this approach is compelling: in a prospective observational study by Salem et al., early initiation of abatacept and ruxolitinib was associated with a myotoxicity-related fatality rate of only **3.4% (1/30)**, compared to **60%** in a historical control group receiving conventional high-dose steroid therapy alone (p<0.0001) [PMC13356802::12]. Additionally, a 2025 American College of Cardiology guidance notes that this targeted immunomodulatory approach **may have fewer side effects** than conventional high-dose steroid therapy alone [PMC13356802::12].\n\nThis combination thus exemplifies the ideal toxicity-directed strategy: selectively interrupting harmful cardiac inflammatory circuits without broadly suppressing the immune response needed for tumor control [PMC13294274::20].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13294274::20",
+        "PMC13356802::12",
+        "PMC13096996::11",
+        "PMC13327357::31",
+        "PMC13080612::9"
+      ],
+      "reference_chunk_ids": [
+        "PMC13294274::20"
+      ],
+      "latency_ms": 35.14908300712705,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8571428571428571,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::32::PMC13059913::1",
+      "answerable": true,
+      "question": "What specific germline variant in NLRC5 was investigated for its association with ICI-induced diabetes mellitus, and at what chromosomal location is it found?",
+      "answer": "The specific germline variant investigated is a **C>T missense variant** at chromosomal location **chr16:57,025,515**, resulting in a **proline to leucine substitution** at position 191 of the NLRC5 protein (designated **NLRC5Pro191Leu**, recorded as rs74439742 in the dbSNP database) [PMC13059913::4]. This variant is located on the **16q13 locus** of the NLRC5 gene [PMC13059913::4].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13059913::4",
+        "PMC13059913::1",
+        "PMC13059913::2",
+        "PMC13059913::13",
+        "PMC13059913::14"
+      ],
+      "reference_chunk_ids": [
+        "PMC13059913::1"
+      ],
+      "latency_ms": 32.751499995356426,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8333333333333334,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::34::PMC12939777::26",
+      "answerable": true,
+      "question": "According to the passage, how could pairing bispecific antibodies (BsAbs) with antibody-drug conjugates (ADCs) benefit treatment of \"cold\" tumors?",
+      "answer": "According to the passage, pairing BsAbs with ADCs could **deliver cytotoxic payloads to stimulate immunogenic cell death in \"cold\" tumors**, thereby fostering an **'in situ vaccination effect'** that expands the repertoire of tumor-specific T-cells available for the BsAb to engage [PMC12939777::26].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12939777::26",
+        "PMC12939777::0",
+        "PMC13158644::17",
+        "PMC12939777::10",
+        "PMC12939777::25"
+      ],
+      "reference_chunk_ids": [
+        "PMC12939777::26"
+      ],
+      "latency_ms": 34.97829200932756,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::36::PMC13225849::14",
+      "answerable": true,
+      "question": "In the Atez/Bev group, what were the median PFS values for BCLC-B versus BCLC-C patients, and was the difference statistically significant?",
+      "answer": "Based on the context, in the Atez/Bev group, the median PFS for BCLC-B patients was **12.3 months** (95% CI: 9.0–15.8) compared to **6.4 months** (95% CI: 3.8–10.1) for BCLC-C patients. Yes, the difference was statistically significant, with a p-value of **0.012** [PMC13225849::14].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13225849::14",
+        "PMC13225849::2",
+        "PMC13225849::10",
+        "PMC13225849::8",
+        "PMC13319406::14"
+      ],
+      "reference_chunk_ids": [
+        "PMC13225849::14"
+      ],
+      "latency_ms": 37.291457992978394,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::38::PMC13024517::1",
+      "answerable": true,
+      "question": "In the study comparing TMB-H (10–20 mut/Mb) and TMB-VH (>20 mut/Mb) tumor groups, how did the prevalence of microsatellite instability (MSI) differ between the two groups, and was this difference statistically significant?",
+      "answer": "I don't know.\n\nThe provided context does not contain a study that specifically compares TMB-H (10–20 mut/Mb) and TMB-VH (>20 mut/Mb) tumor groups and reports MSI prevalence differences between these two categories with associated statistical significance testing.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13056297::9",
+        "PMC13108082::8",
+        "PMC13108082::5",
+        "PMC12936829::6",
+        "PMC13199106::3"
+      ],
+      "reference_chunk_ids": [
+        "PMC13024517::1"
+      ],
+      "latency_ms": 38.89408300165087,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "answerable::40::PMC12995670::63",
+      "answerable": true,
+      "question": "According to the passage, what are the two specific complex areas discussed in depth regarding controversies and challenges in ICI rechallenge?",
+      "answer": "According to the passage, the two specific complex areas discussed in depth regarding controversies and challenges in ICI rechallenge are:\n\n1. **The dilemmas and opportunities of rechallenge in patients with primary refractory disease**\n2. **The unique difficulties encountered when considering the possibility of ICI rechallenge in elderly people**\n\nAs stated: \"This section discusses in depth two such complex areas: the dilemmas and opportunities of rechallenge in patients with primary refractory disease and the unique difficulties encountered when considering the possibility of ICI rechallenge in elderly people.\" [PMC12995670::63]",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12995670::63",
+        "PMC12877935::5",
+        "PMC12995670::69",
+        "PMC12995670::4",
+        "PMC12995670::2"
+      ],
+      "reference_chunk_ids": [
+        "PMC12995670::63"
+      ],
+      "latency_ms": 40.33791599795222,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::41::PMC13190817::16",
+      "answerable": true,
+      "question": "What functional effects were observed in Huh-7 cells following ZEB1-AS1 knockdown via siRNA transfection?",
+      "answer": "Based on the context, the following functional effects were observed in Huh-7 cells following ZEB1-AS1 knockdown via siRNA transfection:\n\n1. **Suppressed cell proliferation**: CCK-8 assay results showed that ZEB1-AS1 deficiency inhibited cell growth [PMC13190817::16].\n\n2. **Impaired migration**: Both transwell assays and wound healing assays demonstrated that migration was notably reduced following ZEB1-AS1 knockdown [PMC13190817::16].\n\n3. **Impaired invasion**: Transwell assays also showed that invasion was significantly diminished after ZEB1-AS1 knockdown [PMC13190817::16].\n\nThese findings collectively suggest that ZEB1-AS1 is essential for maintaining the aggressive phenotype of HCC cells, and its genetic ablation significantly hindered Huh-7 cell proliferation and compromised their migratory and invasive capabilities [PMC13190817::23].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13190817::17",
+        "PMC13190817::2",
+        "PMC13190817::16",
+        "PMC13190817::7",
+        "PMC13190817::23"
+      ],
+      "reference_chunk_ids": [
+        "PMC13190817::16"
+      ],
+      "latency_ms": 34.23958399798721,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::43::PMC12978458::11",
+      "answerable": true,
+      "question": "What effect does PSMB8-AS1 knockdown have on miR-204/211 levels and TFAP2A expression in RCC cell lines?",
+      "answer": "Based on the provided context, PSMB8-AS1 knockdown has opposing effects on miR-204/211 and TFAP2A:\n\n- **miR-204/211 levels**: PSMB8-AS1 knockdown **restored/increased** miR-204/211 levels in RCC cell lines (ACHN and 769-P). Both miRNAs were significantly downregulated in RCC cells compared to normal cells, and siRNA-mediated knockdown of PSMB8-AS1 reversed this suppression [PMC12978458::11].\n\n- **TFAP2A expression**: PSMB8-AS1 knockdown **decreased** TFAP2A expression. TFAP2A was overexpressed in RCC cells relative to normal kidney cells, and its expression was reduced following PSMB8-AS1 knockdown [PMC12978458::11].\n\nThe mechanistic explanation is that PSMB8-AS1 acts as a competing endogenous RNA (ceRNA), sequestering miR-204/211. When PSMB8-AS1 is knocked down, miR-204/211 are freed to suppress their target TFAP2A, thereby reducing TFAP2A expression [PMC12978458::13]. Luciferase reporter assays confirmed direct binding of miR-204/211 to the TFAP2A 3′UTR, as co-transfection with wild-type (but not mutant) TFAP2A 3′UTR vectors resulted in decreased luciferase activity [PMC12978458::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12978458::11",
+        "PMC12978458::12",
+        "PMC12978458::14",
+        "PMC12978458::13",
+        "PMC12978458::10"
+      ],
+      "reference_chunk_ids": [
+        "PMC12978458::11"
+      ],
+      "latency_ms": 35.65216698916629,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::47::PMC12878502::12",
+      "answerable": true,
+      "question": "In the Nichetti et al. study of NSCLC patients treated with ICI, what were the median progression-free survival (PFS) durations observed in antiplatelet users versus non-users, and was the difference statistically significant?",
+      "answer": "Based on the context, in the Nichetti et al. study, antiplatelet users had a median PFS of **6.4 months** compared to **3.4 months** in non-users. The difference was statistically significant, with a p-value of **0.015** [PMC12878502::12].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12878502::12",
+        "PMC13251138::4",
+        "PMC13070734::10",
+        "PMC12907331::8",
+        "PMC13191858::9"
+      ],
+      "reference_chunk_ids": [
+        "PMC12878502::12"
+      ],
+      "latency_ms": 35.680957982549444,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::50::PMC13381639::1",
+      "answerable": true,
+      "question": "What distinguishes acral melanoma (AM) from UV-driven melanomas in terms of molecular characteristics and treatment response?",
+      "answer": "## Distinguishing Features of Acral Melanoma vs. UV-Driven Melanomas\n\n### Molecular Characteristics\n\nAcral melanoma exhibits a distinct molecular profile that sets it apart from UV-driven cutaneous melanomas:\n\n- **Low mutation burden** and a **non-UV mutational signature**, in contrast to the high UV-signature (C>T) mutations seen in UV-driven melanomas [PMC13381639::4]\n- **Recurrent copy-number alterations** in cyclin D1 (CCND1) and KIT [PMC13381639::4]\n- **Frequent TERT promoter aberrations** [PMC13381639::4]\n- **Distinct DNA methylation and chromatin accessibility patterns** relative to UV-driven cutaneous melanoma [PMC13381639::4]\n- A potentially distinct role for **transposable elements (TEs)**, particularly HERVs, in its pathogenesis, which remains incompletely characterized [PMC13381639::1]\n\n### Treatment Response\n\n- AM is **particularly refractory to standard therapies, including immune checkpoint inhibitors (ICIs)**, and often presents with a **significant immunosuppressive tumor microenvironment** [PMC13381639::4]\n- This contrasts sharply with UV-driven cutaneous melanoma, which shows the **highest responsiveness to ICIs among solid tumors**, with objective response rates of ~40–45% and long-term survival exceeding 40% at 6.5 years in some cohorts [PMC12965150::4]\n- AM is also associated with **worse survival outcomes** compared to UV-driven melanomas [PMC13381639::1]\n\nThe low mutational burden of AM likely contributes to its poor ICI response, as high UV-signature tumor mutational burden has been associated with more favorable immunotherapy responses across multiple cancer types [PMC13271546::13].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13381639::4",
+        "PMC13381639::1",
+        "PMC13271546::13",
+        "PMC13381639::0",
+        "PMC12965150::4"
+      ],
+      "reference_chunk_ids": [
+        "PMC13381639::1"
+      ],
+      "latency_ms": 26.833291980437934,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::54::PMC13201575::20",
+      "answerable": true,
+      "question": "What were the optimism-corrected AUC values obtained from bootstrap validation and 10-fold cross-validation during internal validation of the severe immune-related adverse events risk prediction model?",
+      "answer": "Based on the provided context, the specific optimism-corrected AUC values from both bootstrap validation and 10-fold cross-validation for the severe immune-related adverse events (irAEs) risk prediction model are not fully detailed. The context from [PMC13201575::2] only reports a **bootstrap-corrected AUC of 0.85** and a Brier score of 0.14 for the prediction model. The methodology for both validation approaches (bootstrap resampling with 1,000 iterations and 10-fold cross-validation) is described in [PMC13201575::11], but the specific optimism-corrected AUC value from the 10-fold cross-validation is not reported in the provided context.\n\nI don't know the 10-fold cross-validation AUC value, as it is not included in the provided excerpts.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13201575::11",
+        "PMC13250698::34",
+        "PMC13201575::2",
+        "PMC13313863::12",
+        "PMC13368482::12"
+      ],
+      "reference_chunk_ids": [
+        "PMC13201575::20"
+      ],
+      "latency_ms": 37.944542011246085,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.25
+      },
+      "correctness": 1,
+      "completeness": 1,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::55::PMC13148885::9",
+      "answerable": true,
+      "question": "According to the passage, what management steps are recommended for patients with elevated baseline cardiac biomarkers who have preexisting cardiovascular disease?",
+      "answer": "Based on the context, for patients with elevated baseline cardiac biomarkers who have preexisting cardiovascular disease, the following management steps are recommended:\n\n1. **Early involvement of cardiologists** — given the potential risk for MACE with preexisting cardiovascular disease [PMC13148885::9]\n\n2. **Close monitoring**, including:\n   - Symptom assessment\n   - Electrocardiography [PMC13148885::9]\n\n3. **Repeat cardiac biomarker testing and echocardiography** — these should be considered promptly in patients who develop **new cardiac symptoms** or **new electrocardiographic abnormalities** [PMC13148885::9]\n\nAdditionally, the context emphasizes that **baseline measurements** are essential to understand the clinical significance of subsequent rises in biomarker levels, since interpretation of elevated troponin or natriuretic peptide levels is particularly challenging in patients with preexisting cardiovascular disease [PMC13148885::8][PMC13148885::9].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13148885::9",
+        "PMC13148885::8",
+        "PMC13184919::25",
+        "PMC13303625::9",
+        "PMC13148885::0"
+      ],
+      "reference_chunk_ids": [
+        "PMC13148885::9"
+      ],
+      "latency_ms": 34.5547080214601,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::56::PMC12876016::2",
+      "answerable": true,
+      "question": "In the study of NSCLC patients with driver gene alterations treated with immunotherapy, what were the median PFS values for patients with PD-L1 expression levels of <1%, 1–49%, and ≥50%, and was the difference statistically significant?",
+      "answer": "Based on the study of NSCLC patients with gene alterations treated with first-line ICI therapy, the median PFS values according to PD-L1 expression levels were as follows:\n\n- **PD-L1 <1%**: median PFS of **7.97 months** (95% CI: 3.83–19.9)\n- **PD-L1 1–49%**: median PFS of **11.27 months**\n- **PD-L1 ≥50%**: median PFS of **11.77 months**\n\nThe difference in PFS across these PD-L1 expression groups **was statistically significant (P=0.04)** [PMC12876016::20]. This finding was further reinforced by Cox regression analysis, which confirmed PD-L1 expression ≥50% as a protective factor in both univariate and multivariate analyses [PMC12876016::24].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12876016::20",
+        "PMC12876016::24",
+        "PMC12995670::51",
+        "PMC12876016::9",
+        "PMC13250698::62"
+      ],
+      "reference_chunk_ids": [
+        "PMC12876016::2"
+      ],
+      "latency_ms": 41.38025001157075,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::57::PMC13336963::63",
+      "answerable": true,
+      "question": "Which institution's ethics committee approved the collection and use of patient samples and clinical data for this study?",
+      "answer": "Based on the context provided, there are multiple studies mentioned, each with different ethics committee approvals. Without knowing which specific study is being referenced, I can note the following approvals mentioned:\n\n- **NHO Takasaki General Medical Center** Institutional Ethics Committee (IRB No. TGMC2024-03) [PMC13225849::23]\n- **National Cancer Center Hospital** institutional review board [PMC12874490::8]\n- **Guangyuan Central Hospital** ethical committee (approval number: GYZXLLH2025010) [PMC13248814::21]\n- Multiple IRBs across various institutions for the multi-site study [PMC13004668::30]\n\nI don't know which specific study's ethics committee approval you are referring to, as the question lacks sufficient context to identify a single institution from among those listed.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13225849::23",
+        "PMC13004668::30",
+        "PMC12874490::8",
+        "PMC13225849::7",
+        "PMC13248814::21"
+      ],
+      "reference_chunk_ids": [
+        "PMC13336963::63"
+      ],
+      "latency_ms": 31.248084007529542,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.5
+      },
+      "correctness": 0,
+      "completeness": 0,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::58::PMC13229815::9",
+      "answerable": true,
+      "question": "According to the National Comprehensive Cancer Network guidelines, what is the recommended initial treatment for severe ICI-induced aplastic anemia, and what should be done if the patient does not respond within 7 days?",
+      "answer": "According to the National Comprehensive Cancer Network guidelines, the recommended initial treatment for severe ICI-induced aplastic anemia is systemic intravenous administration of steroids at a dosage of **1–2 mg/kg once daily**. If the patient does not respond within 7 days of initiation, **other immunosuppressants** should be considered [PMC13229815::9].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13229815::9",
+        "PMC13229815::3",
+        "PMC13229815::10",
+        "PMC13229815::2",
+        "PMC13248814::3"
+      ],
+      "reference_chunk_ids": [
+        "PMC13229815::9"
+      ],
+      "latency_ms": 34.72983400570229,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::62::PMC13269043::7",
+      "answerable": true,
+      "question": "What changes were observed in the follow-up thorax CT compared to the initial CT examination regarding the right lung lesions and pleural effusion?",
+      "answer": "Based on the context, the follow-up thorax CT showed **partial response of the observed right lung lesions** (reduction in size) and **complete resolution of pleural effusion**, despite the discontinuation of ICI therapy [PMC13269043::7]. These changes occurred spontaneously after approximately one month of follow-up [PMC13269043::6].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13269043::7",
+        "PMC13319016::4",
+        "PMC12906081::5",
+        "PMC13131731::3",
+        "PMC13269043::6"
+      ],
+      "reference_chunk_ids": [
+        "PMC13269043::7"
+      ],
+      "latency_ms": 32.266291993437335,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::63::PMC12979166::27",
+      "answerable": true,
+      "question": "According to clinical guidelines, what baseline assessments are recommended prior to ICI therapy, and how should severe irAEs be managed once they occur?",
+      "answer": "## Baseline Assessments Prior to ICI Therapy\n\nAccording to clinical guidelines, a **comprehensive baseline assessment** prior to treatment should include:\n\n- Liver function\n- Kidney function\n- Thyroid function\n- Pulmonary function\n- Autoimmune history [PMC12979166::27]\n\nAdditionally, **echocardiographic parameters** (such as ejection fraction and left ventricular dimensions) have been identified as potentially important baseline cardiac assessments, as pre-existing echocardiographic abnormalities are associated with future cardiac irAEs [PMC12967468::13].\n\n## Management of Severe irAEs\n\nOnce severe irAEs occur, the following steps are recommended:\n\n1. **Immediate discontinuation** of ICI therapy [PMC12979166::27]\n\n2. **Corticosteroid therapy** as the cornerstone of management — typically methylprednisolone or prednisone at **0.5–2 mg/kg/day prednisone-equivalent**, followed by a gradual taper over several weeks to avoid rebound toxicity [PMC13139166::17]\n\n3. **Additional immunosuppressants** if needed, such as tocilizumab, infliximab, or cyclosporine A [PMC12979166::27]\n\n4. For **high-risk irAEs** such as myocarditis and severe neurological toxicities, **permanent discontinuation** is recommended and rechallenge should not be considered [PMC12995670::60]\n\n5. For **unresolved irAEs**, permanent discontinuation of immunotherapy should be considered [PMC12979166::27]",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12979166::27",
+        "PMC12995670::60",
+        "PMC13043524::13",
+        "PMC12967468::13",
+        "PMC13139166::17"
+      ],
+      "reference_chunk_ids": [
+        "PMC12979166::27"
+      ],
+      "latency_ms": 34.77512497920543,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::65::PMC13314586::1",
+      "answerable": true,
+      "question": "What approach allowed for BP diagnosis in 100% of ICI-BP patients in this study, and why is this clinically significant?",
+      "answer": "## Approach Achieving 100% Diagnostic Sensitivity\n\n### The Method\n\nIn the study by PMC13314586, an **in-house ELISA based on ECD-BP180** (extracellular domain of BP180) was used in addition to the commercial BP180 ELISA. Among the 47 ICI-BP patients tested, **8 patients (17%) were negative by commercial BP180 ELISA** but yielded **positive results with the in-house ECD-BP180 ELISA**, thereby increasing diagnostic sensitivity from **83% to 100%** [PMC13314586::18].\n\nThis finding is explained by the underlying biology: ICI-BP patients exhibit a specific humoral response characterized by **increased reactivity to non-NC16A epitopes, particularly the COOH-terminal region** of BP180 [PMC13314586::18]. Standard commercial ELISAs are primarily designed around the NC16A domain, which may miss patients whose antibodies target other epitopes.\n\n### Clinical Significance\n\nThis is clinically significant for two key reasons:\n\n1. **Reducing diagnostic delay**: The median time to diagnosis was approximately 49 weeks, with a ~2-month diagnostic delay inferred. Since pruritus (a prodromal BP symptom) is also a common cutaneous irAE, it can confound and delay diagnosis [PMC13314586::18].\n\n2. **Preserving cancer treatment**: Timely diagnosis enables appropriate disease management and may contribute to **early resumption or prevention of premature discontinuation of ICI cancer therapy** [PMC13314586::18], which is critical for this vulnerable patient population.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12878624::17",
+        "PMC13314586::18",
+        "PMC13314586::3",
+        "PMC13314586::8",
+        "PMC12878624::4"
+      ],
+      "reference_chunk_ids": [
+        "PMC13314586::1"
+      ],
+      "latency_ms": 33.942375011974946,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8823529411764706,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::66::PMC13321219::8",
+      "answerable": true,
+      "question": "What was the median progression-free survival (PFS) for the HSPPC-96 vaccine group compared to the placebo and ancillary groups in this clinical trial?",
+      "answer": "Based on the clinical trial results, the median progression-free survival (PFS) for each group was as follows:\n\n- **HSPPC-96 vaccine group**: **9.9 months**\n- **Placebo group**: **7.9 months**\n- **Ancillary group**: **7.4 months**\n\n[PMC13321219::8]\n\nWhile patients receiving the HSPPC-96 vaccine demonstrated slightly prolonged PFS compared to both the placebo and ancillary groups, these differences were **not statistically significant** and had overlapping 95% confidence intervals [PMC13321219::8]. The authors caution that these findings should be interpreted carefully given the small sample sizes in each arm and the lack of demonstrable benefit in the more clinically robust outcome of overall survival [PMC13321219::11].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13321219::8",
+        "PMC13321219::6",
+        "PMC13321219::7",
+        "PMC13321219::0",
+        "PMC13321219::11"
+      ],
+      "reference_chunk_ids": [
+        "PMC13321219::8"
+      ],
+      "latency_ms": 36.492332990746945,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::69::PMC13013455::13",
+      "answerable": true,
+      "question": "When comparing the 3x8 Gy regimen with ICI to 3x8 Gy alone, which specific immune cell populations showed increased infiltration in both irradiated and unirradiated tumors?",
+      "answer": "Based on the context, when comparing 3x8 Gy + ICI to 3x8 Gy alone, only **hCD8+, hFoxP3+, hCD86+, and hCD163+ cells** showed increased infiltration in both irradiated and unirradiated tumors [PMC13013455::13].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13013455::14",
+        "PMC13013455::11",
+        "PMC13013455::15",
+        "PMC13013455::0",
+        "PMC13013455::13"
+      ],
+      "reference_chunk_ids": [
+        "PMC13013455::13"
+      ],
+      "latency_ms": 35.927459015510976,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.2,
+        "ndcg_at_k": 0.38685280723454163
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::71::PMC13167794::18",
+      "answerable": true,
+      "question": "What specific example does the passage give of a promising microbial therapeutic product that was discontinued due to regulatory challenges?",
+      "answer": "Based on the context, the specific example given of a promising microbial therapeutic product that was discontinued due to regulatory challenges is the **MET4 microbial consortium**. The passage notes that the regulatory infrastructure, which prioritizes replicable medications and seeks to eliminate variance, proved ill-suited to microbial therapeutics, leading to the discontinuation of this and other potentially promising therapeutic products [PMC13167794::18].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13167794::18",
+        "PMC13150064::23",
+        "PMC13081749::46",
+        "PMC13081749::45",
+        "PMC13296512::26"
+      ],
+      "reference_chunk_ids": [
+        "PMC13167794::18"
+      ],
+      "latency_ms": 27.47808300773613,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::72::PMC12867126::13",
+      "answerable": true,
+      "question": "What are the 7 overlapping genes identified between the African American vs. European American DEGs and the MMR-d/MSI-H vs. MMR-p/MSI-L+MSS DEGs in the TCGA-COAD-READ analysis?",
+      "answer": "Based on the context, the 7 overlapping genes identified between the AA vs. EA DEGs and the MMR-d/MSI-H vs. MMR-p/MSI-L+MSS DEGs are: **CXCL10, ALOX15B, IDO1, HCAR2, MARCO, OR2I1P, and MTND4P24** [PMC12867126::13].\n\nOf these, six genes (CXCL10, ALOX15B, IDO1, HCAR2, MARCO, and OR2I1P) were **decreased in the AA group and increased in the MMR-d/MSI-H group**, while MTND4P24 showed the opposite pattern — **increased in AA vs. EA and decreased in the MMR-d/MSI-H vs. MMR-p/MSI-L+MSS groups** [PMC12867126::13].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12867126::13",
+        "PMC12867126::23",
+        "PMC12867126::25",
+        "PMC12867126::12",
+        "PMC12867126::1"
+      ],
+      "reference_chunk_ids": [
+        "PMC12867126::13"
+      ],
+      "latency_ms": 41.232625022530556,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::73::PMC13173278::10",
+      "answerable": true,
+      "question": "According to the passage, what statistical challenges make standard differential abundance analysis unreliable for low-prevalence microbial taxa in immunotherapy studies?",
+      "answer": "According to the passage, standard differential abundance analysis faces several statistical challenges when evaluating low-prevalence taxa:\n\n1. **Zero inflation** — bacteria are absent in most samples, creating distributional problems for statistical models [PMC13173278::10].\n\n2. **Low abundance** — which, combined with zero inflation, leads to **unreliable regression coefficients with wide confidence intervals** and **reduced statistical power** [PMC13173278::10].\n\nAs a consequence of these challenges, rare taxa are typically filtered out prior to analysis, which reduces the total number of hypotheses tested and mechanically affects the stringency of multiple comparison corrections, ultimately limiting the discovery of associations with potentially informative allochthonous community members [PMC13173278::10].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13173278::10",
+        "PMC13173278::9",
+        "PMC13173278::45",
+        "PMC13173278::7",
+        "PMC13173278::15"
+      ],
+      "reference_chunk_ids": [
+        "PMC13173278::10"
+      ],
+      "latency_ms": 29.188707994762808,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8888888888888888,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::75::PMC13289302::22",
+      "answerable": true,
+      "question": "What were the median overall survival and progression-free survival outcomes for the ECP cohort compared to the IS cohort in patients with advanced cutaneous melanoma experiencing irAEs?",
+      "answer": "I don't know.\n\nThe provided context mentions that \"longer PFS and OS were observed\" in the ECP group for patients with advanced melanoma [PMC13289302::29], but does not provide the specific median overall survival or progression-free survival values for either the ECP or IS cohorts.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13289302::29",
+        "PMC13289302::13",
+        "PMC13289302::16",
+        "PMC13289302::21",
+        "PMC13289302::23"
+      ],
+      "reference_chunk_ids": [
+        "PMC13289302::22"
+      ],
+      "latency_ms": 37.214583018794656,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "answerable::77::PMC13141162::25",
+      "answerable": true,
+      "question": "How were M1-like and M2-like tumor-associated macrophages (TAMs) phenotypically characterized in the flow cytometric analysis of CLEC5A–HER2 BsAb-treated tumors?",
+      "answer": "Based on the context, in the flow cytometric analysis of CLEC5A–HER2 BsAb-treated tumors, TAMs were first identified as a **CD45+CD11b+F4/80+** subset, and then further characterized by phenotype as follows:\n\n- **M1-like TAMs**: defined by expression of **CD80+**\n- **M2-like TAMs**: defined by expression of **CD206+**\n\n[PMC13141162::25]\n\nThis characterization was used to quantify TAM polarization, with results showing that CLEC5A–HER2 treatment significantly increased the M1-like (CD80+) population while reducing the M2-like (CD206+) population [PMC13141162::25][PMC13141162::35].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13141162::2",
+        "PMC13141162::25",
+        "PMC13066996::5",
+        "PMC13141162::35",
+        "PMC12979737::23"
+      ],
+      "reference_chunk_ids": [
+        "PMC13141162::25"
+      ],
+      "latency_ms": 37.15087502496317,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::78::PMC12986760::8",
+      "answerable": true,
+      "question": "In RET-mutant tumor patients treated with immune checkpoint inhibitors (ICIs), which single base substitution (SBS) mutational signature was associated with improved overall survival, and how did its frequency differ between RET-altered and RET-unaltered tumors?",
+      "answer": "Based on the context, **SBS10b** (associated with POLE mutation) was the mutational signature linked with improved overall survival in RET-mutant tumor patients treated with ICIs.\n\nSpecifically:\n\n- **Survival association**: SBS10b was linked with improved OS (HR = 0.84; 95% CI, 0.71–0.98; P = .03) [PMC12986760::8].\n- **Frequency difference**: Its frequency in RET-altered tumors was significantly **increased** compared with RET-unaltered tumors (**36.5% vs. 26.1%**; P < .001) [PMC12986760::8].\n\nIn contrast, the other significantly changed SBS signatures (SBS7d, SBS31, SBS32, SBS42, and SBS86) were negative predictors of OS and had **downregulated** frequencies in RET-altered tumors [PMC12986760::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12986760::8",
+        "PMC12986760::9",
+        "PMC12986760::6",
+        "PMC12986760::10",
+        "PMC12986760::4"
+      ],
+      "reference_chunk_ids": [
+        "PMC12986760::8"
+      ],
+      "latency_ms": 39.421541994670406,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::79::PMC13223026::44",
+      "answerable": true,
+      "question": "What are the key advantages of NGS over PCR for MSI detection, and what factors limit its widespread clinical adoption?",
+      "answer": "## Advantages of NGS over PCR for MSI Detection\n\nBased on the provided context, NGS offers several key advantages over PCR for MSI detection:\n\n1. **No requirement for normal tissue as a control**, imposing lower demands on sample quality and offering greater compatibility compared to PCR [PMC13223026::44].\n\n2. **Simultaneous multi-marker analysis**: NGS can simultaneously provide information on MSI loci, MMR gene status, and other genetic states, whereas PCR targets only predefined single or limited mutations, resulting in \"systematic monitoring blind spots\" [PMC13223026::44; PMC13287079::19].\n\n3. **Tracking clonal evolution**: NGS can simultaneously track the clonal evolution of multiple genes, which PCR cannot do effectively [PMC13287079::19].\n\n4. **Liquid biopsy capability**: NGS enables MSI monitoring using peripheral blood samples [PMC13223026::44].\n\n5. **Superior detection sensitivity**: NGS identified an additional 1% of MSI-H patients compared with IHC in a study of 1,417 CRC patients [PMC12911711::3].\n\n6. **Additional mutation detection**: NGS can identify *POLE* and *POLD1* mutations resulting in ultra-hypermutated tumours responsive to immunotherapy [PMC12911711::3].\n\n## Factors Limiting Widespread Clinical Adoption\n\nDespite these advantages, NGS faces significant barriers:\n\n- **High costs** [PMC13223026::44]\n- **Complex data analysis processes** [PMC13223026::44]\n- **Absence of unified evaluation standards** [PMC13223026::44]",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12911711::3",
+        "PMC13287079::19",
+        "PMC13223026::44",
+        "PMC12936829::17",
+        "PMC12920478::3"
+      ],
+      "reference_chunk_ids": [
+        "PMC13223026::44"
+      ],
+      "latency_ms": 34.97062501264736,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.3333333333333333,
+        "ndcg_at_k": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 1,
+      "completeness": 1,
+      "citation_valid": false
+    },
+    {
+      "id": "answerable::80::PMC12948422::12",
+      "answerable": true,
+      "question": "Through which inhibitory proteins does CXCL10 suppress STAT3 signaling in tumor-associated macrophages (TAMs)?",
+      "answer": "Based on the provided context, CXCL10 suppresses STAT3 signaling in tumor-associated macrophages through **SOCS3 and PIAS3**.\n\nSpecifically, CXCL10 treatment upregulated the expression of SOCS3 and PIAS3 in IL-4-polarized TAMs, and these proteins reversed the mIL-4-induced elevation of p-STAT3 and p-JAK2 levels [PMC12948422::12]. This mechanism was confirmed to operate downstream of the CXCL10/CXCR3 axis, as treatment with AMG487 (a selective CXCR3 antagonist) restored the p-STAT3 and p-JAK2 levels that had been suppressed by Olig2cKO conditioned medium [PMC12948422::12]. The authors concluded that \"SOCS3 and PIAS3 play critical roles in CXCL10-dependent inhibition of STAT3 signaling\" [PMC12948422::12], a finding further summarized in the discussion as CXCL10 suppressing TAM polarization \"via STAT3 inhibition, mediated by SOCS3 and PIAS3 downstream of the CXCL10/CXCR3 axis\" [PMC12948422::19].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12948422::11",
+        "PMC12948422::12",
+        "PMC12948422::19",
+        "PMC13337094::18",
+        "PMC13297510::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC12948422::12"
+      ],
+      "latency_ms": 31.100249994779006,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.5,
+        "ndcg_at_k": 0.6309297535714575
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8571428571428571,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::81::PMC12979737::42",
+      "answerable": true,
+      "question": "How many brain metastasis (BM) samples were included in the final cohort for scRNA-seq after incorporating additional specimens from the GSE131907 dataset, and what was the minimum cell count criterion used to curate those additional samples?",
+      "answer": "Based on the context, after incorporating seven additional treatment-naïve BM specimens from the GSE131907 dataset (curated based on a minimum cell count of **>2,000 cells** after quality control), the final cohort included a total of **eleven BM samples** for scRNA-seq [PMC12979737::42].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC12979737::41",
+        "PMC12979737::45",
+        "PMC12979737::44",
+        "PMC12979737::42",
+        "PMC13048569::8"
+      ],
+      "reference_chunk_ids": [
+        "PMC12979737::42"
+      ],
+      "latency_ms": 39.26874999888241,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 0.25,
+        "ndcg_at_k": 0.43067655807339306
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::83::PMC13175804::3",
+      "answerable": true,
+      "question": "What treatments were administered to the patient between January 21–23, 2025, for managing myelosuppression and related complications?",
+      "answer": "I don't know.\n\nThe context does not contain any information about treatments administered between January 21–23, 2025. The dates mentioned in the provided context relate to March 9–13, 2025 (Case 2) and other timeframes, but no events or treatments are described for January 21–23, 2025.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13175804::1",
+        "PMC13175804::10",
+        "PMC13175804::7",
+        "PMC13175804::13",
+        "PMC13175804::6"
+      ],
+      "reference_chunk_ids": [
+        "PMC13175804::3"
+      ],
+      "latency_ms": 35.36454198183492,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 0.0
+      },
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "answerable::85::PMC13314586::8",
+      "answerable": true,
+      "question": "What was the allele frequency of HLA-A*31:01 in ICI-BP patients compared to healthy donors, and was this difference statistically significant after Bonferroni correction?",
+      "answer": "Based on the study of Italian ICI-BP patients, the allele frequency of HLA-A\\*31:01 was **9.4% in ICI-BP patients** (6 out of 32 patients) compared to **1.6% in healthy donors** (32 out of 1,017). This difference was statistically significant with p<0.001, and it **remained significant after Bonferroni correction** (pc=0.040) [PMC13314586::8].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13314586::8",
+        "PMC13314586::14",
+        "PMC12923282::0",
+        "PMC13314586::3",
+        "PMC12923282::13"
+      ],
+      "reference_chunk_ids": [
+        "PMC13314586::8"
+      ],
+      "latency_ms": 37.49675001017749,
+      "retrieval_metrics": {
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.2,
+        "mrr": 1.0,
+        "ndcg_at_k": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "context_recall": 1.0
+      },
+      "correctness": 2,
+      "completeness": 2,
+      "citation_valid": true
+    },
+    {
+      "id": "answerable::89::PMC12960525::3",
+      "answerable": true,
+      "question": "What multimodal framework was developed in this study, and what was its primary predictive goal in patients with locally advanced or metastatic NSCLC?",
+      "answer": "Based on the provided context, two relevant multimodal frameworks are described:\n\n1. **CIPHER** (from [PMC13131731::14]): A foundation model that integrates multimodal data (including pre-treatment chest CT imaging, and potentially blood-based biomarkers and PET-derived metabolic data) to **predict the future risk of developing ICI-related pneumonitis (ICI-P)** in NSCLC patients. Its primary predictive goal is to stratify patients by risk of ICI-P before treatment initiation, enabling tailored monitoring and preventive interventions [PMC13131731::14].\n\n2. **A multicenter multimodal prediction model** (from [PMC12960525::29]): This framework integrates **baseline clinical biomarkers with H&E-based whole-slide image (WSI) pathomics** using multi-instance learning (MIL). Its primary predictive goal is to **estimate the probability of checkpoint inhibitor pneumonitis (CIP)** in patients with locally advanced or metastatic NSCLC treated with PD-1/PD-L1 inhibitors [PMC12960525::29]. The model compared pathology-only, clinical-only, and multimodal approaches using AUC analyses and decision curve analysis to assess clinical utility [PMC12960525::14].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13131731::14",
+        "PMC13057278::2",
+        "PMC12960525::14",
+        "PMC13057278::18",
+        "PMC12960525::29"
+      ],
+      "reference_chunk_ids": [
+        "PMC12960525::3"
+      ],
+      "latency_ms": 36.95325000444427,
+      "retrieval_metrics": {
+        "recall_at_k": 0.0,
+        "precision_at_k": 0.0,
+        "mrr": 0.0,
+        "ndcg_at_k": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.8666666666666667,
+        "context_recall": 1.0
+      },
+      "correctness": 1,
+      "completeness": 1,
+      "citation_valid": false
+    },
+    {
+      "id": "unanswerable::0::PMC13204745::2",
+      "answerable": false,
+      "question": "What are the recommended tapering protocols for corticosteroid therapy following resolution of grade 3 or grade 4 checkpoint inhibitor-induced pneumonitis, and how does tapering speed affect relapse rates?",
+      "answer": "Based on the provided context, I can offer only partial information on this topic.\n\n## Corticosteroid Tapering After Severe ICI-Induced Pneumonitis\n\n### What the Context Describes\n\n**Tapering protocol used in the study population:**\n- Systemic corticosteroids were initiated at **0.5 mg/kg/day (prednisolone equivalent)** and gradually tapered over **approximately three months** for patients with severe (Grade 3–4) pneumonitis [PMC12906081::9].\n\n**From the case report:**\n- Corticosteroids were tapered gradually after resolution of symptoms and radiographic improvement, then switched to oral form [PMC13212114::6].\n- The literature recommendation cited is to initiate corticosteroids promptly for moderate to severe irAEs and **gradually taper once symptoms improve** [PMC13212114::14].\n\n### Regarding Tapering Speed and Relapse\n\nThe context does **not provide specific data on how tapering speed affects relapse rates**. However, the case report highlights a critical clinical observation: corticosteroid tapering may **\"reveal hidden immune dysregulation and trigger new organ-specific irAEs, even after the initial toxicity appears resolved\"** [PMC13212114::14]. This suggests tapering should be treated as a **sensitive period** requiring ongoing vigilance.\n\n### Key Limitation\n\nThe context does not contain formal comparative data or clinical trial evidence specifically addressing optimal tapering protocols or the relationship between tapering speed and pneumonitis relapse rates. A more complete answer would require additional literature not present here.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13212114::6",
+        "PMC12906081::9",
+        "PMC13212114::8",
+        "PMC13212114::5",
+        "PMC13212114::14"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 37.90829100762494,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::1::PMC13176022::27",
+      "answerable": false,
+      "question": "What is the clinical significance of the gut microbiome composition at baseline as a predictor of immune checkpoint inhibitor efficacy, and which specific microbial taxa have been most consistently associated with favorable treatment outcomes across tumor types?",
+      "answer": "## Clinical Significance of Baseline Gut Microbiome as a Predictor of ICI Efficacy\n\n### Clinical Importance\n\nThe gut microbiome is recognized as a **pivotal modulator of systemic anti-tumor immunity**, and its baseline composition has emerged as a critical predictor of immune checkpoint inhibitor (ICI) efficacy. Clinical outcomes with ICIs remain highly heterogeneous — for instance, ICIs demonstrate limited efficacy in approximately 50% of patients with metastatic melanoma — underscoring the need for predictive biomarkers [PMC13173278::1]. The predictive value of the microbiome is further validated by interventional studies showing that fecal microbiota transplantation (FMT) from responding patients can augment ICI response both in germ-free mice and in human patients [PMC13173278::1].\n\n### Ecological Framework\n\nBeyond individual taxa, research supports an **ecological interpretation**: clinical benefit is associated with gut ecosystems dominated by **prevalent, autochthonous (native) taxa**, forming stable, functionally coherent microbial communities. Nonresponse, by contrast, is characterized by a destabilized state with high individual variability, enrichment of low-prevalence exogenous oral and food-derived bacteria, and enrichment of replication-associated pathways [PMC13173278::0]. This has been framed as the \"Anna Karenina principle\" applied to microbiomes [PMC13173278::0].\n\n### Specific Taxa Associated with Favorable Outcomes\n\nThe following taxa have been most consistently linked to ICI response across tumor types:\n\n- **_Faecalibacterium prausnitzii_**: Most consistently identified across studies. It maintains intestinal homeostasis and reduces inflammation, thereby limiting tumor-promoting effects. Baseline enrichment in melanoma patients treated with ipilimumab (CTLA-4 inhibitor) correlated with improved clinical outcomes [PMC13117110::6]. It also forms part of the SIG2 group associated with longer overall survival in NSCLC [PMC13117110::6].\n- **_Streptococcus parasanguinis_** and **_Bacteroides caccae_**: Identified as distinctive taxa in responders in a 2023 systematic review [",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13173278::0",
+        "PMC13117110::6",
+        "PMC13027181::26",
+        "PMC13173278::1",
+        "PMC13296512::0"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 35.03283401369117,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::3::PMC13235729::24",
+      "answerable": false,
+      "question": "What clinical and pathological factors determine the optimal timing for initiating immune checkpoint inhibitor therapy in patients with advanced solid tumors who have received prior lines of cytotoxic chemotherapy, and how does the number of prior treatment lines affect subsequent ICI response rates?",
+      "answer": "Based on the provided context, I cannot fully answer this question as posed. The context does not directly address the optimal **timing for initiating** ICI therapy in patients who have received prior cytotoxic chemotherapy, nor does it provide data on how the **number of prior treatment lines** specifically affects subsequent ICI response rates.\n\nHowever, the context does provide some relevant partial information:\n\n**Factors affecting ICI re-challenge/retreatment efficacy:**\n- Prior clinical benefit from ICI is considered the primary determinant for drug selection in re-challenge, followed by performance status, PD-L1 expression level, and patient age [PMC13120971::18].\n- Positive factors for prolonged PFS during re-challenge include: treatment discontinuation due to adverse events or clinical decision, absence of systemic therapy between ICI courses, short inter-treatment interval, low ECOG performance status, oligometastatic disease, and lack of brain metastases [PMC13120971::18].\n- ECOG performance status was confirmed in multivariate analysis to influence PFS during reactivation [PMC13120971::18].\n- Bone metastasis was identified as a risk factor [PMC13120971::18].\n\n**Regarding timing specifically:**\n- Re-challenge within three months was recommended, as immune memory from initial treatment may wane over time, disrupting tumor dormancy [PMC13120971::18].\n\nThe context does **not** provide data on how the number of prior treatment lines affects ICI response rates. A complete answer to this question requires information not present in the provided context.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13350252::40",
+        "PMC13120971::18",
+        "PMC13368482::32",
+        "PMC13188668::1",
+        "PMC13057278::3"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 35.757207981077954,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::4::PMC13238030::10",
+      "answerable": false,
+      "question": "What is the concordance rate between HER2 immunohistochemistry and fluorescence in situ hybridization (FISH) testing in gastric cancer, and how does intratumoral heterogeneity affect the reliability of HER2 status determination from biopsy specimens compared to resection specimens?",
+      "answer": "I don't know.\n\nThe provided context discusses HER2 testing discordance between primary tumors and metastatic sites (reporting rates of 10–27% across gastrointestinal malignancies including colorectal cancer) [PMC13026059::8], and notes limitations of mRNA-based versus IHC/ISH-based HER2 classification [PMC13368482::9; PMC13222929::35], but does not specifically address the concordance rate between IHC and FISH testing in gastric cancer, nor does it compare HER2 reliability between biopsy specimens and resection specimens in that context.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13369584::27",
+        "PMC13369584::35",
+        "PMC13368482::9",
+        "PMC13026059::8",
+        "PMC13222929::35"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 42.05720801837742,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::5::PMC13357655::2",
+      "answerable": false,
+      "question": "What specific antibiotic classes have been most strongly associated with reduced immune checkpoint inhibitor efficacy, and what is the proposed mechanistic link between antibiotic-induced gut dysbiosis and impaired antitumor immune responses?",
+      "answer": "## Antibiotic Classes and ICI Efficacy\n\n### Specific Antibiotic Classes\n\nThe provided context does **not specify particular antibiotic classes** (e.g., fluoroquinolones, beta-lactams, etc.) as being most strongly associated with reduced ICI efficacy. The literature cited discusses antibiotic exposure broadly, noting that effects are most pronounced when antibiotics are given **before or shortly after starting ICI therapy** [PMC13207992::18].\n\n### Proposed Mechanistic Links\n\nThe context does describe several mechanistic pathways connecting antibiotic-induced dysbiosis to impaired antitumor immunity:\n\n1. **Depletion of beneficial taxa**: Antibiotic exposure reduces microbial diversity and depletes bacterial taxa — including *Bifidobacterium*, *Akkermansia muciniphila*, and members of the *Ruminococcaceae* family — that are enriched in ICI responders [PMC13176022::5].\n\n2. **Impaired immune cell activation**: These commensal bacteria support anti-tumor immunity through dendritic cell activation, CD8+ T-cell priming, and CD4+ T-cell effector function [PMC13176022::5].\n\n3. **Disruption of commensal translocation**: ICIs can facilitate movement of specific commensals to lymphoid organs and tumors, enhancing dendritic cell activation and CD8+ T-cell responses; antibiotics may interfere with this process [PMC13207992::18].\n\n4. **Loss of immune-active metabolites**: Antibiotic-induced dysbiosis disrupts gut microbiome-derived metabolites that are key regulators of systemic and intratumoral antitumor immunity [PMC13207992::18].\n\n5. **Reduced baseline diversity**: A prospective NSCLC stool profiling study demonstrated that pre-ICI antibiotic use was associated with reduced baseline alpha diversity and depletion of taxa linked to favorable survival outcomes [PMC13207992::18].",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13176022::5",
+        "PMC13207992::18",
+        "PMC13150064::10",
+        "PMC12993542::0",
+        "PMC13296512::0"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 40.50462497980334,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::6::PMC12940007::3",
+      "answerable": false,
+      "question": "What is the clinical significance of ESR1 mutation variant type and allele frequency on outcomes with selective estrogen receptor degraders (SERDs) such as elacestrant, and how should serial circulating tumor DNA monitoring inform treatment sequencing decisions in HR+/HER2− metastatic breast cancer?",
+      "answer": "I don't know.\n\nThe provided context does not contain sufficient information to answer this question. While ESR1 mutations are briefly mentioned in the context as a biomarker for elacestrant eligibility in HR+/HER2− metastatic breast cancer [PMC12940007::7], and serial ctDNA monitoring is discussed in the context of colorectal cancer and immune checkpoint blockade [PMC13324675::2, PMC13026059::0], the context does not address:\n\n1. The clinical significance of specific ESR1 mutation variant types or allele frequencies on outcomes with SERDs like elacestrant\n2. How serial ctDNA monitoring should inform treatment sequencing decisions specifically in HR+/HER2− metastatic breast cancer",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13026059::0",
+        "PMC13026059::3",
+        "PMC13026059::13",
+        "PMC13324675::2",
+        "PMC12940007::7"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 43.14529200200923,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::8::PMC13190817::8",
+      "answerable": false,
+      "question": "What is the mechanistic role of ZEB1-AS1 in regulating epithelial-to-mesenchymal transition, and which downstream transcription factors and signaling cascades does it modulate to promote tumor cell invasiveness?",
+      "answer": "Based on the provided context, I can only partially address this question.\n\nThe context confirms that ZEB1-AS1 affects tumor proliferation, migration, and invasion by **\"affecting the cell cycle, regulating signaling pathways, and triggering epithelial-mesenchymal transition\"** [PMC13190817::22], but does not provide detailed mechanistic information about which specific EMT-related transcription factors ZEB1-AS1 directly modulates.\n\nRegarding downstream targets and signaling cascades, the context provides only limited mechanistic details:\n\n1. **miR-302b/PI3K-AKT/EGFR axis**: ZEB1-AS1 promotes HCC brain metastasis by targeting miR-302b to activate the PI3K-AKT pathway and increase EGFR expression [PMC13190817::26].\n\n2. **miR-299-3p/E2F1 axis**: ZEB1-AS1 targets miR-299-3p/E2F1 to promote HCC cell proliferation and metastasis [PMC13190817::26].\n\n3. **Wnt signaling pathway** and **cAMP signaling pathway** are implicated in ZEB1-AS1 regulation based on KEGG pathway analysis [PMC13190817::26].\n\nFunctional experiments confirmed that knockdown of ZEB1-AS1 significantly hindered proliferation, migration, and invasion of Huh-7 cells [PMC13190817::23], [PMC13190817::17].\n\nHowever, the context does **not** provide comprehensive mechanistic details specifically linking ZEB1-AS1 to EMT transcription factors (such as ZEB1 itself, Snail, or Twist). A more complete mechanistic answer would require information beyond what is provided here.",
+      "abstained": false,
+      "retrieved_chunk_ids": [
+        "PMC13190817::22",
+        "PMC13190817::23",
+        "PMC13190817::17",
+        "PMC13190817::26",
+        "PMC13190817::14"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 36.821541987592354,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    },
+    {
+      "id": "unanswerable::9::PMC13027181::49",
+      "answerable": false,
+      "question": "What are the established protocols for performing fecal microbiota transplantation in patients with immune checkpoint inhibitor-refractory colitis, and what clinical response rates and durability of remission have been reported in prospective trials?",
+      "answer": "I don't know.\n\nThe provided context discusses FMT primarily in the context of enhancing ICI efficacy in cancer patients (particularly melanoma), not in the specific context of treating ICI-refractory colitis. While there is one mention that Faecalibacterium prausnitzii has a \"potential ↓ colitis risk\" [PMC13027181::45], the context does not contain information about established protocols for FMT in ICI-refractory colitis, nor clinical response rates or durability of remission from prospective trials in that specific indication.",
+      "abstained": true,
+      "retrieved_chunk_ids": [
+        "PMC13207992::21",
+        "PMC13027181::45",
+        "PMC13167794::13",
+        "PMC13173278::1",
+        "PMC13167794::0"
+      ],
+      "reference_chunk_ids": null,
+      "latency_ms": 38.1720419973135,
+      "retrieval_metrics": {},
+      "ragas_metrics": {},
+      "correctness": null,
+      "completeness": null,
+      "citation_valid": null
+    }
+  ]
+}
