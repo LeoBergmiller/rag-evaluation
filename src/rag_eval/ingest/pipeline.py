@@ -10,12 +10,8 @@ from transformers import AutoTokenizer
 
 from rag_eval.config import Config
 from rag_eval.ingest.chunk import Chunk, chunk_text
-from rag_eval.ingest.download import download_papers
 from rag_eval.ingest.embed import BGEEmbedder, Embedder
 from rag_eval.ingest.index import BM25Index, DenseIndex, IngestManifest
-from rag_eval.ingest.jats_parse import extract_jats_text
-from rag_eval.ingest.parse import extract_text
-from rag_eval.ingest.pmc_download import download_pmc_articles
 
 logger = logging.getLogger(__name__)
 
@@ -25,11 +21,25 @@ _CHUNKS_FILE = "chunks.jsonl"
 def _load_source_documents(cfg: Config) -> list[tuple[str, str]]:
     """(doc_id, cleaned_text) per source document, dispatched on the corpus source.
 
-    Both sources feed the SAME downstream chunk -> embed -> index pipeline; only the
+    All sources feed the SAME downstream chunk -> embed -> index pipeline; only the
     fetch + parse differ. arXiv yields PDF text keyed by arXiv id; PMC yields JATS
-    full-text keyed by PMCID.
+    full-text keyed by PMCID; `local` reads authored Markdown/text already on disk,
+    keyed by filename stem.
+
+    The per-source fetchers are imported INSIDE their branch rather than at module
+    scope. arXiv needs `arxiv` + `pypdf` and PMC needs `requests` — all `[full]`
+    extras — so a top-level import would make a base install unable to run ingest for
+    the one source that needs no downloader at all (D13).
     """
+    if cfg.corpus.source == "local":
+        from rag_eval.ingest.local_source import load_local_documents
+
+        return load_local_documents(cfg.corpus)
+
     if cfg.corpus.source == "pmc":
+        from rag_eval.ingest.jats_parse import extract_jats_text
+        from rag_eval.ingest.pmc_download import download_pmc_articles
+
         articles = download_pmc_articles(cfg.corpus)
         return [
             (
@@ -40,6 +50,9 @@ def _load_source_documents(cfg: Config) -> list[tuple[str, str]]:
             )
             for article in articles
         ]
+
+    from rag_eval.ingest.download import download_papers
+    from rag_eval.ingest.parse import extract_text
 
     papers = download_papers(cfg.corpus)
     return [

@@ -27,15 +27,64 @@ _DEFAULT_CONFIG_PATH = Path(__file__).resolve().parents[2] / "configs" / "config
 
 @dataclass(frozen=True)
 class CorpusConfig:
+    """Corpus location and fetch parameters.
+
+    Only `source`, `raw_dir` and `index_dir` are universal. The rest describe how to
+    FETCH a corpus, and each source needs a different subset: arXiv searches by
+    `categories`, PMC by `query`, and `local` fetches nothing at all. They are
+    therefore optional on the dataclass and required per-source at load time by
+    `_SOURCE_REQUIRED_KEYS` — a config that omits a key its own source needs still
+    fails loudly, but a local corpus does not have to carry meaningless arXiv fields
+    (D13). No field here feeds `Config.fingerprint()`, so none of this perturbs the
+    controlled-variable identity that D12 relies on.
+    """
+
     source: str
-    categories: tuple[str, ...]
-    max_papers: int
-    fulltext: bool
-    strip_references: bool
     raw_dir: Path
     index_dir: Path
+    # arXiv (source="arxiv") search categories.
+    categories: tuple[str, ...] = ()
+    max_papers: int = 0
+    fulltext: bool = True
+    strip_references: bool = True
     # PMC (source="pmc") search term; unused by the arXiv source (which uses `categories`).
     query: str | None = None
+
+
+#: Fetch parameters each source genuinely requires, beyond the universal three.
+_SOURCE_REQUIRED_KEYS: dict[str, tuple[str, ...]] = {
+    "arxiv": ("categories", "max_papers", "fulltext", "strip_references"),
+    "pmc": ("query", "max_papers", "strip_references"),
+    "local": (),
+}
+
+
+def _build_corpus_config(raw: dict[str, Any]) -> CorpusConfig:
+    source = raw.get("source")
+    if source not in _SOURCE_REQUIRED_KEYS:
+        raise ValueError(
+            f"Unknown corpus.source: {source!r} "
+            f"(known: {sorted(_SOURCE_REQUIRED_KEYS)})"
+        )
+
+    required = ("raw_dir", "index_dir", *_SOURCE_REQUIRED_KEYS[source])
+    missing = [key for key in required if raw.get(key) is None]
+    if missing:
+        raise ValueError(
+            f"corpus.source={source!r} requires these keys, which are missing or "
+            f"null: {missing}"
+        )
+
+    return CorpusConfig(
+        source=source,
+        raw_dir=Path(raw["raw_dir"]),
+        index_dir=Path(raw["index_dir"]),
+        categories=tuple(raw.get("categories") or ()),
+        max_papers=int(raw.get("max_papers", 0)),
+        fulltext=bool(raw.get("fulltext", True)),
+        strip_references=bool(raw.get("strip_references", True)),
+        query=raw.get("query"),
+    )
 
 
 @dataclass(frozen=True)
@@ -142,20 +191,19 @@ def load_config(path: Path | None = None) -> Config:
     else:
         env_path = os.environ.get("RAG_CONFIG")
         config_path = Path(env_path) if env_path else _DEFAULT_CONFIG_PATH
+
+    if not config_path.is_file():
+        raise FileNotFoundError(
+            f"No config file at {config_path}. The default path is resolved relative "
+            "to this package's source tree, so it only exists in a checkout or an "
+            "editable install. A consumer that installed rag-eval as a dependency "
+            "must pass load_config(path=...) explicitly or set RAG_CONFIG."
+        )
+
     with config_path.open("r") as f:
         raw = yaml.safe_load(f)
 
-    corpus_raw = raw["corpus"]
-    corpus = CorpusConfig(
-        source=corpus_raw["source"],
-        categories=tuple(corpus_raw["categories"]),
-        max_papers=corpus_raw["max_papers"],
-        fulltext=corpus_raw["fulltext"],
-        strip_references=corpus_raw["strip_references"],
-        raw_dir=Path(corpus_raw["raw_dir"]),
-        index_dir=Path(corpus_raw["index_dir"]),
-        query=corpus_raw.get("query"),
-    )
+    corpus = _build_corpus_config(raw["corpus"])
 
     chunking_raw = raw["chunking"]
     chunking = ChunkingConfig(
