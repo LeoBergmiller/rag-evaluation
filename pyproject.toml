@@ -64,7 +64,12 @@ full = [
   "openai==2.41.1",
   "fastapi",
   "uvicorn[standard]",
-  "streamlit",
+  # PINNED (D14): streamlit 1.61 changed how `AppTest.from_file` resolves a relative
+  # path — against the calling file rather than the CWD. Unpinned, CI resolved 1.61.1
+  # while local had 1.58.0, and four app tests passed locally and failed on the runner.
+  # The tests now pass an absolute path and are correct either way; this pin exists so
+  # local and CI run the SAME streamlit. Bump deliberately, re-running the suite.
+  "streamlit==1.58.0",
   "typer",
   "scikit-learn",
 ]

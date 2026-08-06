@@ -1,6 +1,14 @@
+from pathlib import Path
+
 from streamlit.testing.v1 import AppTest
 
 from rag_eval import apiclient
+
+# Absolute, so it is correct under either resolution rule. `AppTest.from_file` resolves a
+# RELATIVE path against the CALLING FILE (tests/) in streamlit >= 1.61 and against the CWD
+# (repo root) in older versions — so "app.py" passed locally on 1.58.0 and looked for
+# tests/app.py on CI's 1.61.1. An absolute path is passed through unchanged by both. D14.
+_APP = Path(__file__).resolve().parents[1] / "app.py"
 
 _HEALTH = {
     "status": "ok",
@@ -63,7 +71,7 @@ def _patch(monkeypatch) -> None:
 def test_app_renders_health_and_strategies(monkeypatch) -> None:
     _patch(monkeypatch)
 
-    at = AppTest.from_file("app.py").run()
+    at = AppTest.from_file(_APP).run()
 
     assert not at.exception
     assert "dense" in at.selectbox[0].options
@@ -72,7 +80,7 @@ def test_app_renders_health_and_strategies(monkeypatch) -> None:
 def test_app_query_renders_answer(monkeypatch) -> None:
     _patch(monkeypatch)
 
-    at = AppTest.from_file("app.py").run()
+    at = AppTest.from_file(_APP).run()
     at.text_area[0].set_value("What is attention?").run()
     at.button[0].click().run()
 
@@ -84,7 +92,7 @@ def test_app_query_renders_answer(monkeypatch) -> None:
 def test_app_benchmark_renders_without_error(monkeypatch) -> None:
     _patch(monkeypatch)
 
-    at = AppTest.from_file("app.py").run()
+    at = AppTest.from_file(_APP).run()
 
     assert not at.exception
     assert len(at.dataframe) >= 1
@@ -97,6 +105,6 @@ def test_app_handles_unreachable_api(monkeypatch) -> None:
     monkeypatch.setattr(apiclient, "health", _raise)
     monkeypatch.setattr(apiclient, "ablation", _raise)
 
-    at = AppTest.from_file("app.py").run()
+    at = AppTest.from_file(_APP).run()
 
     assert not at.exception
