@@ -14,7 +14,9 @@ FastAPI, Streamlit, Docker. (LlamaIndex intentionally not used.)
 
 ## Commands
 ```bash
-pip install -e ".[dev]"
+# The BASE install is the framework-free retrieval + indexing core only. Every command
+# below needs the `full` extra: generation, judges, gate, fetchers, CLI, API, UI (D13).
+pip install -e ".[full,dev]"
 python -m rag_eval.cli ingest          # download → chunk → embed → index (arXiv)
 python -m rag_eval.cli query "..."     # single query against a strategy
 python -m rag_eval.cli evaluate        # run benchmark across all strategies

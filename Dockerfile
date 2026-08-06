@@ -20,7 +20,9 @@ WORKDIR /app
 # (src/rag_eval/config.py), so the source tree must remain at /app/src.
 COPY pyproject.toml ./
 COPY src/ src/
-RUN pip install -e .
+# [full]: this image serves the FastAPI API and the Streamlit UI and runs benchmarks,
+# all of which live outside the base retrieval install (D13).
+RUN pip install -e ".[full]"
 
 # App code that changes more often than the dependency set.
 COPY configs/ configs/

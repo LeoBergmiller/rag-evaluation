@@ -7,7 +7,9 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with: { python-version: "3.11" }
-      - run: pip install -e ".[dev]"
+      # [full] because the suite covers generation, both judges, the gate and the
+      # API/UI surfaces — none of which are in the base retrieval install (D13).
+      - run: pip install -e ".[full,dev]"
       - run: ruff check .
       - run: ruff format --check .
       - run: mypy src/rag_eval

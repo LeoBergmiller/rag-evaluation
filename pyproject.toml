@@ -1,8 +1,47 @@
 [project]
 name = "rag-eval"
-version = "0.1.0"
+# 0.2.0: the install contract changed — the base install is now the framework-free
+# retrieval core, with generation/eval/serving behind the `full` extra (D13).
+version = "0.2.0"
 requires-python = ">=3.11"
+# The BASE install is the framework-free retrieval + indexing core and the ingest
+# pipeline that feeds it (D13). D7 already says that core is framework-free; until the
+# extras split it was framework-free in the source tree but not in the install, because
+# every dependent also got LangChain, RAGAS, OpenAI, FastAPI and Streamlit. Anything
+# needed only to GENERATE, EVALUATE, GATE or SERVE lives in `[full]`.
+#
+# `pip install -e .`          -> retrieve over a built index, and build one
+# `pip install -e ".[full]"`  -> everything: generation, RAGAS, judge, gate, API, UI
 dependencies = [
+  # --- retrieval + indexing core (framework-free) ---
+  "faiss-cpu==1.14.2",
+  "rank-bm25",
+  "sentence-transformers==5.5.1",
+  "numpy",
+
+  # --- chunking ---
+  # LangChain's text splitters only. This is the one LangChain package in the base
+  # install and it is deliberate: D7 assigns chunking to LangChain, and
+  # langchain-text-splitters pulls no LLM client, no provider SDK, and no framework
+  # runtime. `transformers` is declared explicitly because ingest/pipeline.py imports
+  # AutoTokenizer directly rather than relying on sentence-transformers to supply it.
+  "langchain-text-splitters==0.3.11",
+  "transformers",
+
+  # --- config ---
+  "pydantic",
+  "pyyaml",
+  "python-dotenv",
+]
+# NOTE: llama-index intentionally omitted — not used in the MVP. The retrieval scoring core
+# is framework-free (sentence-transformers / faiss / rank_bm25); generation + HyDE use
+# LangChain. Add llama-index later only if a concrete ingest need appears (and pin it then).
+
+[project.optional-dependencies]
+# Everything beyond retrieving over an existing index: generation, the RAGAS + rubric
+# judges, the regression gate, the arXiv/PMC fetchers, the CLI, and the API/UI surfaces.
+# This is what CI, the Docker image, and any benchmark run install.
+full = [
   # --- LangChain stack pinned to the stable 0.3 line ---
   # WHY PINNED: langchain 1.x + ragas 0.4.x is currently broken. ragas 0.4.3 (latest)
   # hard-imports langchain_community.chat_models.vertexai, a path the 1.x-era community
@@ -14,13 +53,9 @@ dependencies = [
   "langchain-community==0.3.31",
   "langchain-openai==0.3.35",
   "langchain-anthropic==0.3.22",
-  "langchain-text-splitters==0.3.11",
   "ragas==0.2.15",
 
-  # --- retrieval core (framework-free) + ingest ---
-  "faiss-cpu==1.14.2",
-  "rank-bm25",
-  "sentence-transformers==5.5.1",
+  # --- corpus fetch + parse (arXiv PDFs, PMC JATS) ---
   "arxiv",
   "pypdf==6.13.2",
 
@@ -30,18 +65,10 @@ dependencies = [
   "fastapi",
   "uvicorn[standard]",
   "streamlit",
-  "pydantic",
-  "pyyaml",
   "typer",
-  "python-dotenv",
-  "numpy",
   "scikit-learn",
 ]
-# NOTE: llama-index intentionally omitted — not used in the MVP. The retrieval scoring core
-# is framework-free (sentence-transformers / faiss / rank_bm25); generation + HyDE use
-# LangChain. Add llama-index later only if a concrete ingest need appears (and pin it then).
 
-[project.optional-dependencies]
 # Pinned for reproducible CI (same rationale as the runtime pins, D8): unpinned linters
 # drift ahead of what's verified locally -- ruff 0.16 added import-sort rules that fail
 # checks passing under 0.15. Bump deliberately, re-running `ruff check/format` + mypy.

@@ -140,9 +140,21 @@ domain can actively hurt on another; generalization is not free, and the harness
 ```bash
 git clone https://github.com/LeoBergmiller/rag-evaluation.git
 cd rag-evaluation
-pip install -e ".[dev]"
+pip install -e ".[full,dev]"
 cp .env.example .env   # ANTHROPIC_API_KEY, OPENAI_API_KEY (+ NCBI_API_KEY for the medical corpus)
 ```
+
+**Install shapes.** The base install is the framework-free retrieval + indexing core and
+the ingest pipeline — enough to build an index and retrieve over it, with no LLM client,
+no RAGAS, and no web framework. Generation, both judges, the regression gate, the
+arXiv/PMC fetchers, the CLI and the API/UI live in the `full` extra. Everything in this
+README except "use as a retrieval library" wants `full` (D13).
+
+| Install | Gets you |
+| --- | --- |
+| `pip install -e .` | build an index (`source: local`) and retrieve over it — `dense`, `bm25`, `hybrid`, `rerank` |
+| `pip install -e ".[full]"` | the whole harness: generation, RAGAS + rubric judges, gate, arXiv/PMC ingest, CLI, API, UI |
+| `pip install -e ".[full,dev]"` | the above plus pytest / ruff / mypy |
 
 **arXiv corpus (default):**
 ```bash

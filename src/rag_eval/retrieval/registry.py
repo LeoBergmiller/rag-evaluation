@@ -19,8 +19,9 @@ from rag_eval.retrieval.base import Retriever
 from rag_eval.retrieval.bm25 import BM25Retriever
 from rag_eval.retrieval.dense import DenseRetriever
 from rag_eval.retrieval.hybrid import HybridRetriever
-from rag_eval.retrieval.hyde import HydeRetriever, LLMQueryExpander
 from rag_eval.retrieval.rerank import CrossEncoderReranker, RerankRetriever
+
+# NOTE: `rag_eval.retrieval.hyde` is deliberately NOT imported here — see _build_hyde.
 
 
 @dataclass
@@ -105,6 +106,21 @@ def _build_hybrid(cfg: Config, resources: RetrieverResources) -> Retriever:
 
 @register("hyde")
 def _build_hyde(cfg: Config, resources: RetrieverResources) -> Retriever:
+    # HyDE is the one strategy that calls an LLM at RETRIEVAL time, so its module
+    # pulls the LangChain generation stack. Importing it at module scope would put
+    # that stack behind every `import rag_eval.retrieval.registry` and make the
+    # framework-free core (D7) framework-free in name only (D13). Imported here so
+    # a base install can retrieve with the other four strategies; asking for `hyde`
+    # without `[full]` fails loudly and actionably rather than at some later
+    # AttributeError.
+    try:
+        from rag_eval.retrieval.hyde import HydeRetriever, LLMQueryExpander
+    except ImportError as exc:  # pragma: no cover - depends on install shape
+        raise ImportError(
+            "The 'hyde' strategy needs the generation stack, which is not in the "
+            "base install. Install it with: pip install -e '.[full]'"
+        ) from exc
+
     base = _build_dense(cfg, resources)
     expander = LLMQueryExpander(cfg)
     return HydeRetriever(base, expander)
