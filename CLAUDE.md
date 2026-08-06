@@ -48,6 +48,11 @@ docker compose up --build   # api on :8000, ui (Streamlit) on :8501
 - Eval outputs are structured Pydantic models written to results/ with a run id + timestamp.
 
 ## What Claude must never do
+- **Never run `pip` or `uv` without first confirming which Python points at THIS repo's venv**
+  (`which python`, or invoke `.venv/bin/python -m pip` by path). Installing this project's
+  dependencies while another project's venv is active corrupts that project's environment.
+  This repo has no lockfile, so there is no `uv sync --frozen` to restore it from — the
+  recovery is manual. Check before, not after.
 - Never write to or edit the raw corpus dirs (data/raw/, data/raw_med/) — immutable once fetched.
 - Never hardcode API keys — read from environment.
 - Never add a retrieval strategy without a matching test and a metrics entry.
